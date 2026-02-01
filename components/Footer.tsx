@@ -30,7 +30,7 @@ export default function Footer() {
                 <Instagram className="w-5 h-5" />
               </a>
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/elad.deutsch.3"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-[#E85D04] transition-colors"
