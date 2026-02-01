@@ -93,7 +93,7 @@ export default function Footer() {
           <p className="mt-2">
             Built with ❤️ by{' '}
             <a
-              href="https://slavx.com"
+              href="https://slavx.site"
               target="_blank"
               rel="noopener noreferrer"
               className="text-[#E85D04] hover:underline"
