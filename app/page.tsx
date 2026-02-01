@@ -35,6 +35,7 @@ export default function Home() {
           style={{
             backgroundImage: 'url(/logo.svg)',
             backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center',
           }}
         />
