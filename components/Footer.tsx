@@ -21,7 +21,7 @@ export default function Footer() {
             <p className="text-gray-300 mb-4">לטייל. לאכול. לחזור על זה.</p>
             <div className="flex gap-4">
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/eladdeutsch4/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-[#E85D04] transition-colors"
