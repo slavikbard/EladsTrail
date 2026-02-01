@@ -34,7 +34,7 @@ export default function Home() {
           className="absolute inset-0 opacity-10"
           style={{
             backgroundImage: 'url(/logo.svg)',
-            backgroundSize: 'cover',
+            backgroundSize: 'contain',
             backgroundPosition: 'center',
           }}
         />
