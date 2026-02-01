@@ -14,6 +14,11 @@ export interface Category {
   created_at: string;
 }
 
+export interface GalleryImage {
+  url: string;
+  caption: string;
+}
+
 export interface Post {
   id: string;
   title_he: string;
@@ -27,6 +32,9 @@ export interface Post {
   category_id: string;
   published: boolean;
   view_count: number;
+  gallery_images?: GalleryImage[];
+  packing_list_he?: string;
+  fun_facts_he?: string;
   created_at: string;
   updated_at: string;
   categories?: Category;

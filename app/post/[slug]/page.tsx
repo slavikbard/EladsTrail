@@ -4,9 +4,10 @@ import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Calendar, Eye, ArrowRight, Mountain } from 'lucide-react';
+import { Calendar, Eye, ArrowRight, Mountain, Backpack, Lightbulb, Camera } from 'lucide-react';
 import { supabase, Post } from '@/lib/supabase';
 import { motion } from 'framer-motion';
+import ImageGallery from '@/components/ImageGallery';
 
 export default function PostPage() {
   const params = useParams();
@@ -185,6 +186,62 @@ export default function PostPage() {
             {post.content_he}
           </div>
         </motion.article>
+
+        {/* Photo Gallery */}
+        {post.gallery_images && post.gallery_images.length > 0 && (
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="mb-16"
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <Camera className="w-8 h-8 text-[#E85D04]" />
+              <h2 className="text-3xl font-bold text-[#1B263B]">גלריית תמונות</h2>
+            </div>
+            <ImageGallery images={post.gallery_images} />
+          </motion.section>
+        )}
+
+        {/* Packing List */}
+        {post.packing_list_he && (
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7 }}
+            className="mb-16"
+          >
+            <div className="bg-gradient-to-br from-[#E85D04]/5 to-[#1B263B]/5 rounded-2xl p-8 shadow-lg">
+              <div className="flex items-center gap-3 mb-6">
+                <Backpack className="w-8 h-8 text-[#E85D04]" />
+                <h2 className="text-3xl font-bold text-[#1B263B]">מה כדאי לקחת איתכם?</h2>
+              </div>
+              <div className="text-gray-700 leading-relaxed whitespace-pre-line text-lg">
+                {post.packing_list_he}
+              </div>
+            </div>
+          </motion.section>
+        )}
+
+        {/* Fun Facts */}
+        {post.fun_facts_he && (
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8 }}
+            className="mb-16"
+          >
+            <div className="bg-gradient-to-br from-[#1B263B]/5 to-[#E85D04]/5 rounded-2xl p-8 shadow-lg">
+              <div className="flex items-center gap-3 mb-6">
+                <Lightbulb className="w-8 h-8 text-[#E85D04]" />
+                <h2 className="text-3xl font-bold text-[#1B263B]">פרטים שמעניין לדעת</h2>
+              </div>
+              <div className="text-gray-700 leading-relaxed whitespace-pre-line text-lg">
+                {post.fun_facts_he}
+              </div>
+            </div>
+          </motion.section>
+        )}
 
         {/* Related Posts */}
         {relatedPosts.length > 0 && (
