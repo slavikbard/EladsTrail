@@ -17,6 +17,10 @@ const heebo = Heebo({
 export const metadata: Metadata = {
   title: 'המסלול של אלעד - לטייל. לאכול. לחזור על זה.',
   description: 'בלוג טיולים ואוכל של אלעד. מסלולי טיולים בישראל ובעולם, חוויות קולינריות אותנטיות, ואוכל מקומי אמיתי.',
+  icons: {
+    icon: '/logo.svg',
+    apple: '/logo.svg',
+  },
   openGraph: {
     title: 'המסלול של אלעד',
     description: 'לטייל. לאכול. לחזור על זה.',

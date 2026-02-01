@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 
 export default function Header() {
   const pathname = usePathname();
@@ -21,7 +22,14 @@ export default function Header() {
     <header className="bg-white shadow-sm sticky top-0 z-40 hidden md:block" dir="rtl">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-3">
+            <Image
+              src="/logo.svg"
+              alt="לוגו המסלול של אלעד"
+              width={40}
+              height={40}
+              className="w-10 h-10"
+            />
             <h1 className="text-2xl font-bold text-[#1B263B]">
               המסלול של אלעד
             </h1>

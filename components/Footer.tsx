@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Instagram, Facebook, Mail } from 'lucide-react';
+import Image from 'next/image';
 
 export default function Footer() {
   return (
@@ -7,7 +8,16 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="grid md:grid-cols-3 gap-8">
           <div>
-            <h3 className="text-2xl font-bold mb-4 text-[#E85D04]">המסלול של אלעד</h3>
+            <div className="flex items-center gap-3 mb-4">
+              <Image
+                src="/logo.svg"
+                alt="לוגו המסלול של אלעד"
+                width={40}
+                height={40}
+                className="w-10 h-10"
+              />
+              <h3 className="text-2xl font-bold text-[#E85D04]">המסלול של אלעד</h3>
+            </div>
             <p className="text-gray-300 mb-4">לטייל. לאכול. לחזור על זה.</p>
             <div className="flex gap-4">
               <a
