@@ -33,7 +33,7 @@ export default function Home() {
         <div
           className="absolute inset-0 opacity-10"
           style={{
-            backgroundImage: 'url(https://images.pexels.com/photos/1666021/pexels-photo-1666021.jpeg)',
+            backgroundImage: 'url(/logo.svg)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
