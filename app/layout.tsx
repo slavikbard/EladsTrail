@@ -6,6 +6,7 @@ import AccessibilityButton from '@/components/AccessibilityButton';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import MobileNav from '@/components/MobileNav';
+import CookieConsent from '@/components/CookieConsent';
 
 const heebo = Heebo({
   subsets: ['latin', 'hebrew'],
@@ -53,6 +54,7 @@ export default function RootLayout({
           <Footer />
           <MobileNav />
           <AccessibilityButton />
+          <CookieConsent />
         </AccessibilityProvider>
       </body>
     </html>

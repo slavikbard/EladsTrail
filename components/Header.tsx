@@ -12,6 +12,7 @@ export default function Header() {
 
   const navItems = [
     { href: '/', label: 'בית' },
+    { href: '/trails', label: 'טיולים' },
     { href: '/categories', label: 'קטגוריות' },
     { href: '/about', label: 'אודות' },
   ];

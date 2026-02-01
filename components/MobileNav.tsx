@@ -2,14 +2,14 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Search, List, User } from 'lucide-react';
+import { Home, Mountain, List, User } from 'lucide-react';
 
 export default function MobileNav() {
   const pathname = usePathname();
 
   const navItems = [
     { href: '/', icon: Home, label: 'בית' },
-    { href: '/search', icon: Search, label: 'חיפוש' },
+    { href: '/trails', icon: Mountain, label: 'טיולים' },
     { href: '/categories', icon: List, label: 'קטגוריות' },
     { href: '/about', icon: User, label: 'אודות' },
   ];

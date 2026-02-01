@@ -42,6 +42,11 @@ export default function Footer() {
             <h4 className="font-semibold mb-4">מסלולים</h4>
             <ul className="space-y-2 text-gray-300">
               <li>
+                <Link href="/trails" className="hover:text-[#E85D04] transition-colors">
+                  כל המסלולים
+                </Link>
+              </li>
+              <li>
                 <Link href="/categories?cat=israel" className="hover:text-[#E85D04] transition-colors">
                   מסלולים בישראל
                 </Link>
