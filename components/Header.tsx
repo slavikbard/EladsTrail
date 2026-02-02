@@ -6,7 +6,7 @@ import { Menu, X, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import { CATEGORIES } from '@/src/data/siteData';
+import { CATEGORIES, getSubcategoriesByCategory } from '@/src/data/siteData';
 
 export default function Header() {
   const pathname = usePathname();
@@ -68,17 +68,34 @@ export default function Header() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-2"
+                    className="absolute left-0 mt-2 w-64 bg-white rounded-lg shadow-xl py-2 max-h-[80vh] overflow-y-auto"
                   >
-                    {CATEGORIES.map((category) => (
-                      <Link
-                        key={category.id}
-                        href={`/category/${category.slug}`}
-                        className="block px-4 py-2 text-sm text-[#1B263B] hover:bg-gray-50 hover:text-[#E85D04] transition-colors"
-                      >
-                        {category.name_he}
-                      </Link>
-                    ))}
+                    {CATEGORIES.map((category) => {
+                      const subcategories = getSubcategoriesByCategory(category.id);
+                      return (
+                        <div key={category.id} className="py-2">
+                          <Link
+                            href={`/category/${category.slug}`}
+                            className="block px-4 py-2 text-sm font-semibold text-[#1B263B] hover:bg-gray-50 hover:text-[#E85D04] transition-colors"
+                          >
+                            {category.name_he}
+                          </Link>
+                          {subcategories.length > 0 && (
+                            <div className="pr-4">
+                              {subcategories.map((subcategory) => (
+                                <Link
+                                  key={subcategory.id}
+                                  href={`/category/${category.slug}#${subcategory.slug}`}
+                                  className="block px-4 py-1.5 text-xs text-gray-600 hover:bg-gray-50 hover:text-[#E85D04] transition-colors"
+                                >
+                                  {subcategory.name_he}
+                                </Link>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -125,16 +142,34 @@ export default function Header() {
 
               <div className="pt-2 border-t mt-2">
                 <p className="px-4 py-2 text-sm font-semibold text-gray-500">יעדים</p>
-                {CATEGORIES.map((category) => (
-                  <Link
-                    key={category.id}
-                    href={`/category/${category.slug}`}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block px-4 py-2 text-[#1B263B] hover:bg-gray-100 rounded-lg transition-colors"
-                  >
-                    {category.name_he}
-                  </Link>
-                ))}
+                {CATEGORIES.map((category) => {
+                  const subcategories = getSubcategoriesByCategory(category.id);
+                  return (
+                    <div key={category.id} className="mb-3">
+                      <Link
+                        href={`/category/${category.slug}`}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block px-4 py-2 text-[#1B263B] font-medium hover:bg-gray-100 rounded-lg transition-colors"
+                      >
+                        {category.name_he}
+                      </Link>
+                      {subcategories.length > 0 && (
+                        <div className="pr-4 mt-1">
+                          {subcategories.map((subcategory) => (
+                            <Link
+                              key={subcategory.id}
+                              href={`/category/${category.slug}#${subcategory.slug}`}
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="block px-4 py-1.5 text-sm text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+                            >
+                              {subcategory.name_he}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </nav>
           </motion.div>
