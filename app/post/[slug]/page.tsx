@@ -56,7 +56,7 @@ export default function PostPage() {
           {post.title_he}
         </motion.h1>
 
-        {/* Featured Image - Main */}
+        {/* Featured Image - Main Post */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -66,6 +66,7 @@ export default function PostPage() {
             src={post.featured_image}
             alt={post.title_he}
             className="w-full h-auto block"
+            loading="eager"
           />
         </motion.div>
 
@@ -76,14 +77,14 @@ export default function PostPage() {
           </p>
         </div>
 
-        {/* Content */}
+        {/* Content Section */}
         <article className="prose prose-lg max-w-none mb-16">
           <div className="text-gray-700 leading-relaxed whitespace-pre-line text-lg">
             {post.content_he}
           </div>
         </article>
 
-        {/* Related Posts Section - FIXED FOR INFOGRAPHICS */}
+        {/* Related Posts Section - התיקון כאן */}
         {relatedPosts.length > 0 && (
           <section className="mt-20 pt-12 border-t border-gray-200">
             <h2 className="text-3xl font-bold text-[#1B263B] mb-8 flex items-center gap-3">
@@ -94,14 +95,16 @@ export default function PostPage() {
               {relatedPosts.map((relatedPost) => (
                 <Link key={relatedPost.id} href={`/post/${relatedPost.slug}`} className="group">
                   <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
-                    {/* Fixed Image Wrapper - No fixed height anymore */}
-                    <div className="w-full bg-gray-50 border-b border-gray-100">
+                    
+                    {/* קונטיינר התמונה - ללא גובה קשיח h-48 */}
+                    <div className="w-full bg-gray-50 border-b border-gray-100 aspect-video flex items-center justify-center">
                       <img
                         src={relatedPost.featured_image}
                         alt={relatedPost.title_he}
-                        className="w-full h-auto block object-contain transition-transform duration-500 group-hover:scale-105"
+                        className="w-full h-full object-contain block transition-transform duration-500 group-hover:scale-105"
                       />
                     </div>
+
                     <div className="p-4 flex-grow">
                       <h3 className="font-bold text-[#1B263B] group-hover:text-[#E85D04] transition-colors line-clamp-2">
                         {relatedPost.title_he}
@@ -121,7 +124,7 @@ export default function PostPage() {
         <div className="mt-12 text-center">
           <Link
             href="/trails"
-            className="inline-flex items-center gap-2 bg-[#E85D04] hover:bg-[#E85D04]/90 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-lg transition-all hover:scale-105"
+            className="inline-flex items-center gap-2 bg-[#E85D04] hover:bg-[#E85D04]/90 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
           >
             <Mountain className="w-6 h-6" />
             חזרה לכל הטיולים
