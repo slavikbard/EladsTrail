@@ -1,87 +1,26 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Calendar, Eye, ArrowRight, Mountain, Backpack, Lightbulb, Camera } from 'lucide-react';
-import { supabase, Post } from '@/lib/supabase';
+import { Calendar, ArrowRight, Mountain, Backpack, Lightbulb, Camera } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ImageGallery from '@/components/ImageGallery';
+import { getPostBySlug, getCategoryById, getPostsByCategory } from '@/data/siteContent';
+import { notFound, useParams } from 'next/navigation';
 
 export default function PostPage() {
   const params = useParams();
-  const router = useRouter();
   const slug = params.slug as string;
-  const [post, setPost] = useState<Post | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [relatedPosts, setRelatedPosts] = useState<Post[]>([]);
-
-  useEffect(() => {
-    async function fetchPost() {
-      try {
-        // Fetch the post
-        const { data: postData, error } = await supabase
-          .from('posts')
-          .select('*, categories(*)')
-          .eq('slug', slug)
-          .eq('published', true)
-          .maybeSingle();
-
-        if (error || !postData) {
-          router.push('/404');
-          return;
-        }
-
-        setPost(postData as Post);
-
-        // Update view count
-        await supabase
-          .from('posts')
-          .update({ view_count: (postData.view_count || 0) + 1 })
-          .eq('id', postData.id);
-
-        // Fetch related posts from the same category
-        if (postData.category_id) {
-          const { data: related } = await supabase
-            .from('posts')
-            .select('*, categories(*)')
-            .eq('category_id', postData.category_id)
-            .eq('published', true)
-            .neq('id', postData.id)
-            .limit(3);
-
-          if (related) {
-            setRelatedPosts(related as Post[]);
-          }
-        }
-      } catch (error) {
-        console.error('Error fetching post:', error);
-        router.push('/404');
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    if (slug) {
-      fetchPost();
-    }
-  }, [slug, router]);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center" dir="rtl">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-[#E85D04] mx-auto mb-4"></div>
-          <p className="text-gray-600">טוען את הטיול...</p>
-        </div>
-      </div>
-    );
-  }
+  const post = getPostBySlug(slug);
 
   if (!post) {
-    return null;
+    notFound();
   }
+
+  const category = post.category_id ? getCategoryById(post.category_id) : null;
+  const relatedPosts = post.category_id
+    ? getPostsByCategory(post.category_id).filter(p => p.id !== post.id).slice(0, 3)
+    : [];
 
   return (
     <div className="min-h-screen py-20 md:py-8" dir="rtl">
@@ -100,15 +39,15 @@ export default function PostPage() {
         </nav>
 
         {/* Category Badge */}
-        {post.categories && (
+        {category && (
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-white font-semibold text-sm shadow-lg mb-6"
-            style={{ backgroundColor: post.categories.color }}
+            style={{ backgroundColor: category.color }}
           >
             <Mountain className="w-4 h-4" />
-            {post.categories.name_he}
+            {category.name_he}
           </motion.div>
         )}
 
@@ -138,10 +77,6 @@ export default function PostPage() {
                 day: 'numeric',
               })}
             </span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Eye className="w-5 h-5 text-[#E85D04]" />
-            <span>{post.view_count + 1} צפיות</span>
           </div>
         </motion.div>
 

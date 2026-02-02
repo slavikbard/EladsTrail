@@ -1,31 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mountain } from 'lucide-react';
-import { supabase, Post } from '@/lib/supabase';
+import { getAllPublishedPosts } from '@/data/siteContent';
 import BlogCard from '@/components/BlogCard';
 
 export default function Trails() {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchPosts() {
-      const { data } = await supabase
-        .from('posts')
-        .select('*, categories(*)')
-        .eq('published', true)
-        .order('created_at', { ascending: false });
-
-      if (data) {
-        setPosts(data as Post[]);
-      }
-      setLoading(false);
-    }
-
-    fetchPosts();
-  }, []);
+  const posts = getAllPublishedPosts();
 
   return (
     <div className="min-h-screen py-20" dir="rtl">
@@ -47,13 +28,7 @@ export default function Trails() {
           </p>
         </motion.div>
 
-        {loading ? (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div key={i} className="bg-gray-200 rounded-xl h-96 animate-pulse" />
-            ))}
-          </div>
-        ) : posts.length > 0 ? (
+        {posts.length > 0 ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {posts.map((post, index) => (
               <BlogCard key={post.id} post={post} index={index} />

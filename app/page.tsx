@@ -1,32 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
-import { supabase, Post } from '@/lib/supabase';
+import { getAllPublishedPosts } from '@/data/siteContent';
 import BlogCard from '@/components/BlogCard';
-import Image from 'next/image'; // ייבוא רכיב התמונה
+import Image from 'next/image';
 
 export default function Home() {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchPosts() {
-      const { data, error } = await supabase
-        .from('posts')
-        .select('*, categories(*)')
-        .eq('published', true)
-        .order('created_at', { ascending: false });
-
-      if (data) {
-        setPosts(data as Post[]);
-      }
-      setLoading(false);
-    }
-
-    fetchPosts();
-  }, []);
+  const posts = getAllPublishedPosts();
 
   return (
     <div className="min-h-screen" dir="rtl">
@@ -114,21 +95,13 @@ export default function Home() {
           </p>
         </motion.div>
 
-        {loading ? (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="bg-gray-200 rounded-xl h-96 animate-pulse" />
-            ))}
-          </div>
-        ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {posts.map((post, index) => (
-              <BlogCard key={post.id} post={post} index={index} />
-            ))}
-          </div>
-        )}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {posts.map((post, index) => (
+            <BlogCard key={post.id} post={post} index={index} />
+          ))}
+        </div>
 
-        {!loading && posts.length === 0 && (
+        {posts.length === 0 && (
           <div className="text-center py-20">
             <p className="text-xl text-gray-600">בקרוב יגיעו מסלולים חדשים...</p>
           </div>
