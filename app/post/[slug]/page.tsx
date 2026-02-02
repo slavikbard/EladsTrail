@@ -80,22 +80,19 @@ export default function PostPage() {
           </div>
         </motion.div>
 
-        {/* Featured Image */}
+        {/* Featured Image - FIXED FOR INFOGRAPHICS */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3 }}
-          className="relative w-full h-[400px] md:h-[600px] rounded-2xl overflow-hidden shadow-2xl mb-12"
+          className="w-full rounded-2xl overflow-hidden shadow-2xl mb-12 bg-white"
         >
-         <Image
-  src={post.featured_image}
-  alt={post.title_he}
-  width={1200}
-  height={800}
-  className="w-full h-auto"
-  priority
-  sizes="(max-width: 768px) 100vw, 1200px"
-/>
+          <img
+            src={post.featured_image}
+            alt={post.title_he}
+            className="w-full h-auto block"
+            loading="eager"
+          />
         </motion.div>
 
         {/* Excerpt */}
@@ -132,7 +129,9 @@ export default function PostPage() {
             className="mb-16"
           >
             <div className="flex items-center gap-3 mb-6">
-              <Camera className="w-8 h-8 text-[#E85D04]" />
+              <span className="p-2 bg-[#E85D04]/10 rounded-lg">
+                <Camera className="w-8 h-8 text-[#E85D04]" />
+              </span>
               <h2 className="text-3xl font-bold text-[#1B263B]">גלריית תמונות</h2>
             </div>
             <ImageGallery images={post.gallery_images} />
@@ -223,7 +222,7 @@ export default function PostPage() {
           </motion.section>
         )}
 
-        {/* Back to Trails Button */}
+        {/* Back Button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
