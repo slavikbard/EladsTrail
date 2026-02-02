@@ -92,7 +92,7 @@ export default function PostPage() {
   alt={post.title_he}
   width={1200}
   height={800}
-  className="w-full h-auto"
+  className="w-full h-auto block rounded-lg"
   priority
   sizes="(max-width: 768px) 100vw, 896px"
 />
