@@ -173,16 +173,7 @@ export const POSTS: Post[] = [
     featured_image: "https://images.pexels.com/photos/3568039/pexels-photo-3568039.jpeg?auto=compress&cs=tinysrgb&w=1200",
     date: "2023-12-10"
   },
-  {
-  id: 5,
-  slug: "Afrika",
-  title_he: "אפריקה",
-  excerpt_he: "תקציר קצר",
-  content_he: "תוכן מלא של הפוסט",
-  category_id: 5, // 1=ישראל, 2=אירופה, 3=אסיה, 4=אמריקה
-  featured_image: "https://images.pexels.com/...",
-  date: "2024-03-20"
-}
+  
 ];
 
 // Helper functions
