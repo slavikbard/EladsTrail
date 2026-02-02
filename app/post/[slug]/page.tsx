@@ -87,14 +87,15 @@ export default function PostPage() {
           transition={{ delay: 0.3 }}
           className="relative w-full h-[400px] md:h-[600px] rounded-2xl overflow-hidden shadow-2xl mb-12"
         >
-          <Image
-            src={post.featured_image}
-            alt={post.title_he}
-            fill
-            className="object-contain"
-            priority
-            sizes="(max-width: 768px) 100vw, 896px"
-          />
+         <Image
+  src={post.featured_image}
+  alt={post.title_he}
+  width={1200}
+  height={800}
+  className="w-full h-auto"
+  priority
+  sizes="(max-width: 768px) 100vw, 896px"
+/>
         </motion.div>
 
         {/* Excerpt */}
