@@ -39,7 +39,7 @@ export default function Footer() {
                 <Facebook className="w-5 h-5" />
               </a>
               <a
-                href="mailto:contact@eladstrail.com"
+                href="mailto:Eladd19899@gmail.com"
                 className="hover:text-[#E85D04] transition-colors"
                 aria-label="Email"
               >
