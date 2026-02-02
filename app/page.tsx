@@ -28,15 +28,15 @@ export default function Home() {
   }, []);
 
   return (
-    <div
-  className="absolute inset-0 opacity-40" // העליתי מעט אופסיטי כדי שתראה את התמונה טוב יותר
-  style={{
-    backgroundImage: 'url(/background.jpg)',
-    backgroundSize: 'cover',   /* שומר על פרופורציות ומכסה את כל השטח */
-    backgroundPosition: 'center', /* שומר על מרכז התמונה תמיד באמצע */
-    backgroundRepeat: 'no-repeat',
-  }}
-/>
+    <div className="absolute inset-0 z-0">
+  <Image
+    src="/background.jpg"
+    alt="Background"
+    fill
+    className="object-cover opacity-40"
+    priority
+  />
+</div>
 
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
           <motion.h1
