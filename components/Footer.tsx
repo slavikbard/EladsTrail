@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Instagram, Facebook, Mail } from 'lucide-react';
 import Image from 'next/image';
+import { CATEGORIES } from '@/src/data/siteData';
 
 export default function Footer() {
   return (
@@ -11,12 +12,15 @@ export default function Footer() {
             <div className="flex items-center gap-3 mb-4">
               <Image
                 src="/logo.svg"
-                alt="לוגו המסלול של אלעד"
-                width={40}
-                height={40}
-                className="h-16 w-16"
+                alt="SLAVX"
+                width={50}
+                height={50}
+                className="h-12 w-12"
               />
-              <h3 className="text-2xl font-bold text-[#E85D04]">המסלול של אלעד</h3>
+              <h3 className="text-xl font-light tracking-wide">
+                <span className="text-white">ELAD'S</span>{' '}
+                <span className="text-[#E85D04]">TRAIL</span>
+              </h3>
             </div>
             <p className="text-gray-300 mb-4">לטייל. לאכול. לחזור על זה.</p>
             <div className="flex gap-4">
@@ -56,21 +60,13 @@ export default function Footer() {
                   כל המסלולים
                 </Link>
               </li>
-              <li>
-                <Link href="/categories?cat=israel" className="hover:text-[#E85D04] transition-colors">
-                  מסלולים בישראל
-                </Link>
-              </li>
-              <li>
-                <Link href="/categories?cat=global" className="hover:text-[#E85D04] transition-colors">
-                  מסלולים בעולם
-                </Link>
-              </li>
-              <li>
-                <Link href="/categories?cat=culinary" className="hover:text-[#E85D04] transition-colors">
-                  חוויות קולינריות
-                </Link>
-              </li>
+              {CATEGORIES.map((category) => (
+                <li key={category.id}>
+                  <Link href={`/category/${category.slug}`} className="hover:text-[#E85D04] transition-colors">
+                    מסלולים ב{category.name_he}
+                  </Link>
+                </li>
+              ))}
               <li>
                 <Link href="/about" className="hover:text-[#E85D04] transition-colors">
                   אודות אלעד
