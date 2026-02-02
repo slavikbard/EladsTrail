@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
 import { supabase, Post } from '@/lib/supabase';
 import BlogCard from '@/components/BlogCard';
+import Image from 'next/image'; // ייבוא רכיב התמונה
 
 export default function Home() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -28,15 +29,21 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="absolute inset-0 z-0">
-  <Image
-    src="/background.jpg"
-    alt="Background"
-    fill
-    className="object-cover opacity-40"
-    priority
-  />
-</div>
+    <div className="min-h-screen" dir="rtl">
+      {/* Hero Section */}
+      <section className="relative h-screen flex items-center justify-center bg-[#1B263B] overflow-hidden">
+        {/* רקע התמונה המוגדר בצורה נכונה */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/background.jpg"
+            alt="Background"
+            fill
+            className="object-cover opacity-30" // אופסיטי עדין כדי שהטקסט יהיה קריא
+            priority
+          />
+          {/* שכבת גרדיאנט עדינה לשיפור הקריאות */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-[#1B263B]" />
+        </div>
 
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
           <motion.h1
@@ -82,7 +89,7 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
         >
           <div className="animate-bounce">
             <ArrowDown className="w-8 h-8 text-white" />
@@ -90,6 +97,7 @@ export default function Home() {
         </motion.div>
       </section>
 
+      {/* Blog Section */}
       <section id="latest-trails" className="max-w-7xl mx-auto px-4 py-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
