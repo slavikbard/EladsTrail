@@ -14,7 +14,7 @@ export default function Footer() {
                 alt="לוגו המסלול של אלעד"
                 width={40}
                 height={40}
-                className="w-10 h-10"
+                className="h-16 w-16"
               />
               <h3 className="text-2xl font-bold text-[#E85D04]">המסלול של אלעד</h3>
             </div>
