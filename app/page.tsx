@@ -28,18 +28,15 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen" dir="rtl">
-      <section className="relative h-screen flex items-center justify-center bg-gradient-to-br from-[#1B263B] via-[#1B263B] to-[#E85D04]/20 overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage: 'url(/background.jpg)',
-            backgroundSize: '100% 100%',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center',
-            
-          }}
-        />
+    <div
+  className="absolute inset-0 opacity-40" // העליתי מעט אופסיטי כדי שתראה את התמונה טוב יותר
+  style={{
+    backgroundImage: 'url(/background.jpg)',
+    backgroundSize: 'cover',   /* שומר על פרופורציות ומכסה את כל השטח */
+    backgroundPosition: 'center', /* שומר על מרכז התמונה תמיד באמצע */
+    backgroundRepeat: 'no-repeat',
+  }}
+/>
 
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
           <motion.h1
