@@ -22,7 +22,7 @@ export default function BlogCard({ post, index }: BlogCardProps) {
       className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300"
     >
       <Link href={`/post/${post.slug}`}>
-        <div className="relative h-64 overflow-hidden">
+        <div className="relative w-full aspect-[4/3] overflow-hidden bg-gray-100">
           <Image
             src={post.featured_image}
             alt={post.title_he}

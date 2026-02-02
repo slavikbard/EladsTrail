@@ -60,13 +60,15 @@ export default function PostPage() {
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="w-full rounded-2xl overflow-hidden shadow-2xl mb-12 bg-white"
+          className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-2xl mb-12 bg-gray-100"
         >
-          <img
+          <Image
             src={post.featured_image}
             alt={post.title_he}
-            className="w-full h-auto block"
-            loading="eager"
+            fill
+            className="object-cover"
+            priority
+            sizes="(max-width: 768px) 100vw, 896px"
           />
         </motion.div>
 
@@ -95,16 +97,15 @@ export default function PostPage() {
               {relatedPosts.map((relatedPost) => (
                 <Link key={relatedPost.id} href={`/post/${relatedPost.slug}`} className="group">
                   <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
-                    
-                    {/* קונטיינר התמונה - ללא גובה קשיח h-48 */}
-                    <div className="w-full bg-gray-50 border-b border-gray-100 aspect-video flex items-center justify-center">
-                      <img
+                    <div className="relative w-full aspect-[4/3] overflow-hidden bg-gray-100">
+                      <Image
                         src={relatedPost.featured_image}
                         alt={relatedPost.title_he}
-                        className="w-full h-full object-contain block transition-transform duration-500 group-hover:scale-105"
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                        sizes="(max-width: 768px) 100vw, 300px"
                       />
                     </div>
-
                     <div className="p-4 flex-grow">
                       <h3 className="font-bold text-[#1B263B] group-hover:text-[#E85D04] transition-colors line-clamp-2">
                         {relatedPost.title_he}

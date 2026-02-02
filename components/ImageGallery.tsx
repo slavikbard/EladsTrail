@@ -51,7 +51,7 @@ export default function ImageGallery({ images, title }: ImageGalleryProps) {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.1 }}
-              className="relative h-48 md:h-64 rounded-xl overflow-hidden cursor-pointer group shadow-lg hover:shadow-2xl transition-all duration-300"
+              className="relative w-full aspect-[4/3] rounded-xl overflow-hidden cursor-pointer group shadow-lg hover:shadow-2xl transition-all duration-300 bg-gray-100"
               onClick={() => openLightbox(index)}
             >
               <Image
