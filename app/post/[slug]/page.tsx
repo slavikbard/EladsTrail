@@ -91,7 +91,7 @@ export default function PostPage() {
   src={post.featured_image}
   alt={post.title_he}
   width={1200}
-  height={1200}
+  height={800}
   className="w-full h-auto block rounded-lg"
   priority
   sizes="(max-width: 768px) 100vw, 896px"
