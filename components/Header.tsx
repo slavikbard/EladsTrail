@@ -28,7 +28,7 @@ export default function Header() {
               alt="לוגו המסלול של אלעד"
               width={40}
               height={40}
-              className="h-16 w-16 object-contain"
+              className="h-30 w-30 object-contain"
             />
             <h1 className="text-2xl font-bold text-[#1B263B]">
               המסלול של אלעד
