@@ -51,50 +51,41 @@ export default function PostPage() {
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
           className="text-4xl md:text-5xl font-bold text-[#1B263B] mb-6 leading-tight"
         >
           {post.title_he}
         </motion.h1>
 
-        {/* Featured Image - Main Post */}
+        {/* Featured Image - Main */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.3 }}
           className="w-full rounded-2xl overflow-hidden shadow-2xl mb-12 bg-white"
         >
           <img
             src={post.featured_image}
             alt={post.title_he}
             className="w-full h-auto block"
-            loading="eager"
           />
         </motion.div>
 
-        {/* Content Section (Excerpt & Article) */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="space-y-8 mb-16"
-        >
-          <div className="bg-gradient-to-l from-[#E85D04]/10 to-[#1B263B]/10 p-6 rounded-xl border-r-4 border-[#E85D04]">
-            <p className="text-xl text-gray-700 leading-relaxed font-medium">{post.excerpt_he}</p>
-          </div>
-          <article className="prose prose-lg max-w-none">
-            <div className="text-gray-700 leading-relaxed whitespace-pre-line text-lg">
-              {post.content_he}
-            </div>
-          </article>
-        </motion.div>
+        {/* Excerpt */}
+        <div className="bg-gradient-to-l from-[#E85D04]/10 to-[#1B263B]/10 p-6 rounded-xl mb-12 border-r-4 border-[#E85D04]">
+          <p className="text-xl text-gray-700 leading-relaxed font-medium">
+            {post.excerpt_he}
+          </p>
+        </div>
 
-        {/* Related Posts Section - FIXED CARDS */}
+        {/* Content */}
+        <article className="prose prose-lg max-w-none mb-16">
+          <div className="text-gray-700 leading-relaxed whitespace-pre-line text-lg">
+            {post.content_he}
+          </div>
+        </article>
+
+        {/* Related Posts Section - FIXED FOR INFOGRAPHICS */}
         {relatedPosts.length > 0 && (
-          <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mt-20 pt-12 border-t border-gray-200"
-          >
+          <section className="mt-20 pt-12 border-t border-gray-200">
             <h2 className="text-3xl font-bold text-[#1B263B] mb-8 flex items-center gap-3">
               <Mountain className="w-8 h-8 text-[#E85D04]" />
               טיולים נוספים שיעניינו אותך
@@ -102,13 +93,13 @@ export default function PostPage() {
             <div className="grid md:grid-cols-3 gap-6">
               {relatedPosts.map((relatedPost) => (
                 <Link key={relatedPost.id} href={`/post/${relatedPost.slug}`} className="group">
-                  <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col h-full">
-                    {/* Fixed Image Container: No fixed height, proportional scaling */}
-                    <div className="relative w-full bg-gray-50 border-b border-gray-100">
+                  <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
+                    {/* Fixed Image Wrapper - No fixed height anymore */}
+                    <div className="w-full bg-gray-50 border-b border-gray-100">
                       <img
                         src={relatedPost.featured_image}
                         alt={relatedPost.title_he}
-                        className="w-full h-auto object-contain block transition-transform duration-500 group-hover:scale-105"
+                        className="w-full h-auto block object-contain transition-transform duration-500 group-hover:scale-105"
                       />
                     </div>
                     <div className="p-4 flex-grow">
@@ -123,10 +114,10 @@ export default function PostPage() {
                 </Link>
               ))}
             </div>
-          </motion.section>
+          </section>
         )}
 
-        {/* Navigation Button */}
+        {/* Back Button */}
         <div className="mt-12 text-center">
           <Link
             href="/trails"
