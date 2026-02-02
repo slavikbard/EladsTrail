@@ -80,7 +80,7 @@ export default function PostPage() {
           </div>
         </motion.div>
 
-        {/* Featured Image - FIXED FOR INFOGRAPHICS */}
+        {/* Featured Image - Main Post */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -138,47 +138,7 @@ export default function PostPage() {
           </motion.section>
         )}
 
-        {/* Packing List */}
-        {post.packing_list_he && (
-          <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7 }}
-            className="mb-16"
-          >
-            <div className="bg-gradient-to-br from-[#E85D04]/5 to-[#1B263B]/5 rounded-2xl p-8 shadow-lg">
-              <div className="flex items-center gap-3 mb-6">
-                <Backpack className="w-8 h-8 text-[#E85D04]" />
-                <h2 className="text-3xl font-bold text-[#1B263B]">מה כדאי לקחת איתכם?</h2>
-              </div>
-              <div className="text-gray-700 leading-relaxed whitespace-pre-line text-lg">
-                {post.packing_list_he}
-              </div>
-            </div>
-          </motion.section>
-        )}
-
-        {/* Fun Facts */}
-        {post.fun_facts_he && (
-          <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 }}
-            className="mb-16"
-          >
-            <div className="bg-gradient-to-br from-[#1B263B]/5 to-[#E85D04]/5 rounded-2xl p-8 shadow-lg">
-              <div className="flex items-center gap-3 mb-6">
-                <Lightbulb className="w-8 h-8 text-[#E85D04]" />
-                <h2 className="text-3xl font-bold text-[#1B263B]">פרטים שמעניין לדעת</h2>
-              </div>
-              <div className="text-gray-700 leading-relaxed whitespace-pre-line text-lg">
-                {post.fun_facts_he}
-              </div>
-            </div>
-          </motion.section>
-        )}
-
-        {/* Related Posts */}
+        {/* Related Posts Section */}
         {relatedPosts.length > 0 && (
           <motion.section
             initial={{ opacity: 0, y: 20 }}
@@ -197,17 +157,18 @@ export default function PostPage() {
                   href={`/post/${relatedPost.slug}`}
                   className="group"
                 >
-                  <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300">
-                    <div className="relative h-48 overflow-hidden">
+                  <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
+                    {/* Fixed Card Image Container */}
+                    <div className="relative h-48 overflow-hidden bg-gray-50 flex items-center justify-center p-2">
                       <Image
                         src={relatedPost.featured_image}
                         alt={relatedPost.title_he}
                         fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                        className="object-contain transition-transform duration-500 group-hover:scale-105"
                         sizes="(max-width: 768px) 100vw, 300px"
                       />
                     </div>
-                    <div className="p-4">
+                    <div className="p-4 flex-grow">
                       <h3 className="font-bold text-[#1B263B] group-hover:text-[#E85D04] transition-colors line-clamp-2">
                         {relatedPost.title_he}
                       </h3>
