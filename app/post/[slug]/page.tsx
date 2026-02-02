@@ -91,7 +91,7 @@ export default function PostPage() {
             src={post.featured_image}
             alt={post.title_he}
             fill
-            className="object-cover"
+            className="className="w-full h-auto max-h-[600px] object-contain bg-gray-50""
             priority
             sizes="(max-width: 768px) 100vw, 896px"
           />
