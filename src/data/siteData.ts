@@ -24,7 +24,7 @@ export const CATEGORIES: Category[] = [
     name_he: "ישראל",
     name_en: "Israel",
     slug: "israel",
-    color: "#D4A574",
+    color: "#E85D04",
     image: "https://images.pexels.com/photos/3568039/pexels-photo-3568039.jpeg?auto=compress&cs=tinysrgb&w=800"
   },
   {
@@ -32,7 +32,7 @@ export const CATEGORIES: Category[] = [
     name_he: "אירופה",
     name_en: "Europe",
     slug: "europe",
-    color: "#C9A98E",
+    color: "#1B263B",
     image: "https://images.pexels.com/photos/208701/pexels-photo-208701.jpeg?auto=compress&cs=tinysrgb&w=800"
   },
   {
@@ -40,7 +40,7 @@ export const CATEGORIES: Category[] = [
     name_he: "אסיה",
     name_en: "Asia",
     slug: "asia",
-    color: "#E8B4A0",
+    color: "#0A9396",
     image: "https://images.pexels.com/photos/161401/fushimi-inari-taisha-shrine-kyoto-japan-161401.jpeg?auto=compress&cs=tinysrgb&w=800"
   },
   {
@@ -48,7 +48,7 @@ export const CATEGORIES: Category[] = [
     name_he: "אמריקה",
     name_en: "America",
     slug: "america",
-    color: "#B89B88",
+    color: "#94D2BD",
     image: "https://images.pexels.com/photos/2166559/pexels-photo-2166559.jpeg?auto=compress&cs=tinysrgb&w=800"
   }
 ];

@@ -5,29 +5,30 @@ import { CATEGORIES } from '@/src/data/siteData';
 
 export default function Footer() {
   return (
-    <footer className="bg-[#5D4E37] text-white mt-20 pb-20 md:pb-0" dir="rtl">
-      <div className="max-w-7xl mx-auto px-4 py-16">
-        <div className="grid md:grid-cols-3 gap-12">
+    <footer className="bg-[#1B263B] text-white mt-20 pb-20 md:pb-0" dir="rtl">
+      <div className="max-w-7xl mx-auto px-4 py-12">
+        <div className="grid md:grid-cols-3 gap-8">
           <div>
-            <div className="flex items-center gap-3 mb-6">
+            <div className="flex items-center gap-3 mb-4">
               <Image
                 src="/logo.svg"
                 alt="SLAVX"
                 width={50}
                 height={50}
-                className="h-10 w-10"
+                className="h-12 w-12"
               />
-              <h3 className="text-2xl font-light tracking-wide" style={{fontFamily: 'serif'}}>
-                <span className="italic text-[#D4A574]">המסלול של אלעד</span>
+              <h3 className="text-xl font-light tracking-wide">
+                <span className="text-white">ELAD'S</span>{' '}
+                <span className="text-[#E85D04]">TRAIL</span>
               </h3>
             </div>
-            <p className="text-[#C9A98E] mb-6 font-light italic">לטייל. לאכול. לחזור על זה.</p>
+            <p className="text-gray-300 mb-4">לטייל. לאכול. לחזור על זה.</p>
             <div className="flex gap-4">
               <a
                 href="https://www.instagram.com/eladdeutsch4/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-[#D4A574] transition-colors"
+                className="hover:text-[#E85D04] transition-colors"
                 aria-label="Instagram"
               >
                 <Instagram className="w-5 h-5" />
@@ -36,14 +37,14 @@ export default function Footer() {
                 href="https://www.facebook.com/elad.deutsch.3"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-[#D4A574] transition-colors"
+                className="hover:text-[#E85D04] transition-colors"
                 aria-label="Facebook"
               >
                 <Facebook className="w-5 h-5" />
               </a>
               <a
                 href="mailto:Eladd19899@gmail.com"
-                className="hover:text-[#D4A574] transition-colors"
+                className="hover:text-[#E85D04] transition-colors"
                 aria-label="Email"
               >
                 <Mail className="w-5 h-5" />
@@ -52,22 +53,22 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-light mb-6 text-[#D4A574] tracking-wider">מסלולים</h4>
-            <ul className="space-y-3 text-[#C9A98E] font-light">
+            <h4 className="font-semibold mb-4">מסלולים</h4>
+            <ul className="space-y-2 text-gray-300">
               <li>
-                <Link href="/trails" className="hover:text-white transition-colors">
+                <Link href="/trails" className="hover:text-[#E85D04] transition-colors">
                   כל המסלולים
                 </Link>
               </li>
               {CATEGORIES.map((category) => (
                 <li key={category.id}>
-                  <Link href={`/category/${category.slug}`} className="hover:text-white transition-colors">
+                  <Link href={`/category/${category.slug}`} className="hover:text-[#E85D04] transition-colors">
                     מסלולים ב{category.name_he}
                   </Link>
                 </li>
               ))}
               <li>
-                <Link href="/about" className="hover:text-white transition-colors">
+                <Link href="/about" className="hover:text-[#E85D04] transition-colors">
                   אודות אלעד
                 </Link>
               </li>
@@ -75,20 +76,20 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-light mb-6 text-[#D4A574] tracking-wider">מידע משפטי</h4>
-            <ul className="space-y-3 text-[#C9A98E] font-light">
+            <h4 className="font-semibold mb-4">מידע משפטי</h4>
+            <ul className="space-y-2 text-gray-300">
               <li>
-                <Link href="/accessibility-statement" className="hover:text-white transition-colors">
+                <Link href="/accessibility-statement" className="hover:text-[#E85D04] transition-colors">
                   הצהרת נגישות
                 </Link>
               </li>
               <li>
-                <Link href="/privacy-policy" className="hover:text-white transition-colors">
+                <Link href="/privacy-policy" className="hover:text-[#E85D04] transition-colors">
                   מדיניות פרטיות
                 </Link>
               </li>
               <li>
-                <Link href="/terms-of-use" className="hover:text-white transition-colors">
+                <Link href="/terms-of-use" className="hover:text-[#E85D04] transition-colors">
                   תנאי שימוש
                 </Link>
               </li>
@@ -96,7 +97,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 pt-8 border-t border-[#7A6F5D] text-center text-[#C9A98E] text-sm font-light">
+        <div className="mt-12 pt-8 border-t border-gray-700 text-center text-gray-400 text-sm">
           <p>
             © {new Date().getFullYear()} המסלול של אלעד. כל הזכויות שמורות.
           </p>
@@ -106,7 +107,7 @@ export default function Footer() {
               href="https://slavx.site"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#D4A574] hover:underline"
+              className="text-[#E85D04] hover:underline"
             >
               SLAVX Brand
             </a>
