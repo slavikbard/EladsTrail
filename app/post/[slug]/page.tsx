@@ -92,9 +92,9 @@ export default function PostPage() {
   alt={post.title_he}
   width={1200}
   height={800}
-  className="w-full h-auto block rounded-lg"
+  className="w-full h-auto"
   priority
-  sizes="(max-width: 768px) 100vw, 896px"
+  sizes="(max-width: 768px) 100vw, 1200px"
 />
         </motion.div>
 
