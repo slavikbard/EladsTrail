@@ -74,7 +74,7 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="inline-flex items-center gap-2 bg-[#E85D04] hover:bg-[#E85D04]/90 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all hover:scale-105 shadow-2xl"
+            className="inline-flex items-center gap-2 bg-[#E85D04] hover:bg-[#E85D04]/90 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all hover:scale-105 shadow-[0_0_40px_rgba(0,0,0,0.7)] backdrop-blur-sm"
           >
             גלו את המסלולים
             <ArrowDown className="w-5 h-5" />
