@@ -6,7 +6,7 @@ import { MapPin, Utensils, Camera, Heart } from 'lucide-react';
 
 export default function About() {
   return (
-    <div className="min-h-screen py-20" dir="rtl">
+    <div className="min-h-screen py-20 bg-[#FAF8F5]" dir="rtl">
       <div className="max-w-4xl mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -14,17 +14,18 @@ export default function About() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h1 className="text-5xl md:text-6xl font-bold text-[#1B263B] mb-6">
-            נעים להכיר, אני אלעד
+          <p className="text-sm font-medium text-[#D4A574] tracking-[0.3em] mb-3">אודות</p>
+          <h1 className="text-6xl md:text-7xl font-extralight text-[#5D4E37] mb-6 tracking-tight" style={{fontFamily: 'serif'}}>
+            <span className="italic">נעים להכיר</span>
           </h1>
-          <div className="w-24 h-1 bg-[#E85D04] mx-auto mb-8" />
+          <div className="w-24 h-px bg-[#D4A574] mx-auto" />
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="relative h-96 rounded-2xl overflow-hidden mb-12 shadow-2xl"
+          className="relative h-[500px] overflow-hidden mb-12"
         >
           <Image
             src="https://images.pexels.com/photos/1365425/pexels-photo-1365425.jpeg"
@@ -41,13 +42,13 @@ export default function About() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="prose prose-lg max-w-none"
         >
-          <div className="bg-[#E85D04]/10 border-r-4 border-[#E85D04] p-8 rounded-lg mb-12">
-            <p className="text-2xl text-[#1B263B] font-semibold leading-relaxed">
+          <div className="bg-white border-r-4 border-[#D4A574] p-8 md:p-12 mb-12">
+            <p className="text-2xl text-[#5D4E37] leading-relaxed font-light italic">
               יש כאלה שמטיילים כדי לנוח, אני מטייל כדי לחיות. המסלול של אלעד נולד מתוך רעב בלתי פוסק למסלולים הכי קשוחים ולאוכל מקומי אמיתי.
             </p>
           </div>
 
-          <div className="space-y-8 text-gray-700 text-lg leading-relaxed">
+          <div className="space-y-8 text-[#5D4E37] text-lg leading-loose font-light">
             <p>
               בשביל הרבה אנשים, טיול זה חופשה. בשבילי, זה הדרך שלי לחיות. כל מסלול הוא סיפור חדש, כל פסגה היא אתגר חדש, וכל ארוחה היא הזדמנות להכיר את המקום דרך הטעמים שלו.
             </p>
@@ -65,59 +66,59 @@ export default function About() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 mt-16">
+          <div className="grid md:grid-cols-2 gap-6 mt-16">
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="bg-white p-8 rounded-xl shadow-lg border-t-4 border-[#E85D04]"
+              className="bg-white p-8 border-t-2 border-[#D4A574]"
             >
-              <MapPin className="w-12 h-12 text-[#E85D04] mb-4" />
-              <h3 className="text-2xl font-bold text-[#1B263B] mb-4">המסלולים שלי</h3>
-              <p className="text-gray-700 leading-relaxed">
+              <MapPin className="w-10 h-10 text-[#D4A574] mb-4" />
+              <h3 className="text-2xl font-light text-[#5D4E37] mb-4" style={{fontFamily: 'serif'}}>המסלולים שלי</h3>
+              <p className="text-[#8B7E6A] leading-relaxed font-light">
                 מתמחה במסלולי טיולים קשוחים ומאתגרים. שביל ישראל, שבילי הרי אירופה, ומסלולים מדבריים. אם זה קל מדי, זה לא בשבילי.
               </p>
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
               viewport={{ once: true }}
-              className="bg-white p-8 rounded-xl shadow-lg border-t-4 border-[#E85D04]"
+              className="bg-white p-8 border-t-2 border-[#D4A574]"
             >
-              <Utensils className="w-12 h-12 text-[#E85D04] mb-4" />
-              <h3 className="text-2xl font-bold text-[#1B263B] mb-4">האוכל שלי</h3>
-              <p className="text-gray-700 leading-relaxed">
+              <Utensils className="w-10 h-10 text-[#D4A574] mb-4" />
+              <h3 className="text-2xl font-light text-[#5D4E37] mb-4" style={{fontFamily: 'serif'}}>האוכל שלי</h3>
+              <p className="text-[#8B7E6A] leading-relaxed font-light">
                 מחפש אוכל אמיתי, מקומי, ביתי. לא מעניין אותי מסעדות מהודרות - אני רוצה לטעום את המקום דרך האוכל של האנשים שחיים בו.
               </p>
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
-              className="bg-white p-8 rounded-xl shadow-lg border-t-4 border-[#E85D04]"
+              className="bg-white p-8 border-t-2 border-[#D4A574]"
             >
-              <Camera className="w-12 h-12 text-[#E85D04] mb-4" />
-              <h3 className="text-2xl font-bold text-[#1B263B] mb-4">הצילום שלי</h3>
-              <p className="text-gray-700 leading-relaxed">
+              <Camera className="w-10 h-10 text-[#D4A574] mb-4" />
+              <h3 className="text-2xl font-light text-[#5D4E37] mb-4" style={{fontFamily: 'serif'}}>הצילום שלי</h3>
+              <p className="text-[#8B7E6A] leading-relaxed font-light">
                 כל התמונות בבלוג צולמו על ידי במהלך הטיולים. אני מאמין בתיעוד אמיתי של החוויה - הטוב, הרע, והמיוזע.
               </p>
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
               viewport={{ once: true }}
-              className="bg-white p-8 rounded-xl shadow-lg border-t-4 border-[#E85D04]"
+              className="bg-white p-8 border-t-2 border-[#D4A574]"
             >
-              <Heart className="w-12 h-12 text-[#E85D04] mb-4" />
-              <h3 className="text-2xl font-bold text-[#1B263B] mb-4">הפילוסופיה שלי</h3>
-              <p className="text-gray-700 leading-relaxed">
+              <Heart className="w-10 h-10 text-[#D4A574] mb-4" />
+              <h3 className="text-2xl font-light text-[#5D4E37] mb-4" style={{fontFamily: 'serif'}}>הפילוסופיה שלי</h3>
+              <p className="text-[#8B7E6A] leading-relaxed font-light">
                 לטייל זה לא לברוח מהחיים - זה לחיות אותם במלואם. כל מסלול מלמד משהו חדש, כל ארוחה מחברת לתרבות חדשה.
               </p>
             </motion.div>
@@ -130,12 +131,14 @@ export default function About() {
             viewport={{ once: true }}
             className="mt-16 text-center"
           >
-            <div className="bg-gradient-to-br from-[#1B263B] to-[#E85D04]/20 p-12 rounded-2xl text-white">
-              <h3 className="text-3xl font-bold mb-6">בואו לטייל איתי</h3>
-              <p className="text-xl mb-8 leading-relaxed max-w-2xl mx-auto">
+            <div className="bg-[#F4EDE3] p-12 border border-[#D4A574]">
+              <h3 className="text-4xl font-extralight text-[#5D4E37] mb-6 tracking-tight" style={{fontFamily: 'serif'}}>
+                <span className="italic">בואו לטייל איתי</span>
+              </h3>
+              <p className="text-xl mb-8 leading-relaxed max-w-2xl mx-auto text-[#8B7E6A] font-light">
                 אם גם אתם אוהבים מסלולים קשוחים, אוכל אמיתי, וחוויות שלא שוכחים - הגעתם למקום הנכון. בואו נטייל ביחד.
               </p>
-              <p className="text-2xl font-bold text-[#E85D04]">
+              <p className="text-2xl font-light text-[#D4A574] italic">
                 לטייל. לאכול. לחזור על זה.
               </p>
             </div>

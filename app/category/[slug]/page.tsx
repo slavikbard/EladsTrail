@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useParams, notFound } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { CATEGORIES, getPostsByCategory, getCategoryById } from '@/src/data/siteData';
+import { CATEGORIES, getPostsByCategory } from '@/src/data/siteData';
 
 export default function CategoryPage() {
   const params = useParams();
@@ -19,14 +19,14 @@ export default function CategoryPage() {
   const posts = getPostsByCategory(category.id);
 
   return (
-    <div className="min-h-screen bg-white" dir="rtl">
-      <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
+    <div className="min-h-screen bg-[#FAF8F5]" dir="rtl">
+      <section className="relative h-[50vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
             src={category.image}
             alt={category.name_he}
             fill
-            className="object-cover brightness-75"
+            className="object-cover brightness-50"
             priority
           />
         </div>
@@ -36,15 +36,15 @@ export default function CategoryPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-5xl md:text-7xl font-light text-white mb-6 tracking-wide"
+            className="text-6xl md:text-7xl font-extralight text-white mb-6 tracking-tight" style={{fontFamily: 'serif'}}
           >
-            {category.name_he}
+            <span className="italic">{category.name_he}</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl text-white/90 font-light"
+            className="text-lg text-white/90 font-light tracking-wider"
           >
             {posts.length} פוסטים
           </motion.p>
@@ -54,7 +54,7 @@ export default function CategoryPage() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           {posts.length > 0 ? (
-            <div className="space-y-12">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {posts.map((post, index) => (
                 <Link key={post.id} href={`/post/${post.slug}`}>
                   <motion.article
@@ -62,48 +62,41 @@ export default function CategoryPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     viewport={{ once: true }}
-                    className={`grid lg:grid-cols-2 gap-8 bg-white hover:shadow-2xl transition-shadow duration-300 overflow-hidden ${
-                      index % 2 === 0 ? '' : 'lg:grid-flow-dense'
-                    }`}
+                    className="group"
                   >
-                    <div className={`relative aspect-[4/3] ${index % 2 === 0 ? '' : 'lg:col-start-2'}`}>
+                    <div className="relative aspect-[4/5] overflow-hidden mb-6">
                       <Image
                         src={post.featured_image}
                         alt={post.title_he}
                         fill
-                        className="object-cover"
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
                       />
                     </div>
-                    <div className="p-8 lg:p-12 flex flex-col justify-center">
-                      <span className="text-sm text-[#E85D04] font-medium tracking-wider mb-4">
-                        {category.name_he}
-                      </span>
-                      <h3 className="text-3xl md:text-4xl font-light text-[#1B263B] mb-4 leading-tight">
-                        {post.title_he}
-                      </h3>
-                      <p className="text-gray-600 text-lg leading-relaxed mb-6">
-                        {post.excerpt_he}
-                      </p>
-                      <span className="text-[#E85D04] font-medium hover:underline">
-                        קרא עוד ←
-                      </span>
-                    </div>
+                    <span className="text-xs text-[#D4A574] font-medium tracking-widest mb-3 block uppercase">
+                      {category.name_he}
+                    </span>
+                    <h3 className="text-2xl font-light text-[#5D4E37] mb-3 leading-tight group-hover:text-[#D4A574] transition-colors" style={{fontFamily: 'serif'}}>
+                      {post.title_he}
+                    </h3>
+                    <p className="text-[#8B7E6A] leading-relaxed line-clamp-3 text-sm">
+                      {post.excerpt_he}
+                    </p>
                   </motion.article>
                 </Link>
               ))}
             </div>
           ) : (
             <div className="text-center py-20">
-              <p className="text-xl text-gray-600">בקרוב יגיעו פוסטים חדשים...</p>
+              <p className="text-xl text-[#8B7E6A]">בקרוב יגיעו פוסטים חדשים...</p>
             </div>
           )}
         </div>
       </section>
 
-      <div className="text-center py-16 bg-gray-50">
+      <div className="text-center py-16 bg-[#F4EDE3]">
         <Link
           href="/"
-          className="inline-block text-[#E85D04] hover:text-[#1B263B] font-medium text-lg transition-colors"
+          className="inline-block text-[#D4A574] hover:text-[#5D4E37] font-light text-lg transition-colors tracking-wider"
         >
           ← חזרה לדף הבית
         </Link>
