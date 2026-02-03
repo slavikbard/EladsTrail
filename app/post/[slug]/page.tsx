@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { getPostBySlug, getCategoryById, getPostsByCategory, AUTHOR } from '@/src/data/siteData';
 import { notFound, useParams } from 'next/navigation';
 import { Clock, MapPin, User } from 'lucide-react';
+import ImageSlider from '@/components/ImageSlider';
 
 export default function PostPage() {
   const params = useParams();
@@ -71,18 +72,15 @@ export default function PostPage() {
 
         <div className="w-24 h-px bg-[#D4A574] mx-auto mb-12" />
 
+        {/* סליידר תמונות חדש! */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="relative w-full aspect-[16/9] mb-16 overflow-hidden rounded-lg"
+          className="mb-16"
         >
-          <Image
-            src={post.featured_image}
-            alt={post.title_he}
-            fill
-            className="object-cover"
-            priority
-            sizes="(max-width: 768px) 100vw, 896px"
+          <ImageSlider 
+            images={post.images} 
+            alt={post.title_he} 
           />
         </motion.div>
 
