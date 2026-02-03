@@ -3,8 +3,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { getPostBySlug, getCategoryById, getPostsByCategory } from '@/src/data/siteData';
+import { getPostBySlug, getCategoryById, getPostsByCategory, AUTHOR } from '@/src/data/siteData';
 import { notFound, useParams } from 'next/navigation';
+import { Clock, MapPin, User } from 'lucide-react';
 
 export default function PostPage() {
   const params = useParams();
@@ -38,17 +39,42 @@ export default function PostPage() {
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-4xl md:text-6xl font-extralight text-center text-[#5D4E37] mb-8 leading-tight tracking-tight" style={{fontFamily: 'serif'}}
+          className="text-4xl md:text-6xl font-extralight text-center text-[#5D4E37] mb-8 leading-tight tracking-tight"
+          style={{fontFamily: 'serif'}}
         >
           <span className="italic">{post.title_he}</span>
         </motion.h1>
+
+        {/* זמן קריאה + תאריך + מחבר */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+          className="flex items-center justify-center gap-6 mb-8 text-sm text-[#8B7E6A]"
+        >
+          {post.author && (
+            <div className="flex items-center gap-2">
+              <User className="w-4 h-4" />
+              <span>{post.author}</span>
+            </div>
+          )}
+          {post.reading_time && (
+            <div className="flex items-center gap-2">
+              <Clock className="w-4 h-4" />
+              <span>{post.reading_time}</span>
+            </div>
+          )}
+          <div className="flex items-center gap-2">
+            <span>{new Date(post.date).toLocaleDateString('he-IL', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+          </div>
+        </motion.div>
 
         <div className="w-24 h-px bg-[#D4A574] mx-auto mb-12" />
 
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="relative w-full aspect-[16/9] mb-16 overflow-hidden"
+          className="relative w-full aspect-[16/9] mb-16 overflow-hidden rounded-lg"
         >
           <Image
             src={post.featured_image}
@@ -66,11 +92,76 @@ export default function PostPage() {
           </p>
         </div>
 
-        <div className="max-w-3xl mx-auto bg-white p-8 md:p-12">
+        <div className="max-w-3xl mx-auto bg-white p-8 md:p-12 mb-12">
           <div className="text-[#5D4E37] leading-loose whitespace-pre-line text-lg font-light">
             {post.content_he}
           </div>
         </div>
+
+        {/* גלריית תמונות */}
+        {post.images && post.images.length > 1 && (
+          <div className="max-w-3xl mx-auto mb-16">
+            <h3 className="text-2xl font-light text-[#5D4E37] mb-6 text-center" style={{fontFamily: 'serif'}}>
+              <span className="italic">גלריית תמונות</span>
+            </h3>
+            <div className="grid grid-cols-2 gap-4">
+              {post.images.slice(1).map((image, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="relative aspect-[4/3] overflow-hidden rounded-lg"
+                >
+                  <Image
+                    src={image}
+                    alt={`${post.title_he} - תמונה ${index + 2}`}
+                    fill
+                    className="object-cover hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 768px) 50vw, 400px"
+                  />
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* כרטיס מחבר - אלעד דויטש */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-3xl mx-auto bg-[#F4EDE3] p-8 md:p-12 border border-[#D4A574] mb-16"
+        >
+          <div className="flex flex-col md:flex-row items-center gap-6">
+            {/* תמונת פרופיל עגולה */}
+            <div className="relative w-32 h-32 flex-shrink-0">
+              <Image
+                src={AUTHOR.image}
+                alt={AUTHOR.name}
+                fill
+                className="object-cover rounded-full border-4 border-[#D4A574]"
+              />
+            </div>
+
+            <div className="flex-1 text-center md:text-right">
+              <h3 className="text-3xl font-light text-[#5D4E37] mb-3" style={{fontFamily: 'serif'}}>
+                <span className="italic">{AUTHOR.name}</span>
+              </h3>
+              <p className="text-lg text-[#8B7E6A] font-light mb-4 leading-relaxed">
+                {AUTHOR.bio}
+              </p>
+              <div className="flex items-center justify-center md:justify-end gap-2 text-sm text-[#8B7E6A]">
+                <MapPin className="w-4 h-4" />
+                <span>{AUTHOR.location}</span>
+              </div>
+              <p className="text-xl text-[#D4A574] font-light italic mt-4">
+                {AUTHOR.tagline}
+              </p>
+            </div>
+          </div>
+        </motion.div>
 
       </article>
 
@@ -107,6 +198,12 @@ export default function PostPage() {
                         <h3 className="text-xl font-light text-[#5D4E37] line-clamp-2 group-hover:text-[#D4A574] transition-colors" style={{fontFamily: 'serif'}}>
                           {relatedPost.title_he}
                         </h3>
+                        {relatedPost.reading_time && (
+                          <div className="flex items-center gap-2 mt-2 text-sm text-[#8B7E6A]">
+                            <Clock className="w-3 h-3" />
+                            <span>{relatedPost.reading_time}</span>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </Link>
