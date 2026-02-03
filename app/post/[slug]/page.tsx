@@ -93,10 +93,55 @@ export default function PostPage() {
         </div>
 
         <div className="max-w-3xl mx-auto bg-white p-8 md:p-12 mb-12">
-          <div className="text-[#5D4E37] leading-loose whitespace-pre-line text-lg font-light">
-            {post.content_he}
-          </div>
-        </div>
+  <div className="prose prose-lg max-w-none text-[#5D4E37]" dir="rtl">
+    <div className="space-y-6 leading-relaxed text-lg font-light" style={{ textAlign: 'right' }}>
+      {post.content_he.split('\n\n').map((paragraph, index) => {
+        // אם זה כותרת (מתחיל ב-#)
+        if (paragraph.trim().startsWith('#')) {
+          const level = paragraph.match(/^#+/)?.[0].length || 2;
+          const text = paragraph.replace(/^#+\s*/, '');
+          const HeadingTag = `h${Math.min(level, 6)}` as keyof JSX.IntrinsicElements;
+          return (
+            <HeadingTag
+              key={index}
+              className="text-2xl md:text-3xl font-light text-[#5D4E37] mt-8 mb-4 border-r-4 border-[#D4A574] pr-4"
+              style={{fontFamily: 'serif'}}
+            >
+              <span className="italic">{text}</span>
+            </HeadingTag>
+          );
+        }
+        
+        // אם זה רשימה (מתחיל ב--)
+        if (paragraph.trim().startsWith('-')) {
+          const items = paragraph.split('\n').filter(line => line.trim().startsWith('-'));
+          return (
+            <ul key={index} className="list-none space-y-3 pr-4 border-r-2 border-[#D4A574]">
+              {items.map((item, i) => (
+                <li key={i} className="text-lg leading-relaxed">
+                  <span className="text-[#D4A574] ml-2">•</span>
+                  {item.replace(/^-\s*/, '')}
+                </li>
+              ))}
+            </ul>
+          );
+        }
+        
+        // אם זה פסקה רגילה
+        if (paragraph.trim()) {
+          return (
+            <p key={index} className="text-lg leading-relaxed text-right">
+              {paragraph}
+            </p>
+          );
+        }
+        
+        return null;
+      })}
+    </div>
+  </div>
+</div>
+
 
         {/* גלריית תמונות */}
         {post.images && post.images.length > 1 && (
