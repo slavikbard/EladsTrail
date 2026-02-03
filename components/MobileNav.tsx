@@ -10,7 +10,7 @@ export default function MobileNav() {
   const navItems = [
     { href: '/', icon: Home, label: 'בית' },
     { href: '/trails', icon: Mountain, label: 'טיולים' },
-    { href: '/categories', icon: List, label: 'קטגוריות' },
+    { href: '/trails', icon: List, label: 'יעדים' },
     { href: '/about', icon: User, label: 'אודות' },
   ];
 
