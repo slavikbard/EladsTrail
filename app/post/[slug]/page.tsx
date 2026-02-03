@@ -86,14 +86,15 @@ export default function PostPage() {
           />
         </motion.div>
 
-        <div className="max-w-3xl mx-auto text-center mb-16 bg-white p-8 border-r-4 border-[#D4A574]">
+        {/* תקציר - ברוחב התמונה */}
+        <div className="w-full text-center mb-16 bg-white p-8 border-r-4 border-[#D4A574]">
           <p className="text-xl md:text-2xl text-[#5D4E37] leading-relaxed font-light italic">
             {post.excerpt_he}
           </p>
         </div>
 
-        {/* תוכן הפוסט - מתוקן */}
-        <div className="max-w-3xl mx-auto bg-white p-8 md:p-12 mb-12">
+        {/* תוכן הפוסט - ברוחב התמונה */}
+        <div className="w-full bg-white p-8 md:p-12 mb-12">
           <div 
             className="text-[#5D4E37] text-lg font-light leading-relaxed"
             style={{ 
@@ -107,9 +108,9 @@ export default function PostPage() {
           </div>
         </div>
 
-        {/* גלריית תמונות */}
+        {/* גלריית תמונות - ברוחב התמונה */}
         {post.images && post.images.length > 1 && (
-          <div className="max-w-3xl mx-auto mb-16">
+          <div className="w-full mb-16">
             <h3 className="text-2xl font-light text-[#5D4E37] mb-6 text-center" style={{fontFamily: 'serif'}}>
               <span className="italic">גלריית תמונות</span>
             </h3>
@@ -141,7 +142,7 @@ export default function PostPage() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-4xl mx-auto bg-gradient-to-l from-[#F4EDE3] to-[#FAF8F5] p-8 md:p-12 border-2 border-[#D4A574] rounded-lg shadow-lg mb-16"
+          className="w-full bg-gradient-to-l from-[#F4EDE3] to-[#FAF8F5] p-8 md:p-12 border-2 border-[#D4A574] rounded-lg shadow-lg mb-16"
         >
           <div className="flex flex-col md:flex-row items-start gap-8">
             {/* תמונת פרופיל עגולה */}
