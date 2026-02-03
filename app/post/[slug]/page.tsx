@@ -92,56 +92,20 @@ export default function PostPage() {
           </p>
         </div>
 
+        {/* תוכן הפוסט - מתוקן */}
         <div className="max-w-3xl mx-auto bg-white p-8 md:p-12 mb-12">
-  <div className="prose prose-lg max-w-none text-[#5D4E37]" dir="rtl">
-    <div className="space-y-6 leading-relaxed text-lg font-light" style={{ textAlign: 'right' }}>
-      {post.content_he.split('\n\n').map((paragraph, index) => {
-        // אם זה כותרת (מתחיל ב-#)
-        if (paragraph.trim().startsWith('#')) {
-          const level = paragraph.match(/^#+/)?.[0].length || 2;
-          const text = paragraph.replace(/^#+\s*/, '');
-          const HeadingTag = `h${Math.min(level, 6)}` as keyof JSX.IntrinsicElements;
-          return (
-            <HeadingTag
-              key={index}
-              className="text-2xl md:text-3xl font-light text-[#5D4E37] mt-8 mb-4 border-r-4 border-[#D4A574] pr-4"
-              style={{fontFamily: 'serif'}}
-            >
-              <span className="italic">{text}</span>
-            </HeadingTag>
-          );
-        }
-        
-        // אם זה רשימה (מתחיל ב--)
-        if (paragraph.trim().startsWith('-')) {
-          const items = paragraph.split('\n').filter(line => line.trim().startsWith('-'));
-          return (
-            <ul key={index} className="list-none space-y-3 pr-4 border-r-2 border-[#D4A574]">
-              {items.map((item, i) => (
-                <li key={i} className="text-lg leading-relaxed">
-                  <span className="text-[#D4A574] ml-2">•</span>
-                  {item.replace(/^-\s*/, '')}
-                </li>
-              ))}
-            </ul>
-          );
-        }
-        
-        // אם זה פסקה רגילה
-        if (paragraph.trim()) {
-          return (
-            <p key={index} className="text-lg leading-relaxed text-right">
-              {paragraph}
-            </p>
-          );
-        }
-        
-        return null;
-      })}
-    </div>
-  </div>
-</div>
-
+          <div 
+            className="text-[#5D4E37] text-lg font-light leading-relaxed"
+            style={{ 
+              whiteSpace: 'pre-wrap',
+              textAlign: 'right',
+              direction: 'rtl',
+              lineHeight: '2'
+            }}
+          >
+            {post.content_he}
+          </div>
+        </div>
 
         {/* גלריית תמונות */}
         {post.images && post.images.length > 1 && (
@@ -177,31 +141,36 @@ export default function PostPage() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-3xl mx-auto bg-[#F4EDE3] p-8 md:p-12 border border-[#D4A574] mb-16"
+          className="max-w-4xl mx-auto bg-gradient-to-l from-[#F4EDE3] to-[#FAF8F5] p-8 md:p-12 border-2 border-[#D4A574] rounded-lg shadow-lg mb-16"
         >
-          <div className="flex flex-col md:flex-row items-center gap-6">
+          <div className="flex flex-col md:flex-row items-start gap-8">
             {/* תמונת פרופיל עגולה */}
-            <div className="relative w-32 h-32 flex-shrink-0">
+            <div className="relative w-40 h-40 md:w-48 md:h-48 flex-shrink-0 mx-auto md:mx-0">
               <Image
                 src={AUTHOR.image}
                 alt={AUTHOR.name}
                 fill
-                className="object-cover rounded-full border-4 border-[#D4A574]"
+                className="object-cover rounded-full border-4 border-[#D4A574] shadow-xl"
               />
             </div>
 
-            <div className="flex-1 text-center md:text-right">
-              <h3 className="text-3xl font-light text-[#5D4E37] mb-3" style={{fontFamily: 'serif'}}>
-                <span className="italic">{AUTHOR.name}</span>
-              </h3>
-              <p className="text-lg text-[#8B7E6A] font-light mb-4 leading-relaxed">
+            {/* תוכן */}
+            <div className="flex-1 text-center md:text-right space-y-4">
+              <div className="border-b-2 border-[#D4A574] pb-4">
+                <h3 className="text-4xl md:text-5xl font-light text-[#5D4E37] mb-2" style={{fontFamily: 'serif'}}>
+                  <span className="italic">{AUTHOR.name}</span>
+                </h3>
+                <div className="flex items-center justify-center md:justify-end gap-2 text-base text-[#8B7E6A]">
+                  <MapPin className="w-5 h-5" />
+                  <span>{AUTHOR.location}</span>
+                </div>
+              </div>
+
+              <p className="text-xl md:text-2xl text-[#5D4E37] font-light leading-relaxed">
                 {AUTHOR.bio}
               </p>
-              <div className="flex items-center justify-center md:justify-end gap-2 text-sm text-[#8B7E6A]">
-                <MapPin className="w-4 h-4" />
-                <span>{AUTHOR.location}</span>
-              </div>
-              <p className="text-xl text-[#D4A574] font-light italic mt-4">
+
+              <p className="text-2xl md:text-3xl text-[#D4A574] font-light italic pt-2">
                 {AUTHOR.tagline}
               </p>
             </div>
