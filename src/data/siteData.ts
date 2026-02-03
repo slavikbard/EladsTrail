@@ -1087,10 +1087,26 @@ export const POSTS: Post[] = [
     reading_time: "⏱️ 9 דקות קריאה",
     featured_image: "https://pplx-res.cloudinary.com/image/upload/v1763479838/search_images/30edd0042fda947b561038ff10eaba24c3be35fc.jpg",
     images: [
+     "https://res.cloudinary.com/dwi0ey5cv/image/upload/v1770151751/Albania_The_Wild_Pearl_of_the_Balkans_14_wnc55n.jpg",
+    "https://res.cloudinary.com/dwi0ey5cv/image/upload/v1770151750/Albania_The_Wild_Pearl_of_the_Balkans_13_k2roni.jpg",
+    "https://res.cloudinary.com/dwi0ey5cv/image/upload/v1770151745/Albania_The_Wild_Pearl_of_the_Balkans_10_v8fz0m.jpg",
+  "https://res.cloudinary.com/dwi0ey5cv/image/upload/v1770151745/Albania_The_Wild_Pearl_of_the_Balkans_11_l1hplq.jpg",
+  "https://res.cloudinary.com/dwi0ey5cv/image/upload/v1770151745/Albania_The_Wild_Pearl_of_the_Balkans_12_va0tp0.jpg",
+  "https://res.cloudinary.com/dwi0ey5cv/image/upload/v1770151745/Albania_The_Wild_Pearl_of_the_Balkans_9_ey65pq.jpg",
+  "https://res.cloudinary.com/dwi0ey5cv/image/upload/v1770151745/Albania_The_Wild_Pearl_of_the_Balkans_8_asocki.jpg",
+  "https://res.cloudinary.com/dwi0ey5cv/image/upload/v1770151744/Albania_The_Wild_Pearl_of_the_Balkans_5_hnpzk3.jpg",
+  "https://res.cloudinary.com/dwi0ey5cv/image/upload/v1770151744/Albania_The_Wild_Pearl_of_the_Balkans_7_uosm25.jpg",
+  "https://res.cloudinary.com/dwi0ey5cv/image/upload/v1770151744/Albania_The_Wild_Pearl_of_the_Balkans_6_g9cyed.jpg",
+  "https://res.cloudinary.com/dwi0ey5cv/image/upload/v1770151744/Albania_The_Wild_Pearl_of_the_Balkans_4_mn2w77.jpg",
+  "https://res.cloudinary.com/dwi0ey5cv/image/upload/v1770151744/Albania_The_Wild_Pearl_of_the_Balkans_3_wsnmls.jpg",
+  "https://res.cloudinary.com/dwi0ey5cv/image/upload/v1770151744/Albania_The_Wild_Pearl_of_the_Balkans_2_vub96q.jpg",
+  "https://res.cloudinary.com/dwi0ey5cv/image/upload/v1770151744/Albania_The_Wild_Pearl_of_the_Balkans_1_rfacfx.jpg",
+
+  "https://res.cloudinary.com/dwi0ey5cv/image/upload/v1770049225/MatzegetAlbania_vo28lk.png",
       "https://pplx-res.cloudinary.com/image/upload/v1763479838/search_images/30edd0042fda947b561038ff10eaba24c3be35fc.jpg",
       "https://pplx-res.cloudinary.com/image/upload/v1769604705/search_images/01c37efd4fcb9f17cce70704c599ef14ce672143.jpg",
       "https://pplx-res.cloudinary.com/image/upload/v1764074241/search_images/d112e46f979b967d71a33fe1cf5b20026c9bda6f.jpg",
-      "https://pplx-res.cloudinary.com/image/upload/v1766590490/search_images/d11e99797095df90c020b55ce40f5e7a800e612c.jpg"
+      "https://pplx-res.cloudinary.com/image/upload/v1766590490/search_images/d11e99797095df90c020b55ce40f5e7a800e612c.jpg",
     ],
     date: "2024-02-03"
   }
