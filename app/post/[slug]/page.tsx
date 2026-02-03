@@ -138,8 +138,8 @@ export default function PostPage() {
             {/* תמונת פרופיל עגולה */}
             <div className="relative w-32 h-32 flex-shrink-0">
               <Image
-                src={"https://res.cloudinary.com/dwi0ey5cv/image/upload/v1770106967/EladAbout_vrfofw.jpg"}
-                alt={אלעד דויטש}
+                src={AUTHOR.image}
+                alt={AUTHOR.name}
                 fill
                 className="object-cover rounded-full border-4 border-[#D4A574]"
               />
