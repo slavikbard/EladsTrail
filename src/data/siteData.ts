@@ -34,7 +34,7 @@ export interface Category {
 export const AUTHOR = {
   name: "אלעד דויטש",
   bio: "מטייל אתגרי ג'ינג'י מהקריות שאוהב לאכול ולקרוע את העולם והמדינה",
-  image: "/home/project/public/eladabout.jpg",
+  image: "https://res.cloudinary.com/dwi0ey5cv/image/upload/v1770106967/EladAbout_vrfofw.jpg",
   location: "הקריות, ישראל",
   tagline: "לטייל. לאכול. לחזור על זה."
 };
