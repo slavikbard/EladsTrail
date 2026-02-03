@@ -25,30 +25,26 @@ export default function About() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="relative h-[500px] overflow-hidden mb-12"
-        >
-          <Image
-            src="https://images.pexels.com/photos/1365425/pexels-photo-1365425.jpeg"
-            alt="אלעד דוויץ' במסלול"
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 900px"
-          />
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
           className="prose prose-lg max-w-none"
         >
-          <div className="bg-white border-r-4 border-[#D4A574] p-8 md:p-12 mb-12">
-            <p className="text-2xl text-[#5D4E37] leading-relaxed font-light italic mb-4">
-              שלום, אני <strong>אלעד דויטש</strong>, מטייל אתגרי מהקריות שאוהב לקחת את עצמו למקומות שלא לכל אחד יש אומץ להגיע אליהם.
-            </p>
-            <p className="text-lg text-[#8B7E6A] leading-relaxed font-light">
-              רווק, ג'ינג'י, ובן שנים שלא יכול לשבת בבית כשיש עוד מסלול קשוח לא צעוד או מסעדה מקומית שלא טעמתי את האוכל שלה.
-            </p>
+          {/* תמונה עגולה בצד הטקסט */}
+          <div className="bg-white border-r-4 border-[#D4A574] p-8 md:p-12 mb-12 flex flex-col md:flex-row items-center gap-8">
+            <div className="relative w-48 h-48 flex-shrink-0">
+              <Image
+                src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/af6c251f-5eec-4e19-8ed2-137cafd97a90"
+                alt="אלעד דויטש"
+                fill
+                className="object-cover rounded-full border-4 border-[#D4A574]"
+              />
+            </div>
+            <div>
+              <p className="text-2xl text-[#5D4E37] leading-relaxed font-light italic mb-4">
+                שלום, אני <strong>אלעד דויטש</strong>, מטייל אתגרי מהקריות שאוהב לקחת את עצמו למקומות שלא לכל אחד יש אומץ להגיע אליהם.
+              </p>
+              <p className="text-lg text-[#8B7E6A] leading-relaxed font-light">
+                רווק, ג'ינג'י, ובן שנים שלא יכול לשבת בבית כשיש עוד מסלול קשוח לא צעוד או מסעדה מקומית שלא טעמתי את האוכל שלה.
+              </p>
+            </div>
           </div>
 
           <div className="space-y-8 text-[#5D4E37] text-lg leading-loose font-light">
