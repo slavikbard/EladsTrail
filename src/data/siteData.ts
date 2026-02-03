@@ -1085,12 +1085,12 @@ export const POSTS: Post[] = [
     subcategory_id: 3,
     author: "אלעד דויטש",
     reading_time: "⏱️ 9 דקות קריאה",
-    featured_image: "https://images.pexels.com/photos/3566187/pexels-photo-3566187.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    featured_image: "https://pplx-res.cloudinary.com/image/upload/v1763479838/search_images/30edd0042fda947b561038ff10eaba24c3be35fc.jpg",
     images: [
-      "https://images.pexels.com/photos/3566187/pexels-photo-3566187.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      "https://images.pexels.com/photos/2166559/pexels-photo-2166559.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      "https://images.pexels.com/photos/2467168/pexels-photo-2467168.jpeg?auto=compress&cs=tinysrgb&w=1200",
-      "https://images.pexels.com/photos/3225531/pexels-photo-3225531.jpeg?auto=compress&cs=tinysrgb&w=1200"
+      "https://pplx-res.cloudinary.com/image/upload/v1763479838/search_images/30edd0042fda947b561038ff10eaba24c3be35fc.jpg",
+      "https://pplx-res.cloudinary.com/image/upload/v1769604705/search_images/01c37efd4fcb9f17cce70704c599ef14ce672143.jpg",
+      "https://pplx-res.cloudinary.com/image/upload/v1764074241/search_images/d112e46f979b967d71a33fe1cf5b20026c9bda6f.jpg",
+      "https://pplx-res.cloudinary.com/image/upload/v1766590490/search_images/d11e99797095df90c020b55ce40f5e7a800e612c.jpg"
     ],
     date: "2024-02-03"
   }
