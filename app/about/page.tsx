@@ -31,7 +31,7 @@ export default function About() {
           <div className="bg-white border-r-4 border-[#D4A574] p-8 md:p-12 mb-12 flex flex-col md:flex-row items-center gap-8">
             <div className="relative w-48 h-48 flex-shrink-0">
               <Image
-                src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/af6c251f-5eec-4e19-8ed2-137cafd97a90"
+                src="https://imgur.com/a/Fak1S4U"
                 alt="אלעד דויטש"
                 fill
                 className="object-cover rounded-full border-4 border-[#D4A574]"
