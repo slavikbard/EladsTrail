@@ -7,7 +7,9 @@ export interface Post {
   category_id: number;
   subcategory_id?: number;
   featured_image: string;
-  images: string[]; // חדש: גלריית תמונות
+  images: string[];
+  author: string;
+  reading_time: string;
   date: string;
 }
 
@@ -28,6 +30,14 @@ export interface Category {
   image: string;
   description_he?: string;
 }
+
+export const AUTHOR = {
+  name: "אלעד דויטש",
+  bio: "מטייל אתגרי ג'ינג'י מהקריות שאוהב לאכול ולקרוע את העולם והמדינה",
+  image: "https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/af6c251f-5eec-4e19-8ed2-137cafd97a90",
+  location: "הקריות, ישראל",
+  tagline: "לטייל. לאכול. לחזור על זה."
+};
 
 export const CATEGORIES: Category[] = [
   {
@@ -103,9 +113,15 @@ export const POSTS: Post[] = [
 - התחילו מוקדם
 - קחו ציוד חירום
 
-החזרה הייתה קלה יותר, וסיימנו עם ארוחה חמה בדרוזית בכפר מסעדה.`,
+החזרה הייתה קלה יותר, וסיימנו עם ארוחה חמה בדרוזית בכפר מסעדה.
+
+---
+
+*נכתב על ידי אלעד דויטש - מטייל אתגרי ג'ינג'י מהקריות שאוהב לקרוע את העולם והמדינה* 🏔️`,
     category_id: 1,
     subcategory_id: 1,
+    author: "אלעד דויטש",
+    reading_time: "6 דקות קריאה",
     featured_image: "https://images.pexels.com/photos/773594/pexels-photo-773594.jpeg?auto=compress&cs=tinysrgb&w=1200",
     images: [
       "https://images.pexels.com/photos/773594/pexels-photo-773594.jpeg?auto=compress&cs=tinysrgb&w=1200",
@@ -133,9 +149,15 @@ export const POSTS: Post[] = [
 - אוכל: 50,000 רופיה ליום
 - מדריך: 500,000 רופיה ל-3 ימים
 
-זה טרק קל יחסית, מתאים למשפחות. הנופים פשוט בלתי אפשריים.`,
+זה טרק קל יחסית, מתאים למשפחות. הנופים פשוט בלתי אפשריים.
+
+---
+
+*נכתב על ידי אלעד דויטש - אוהב אוכל ומסלולים ירוקים* 🌾`,
     category_id: 1,
     subcategory_id: 2,
+    author: "אלעד דויטש",
+    reading_time: "5 דקות קריאה",
     featured_image: "https://images.pexels.com/photos/2166559/pexels-photo-2166559.jpeg?auto=compress&cs=tinysrgb&w=1200",
     images: [
       "https://images.pexels.com/photos/2166559/pexels-photo-2166559.jpeg?auto=compress&cs=tinysrgb&w=1200",
@@ -165,9 +187,15 @@ export const POSTS: Post[] = [
 - קחו מקלות הליכה
 - תקציב: כ-700 יורו ל-11 ימים
 
-זה המסלול שכל אוהב הרים חייב לעשות פעם בחיים.`,
+זה המסלול שכל אוהב הרים חייב לעשות פעם בחיים.
+
+---
+
+*נכתב על ידי אלעד דויטש - קורע את אירופה* ⛰️`,
     category_id: 1,
     subcategory_id: 3,
+    author: "אלעד דויטש",
+    reading_time: "7 דקות קריאה",
     featured_image: "https://images.pexels.com/photos/2259917/pexels-photo-2259917.jpeg?auto=compress&cs=tinysrgb&w=1200",
     images: [
       "https://images.pexels.com/photos/2259917/pexels-photo-2259917.jpeg?auto=compress&cs=tinysrgb&w=1200",
@@ -199,9 +227,15 @@ export const POSTS: Post[] = [
 
 האוכל בטרק: דאל באט (אורז ועדשים), מומו (כופתאות), תה צ'אי חם. פשוט אבל טעים.
 
-זהו טרק שמשנה אותך לגמרי.`,
+זהו טרק שמשנה אותך לגמרי.
+
+---
+
+*נכתב על ידי אלעד דויטש - מכור להימלאיה* 🏔️`,
     category_id: 1,
     subcategory_id: 4,
+    author: "אלעד דויטש",
+    reading_time: "8 דקות קריאה",
     featured_image: "https://images.pexels.com/photos/3568039/pexels-photo-3568039.jpeg?auto=compress&cs=tinysrgb&w=1200",
     images: [
       "https://images.pexels.com/photos/3568039/pexels-photo-3568039.jpeg?auto=compress&cs=tinysrgb&w=1200",
@@ -233,9 +267,15 @@ export const POSTS: Post[] = [
 
 תקציב כולל: כ-800 דולר ל-5 ימים כולל אוטובוסים, לינה, אוכל.
 
-הטרק הזה לא לחלשי לב, אבל הוא שווה כל טיפת זיעה.`,
+הטרק הזה לא לחלשי לב, אבל הוא שווה כל טיפת זיעה.
+
+---
+
+*נכתב על ידי אלעד דויטש - שורד רוחות פטגוניה* 💨`,
     category_id: 2,
     subcategory_id: 5,
+    author: "אלעד דויטש",
+    reading_time: "7 דקות קריאה",
     featured_image: "https://images.pexels.com/photos/869258/pexels-photo-869258.jpeg?auto=compress&cs=tinysrgb&w=1200",
     images: [
       "https://images.pexels.com/photos/869258/pexels-photo-869258.jpeg?auto=compress&cs=tinysrgb&w=1200",
@@ -257,15 +297,21 @@ export const POSTS: Post[] = [
 
 יום 3: קימה ב-2 בלילה לטיפוס לפסגה. 4 שעות של טיפוס חד בחושך, דרך חול געשי רופף. כל 3 צעדים קדימה, צעד אחד אחורה.
 
-הגענו לפסגה בזריחה. הנוף: מעל העננים, הר געש אגונג ב רקע, והלוע מלמטה. אחד הרגעים הכי יפים בחיים.
+הגענו לפסגה בזריחה. הנוף: מעל העננים, הר געש אגונג ברקע, והלוע מלמטה. אחד הרגעים הכי יפים בחיים.
 
 עלויות:
 - טרק מאורגן: 3,500,000 רופיה (כ-850 שקל)
 - כולל מדריך, נושא ציוד, אוכל, אוהלים
 
-זה טרק קשה. צריך כושר גופני טוב. אבל החוויה שווה פי כמה.`,
+זה טרק קשה. צריך כושר גופני טוב. אבל החוויה שווה פי כמה.
+
+---
+
+*נכתב על ידי אלעד דויטש - מטפס הרי געש* 🌋`,
     category_id: 2,
     subcategory_id: 6,
+    author: "אלעד דויטש",
+    reading_time: "6 דקות קריאה",
     featured_image: "https://images.pexels.com/photos/417192/pexels-photo-417192.jpeg?auto=compress&cs=tinysrgb&w=1200",
     images: [
       "https://images.pexels.com/photos/417192/pexels-photo-417192.jpeg?auto=compress&cs=tinysrgb&w=1200",
@@ -285,7 +331,7 @@ export const POSTS: Post[] = [
 
 יום 3: סרנגטי נשיונל פארק. כאן עשינו ספארי משולב - חלק ברגל, חלק בג'יפ. ראינו גאון של אריות שוכב מתחת לעץ.
 
-יום 4-5: המעקב אחרי ההגירה הגדולה. מיליוני גנו ו זברות נודדים. זה נראה כמו סרט טבע.
+יום 4-5: המעקב אחרי ההגירה הגדולה. מיליוני גנו וזברות נודדים. זה נראה כמו סרט טבע.
 
 האוכל: ארוחות מדגם של ניאמה צ'ומה (בשר צלוי), אוגאלי (דייסת תירס), סמבוזה. פשוט אבל טעים.
 
@@ -298,9 +344,15 @@ export const POSTS: Post[] = [
 - שמרו מרחק מהחיות
 - לא לצלם עם פלאש
 
-זה טרק יקר, אבל החוויה של לראות את החיות בטבע שלהן - אין על זה.`,
+זה טרק יקר, אבל החוויה של לראות את החיות בטבע שלהן - אין על זה.
+
+---
+
+*נכתב על ידי אלעד דויטש - צייד חוויות אפריקאיות* 🦁`,
     category_id: 2,
     subcategory_id: 7,
+    author: "אלעד דויטש",
+    reading_time: "6 דקות קריאה",
     featured_image: "https://images.pexels.com/photos/631292/pexels-photo-631292.jpeg?auto=compress&cs=tinysrgb&w=1200",
     images: [
       "https://images.pexels.com/photos/631292/pexels-photo-631292.jpeg?auto=compress&cs=tinysrgb&w=1200",
@@ -368,9 +420,15 @@ export const POSTS: Post[] = [
 
 משקל כולל: 10-12 ק"ג
 
-הכלל הזהב שלי: אם לא השתמשתי בזה ב-2 הטרקים האחרונים - לא לוקח!`,
+הכלל הזהב שלי: אם לא השתמשתי בזה ב-2 הטרקים האחרונים - לא לוקח!
+
+---
+
+*נכתב על ידי אלעד דויטש - מומחה לאריזה קלה* 🎒`,
     category_id: 3,
     subcategory_id: 8,
+    author: "אלעד דויטש",
+    reading_time: "5 דקות קריאה",
     featured_image: "https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg?auto=compress&cs=tinysrgb&w=1200",
     images: [
       "https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg?auto=compress&cs=tinysrgb&w=1200",
@@ -403,7 +461,7 @@ export const POSTS: Post[] = [
 - גסט האוזים מקומיים (5-10 דולר)
 
 טיפ 4: אוכל
-- קנו באוכל בשווקים מקומיים
+- קנו אוכל בשווקים מקומיים
 - בשלו בעצמכם
 - אכלו איפה שהמקומיים אוכלים
 
@@ -422,9 +480,15 @@ export const POSTS: Post[] = [
 
 אותו טרק במאורגן? 3500 דולר לפחות.
 
-החיסכון: 2245 דולר = עוד טרק שלם!`,
+החיסכון: 2245 דולר = עוד טרק שלם!
+
+---
+
+*נכתב על ידי אלעד דויטש - חוסך כסף כדי לטייל יותר* 💰`,
     category_id: 3,
     subcategory_id: 9,
+    author: "אלעד דויטש",
+    reading_time: "6 דקות קריאה",
     featured_image: "https://images.pexels.com/photos/164504/pexels-photo-164504.jpeg?auto=compress&cs=tinysrgb&w=1200",
     images: [
       "https://images.pexels.com/photos/164504/pexels-photo-164504.jpeg?auto=compress&cs=tinysrgb&w=1200",
@@ -472,7 +536,7 @@ export const POSTS: Post[] = [
 כלל 7: האמינו לאינסטינקט
 אם משהו מרגיש לא בסדר - תפנו.
 
-כלל 8: נעליים מכף רגל
+כלל 8: נעליים שבורות מכף רגל
 כפות רגל בעייתיות = סוף הטרק. תמיד בדקתי את הנעליים לפני.
 
 כלל 9: ביטוח מקיף
@@ -484,9 +548,15 @@ export const POSTS: Post[] = [
 סיפור אישי:
 בטרק באנאפורנה, החלטתי לא לעלות לפסגה בגלל מזג אוויר גרוע. 3 אנשים עלו. 2 חזרו עם כוויות קור. 1 פונה במסוק.
 
-בטיחות תמיד קודמת לפסגה.`,
+בטיחות תמיד קודמת לפסגה.
+
+---
+
+*נכתב על ידי אלעד דויטש - טרקר סולו מנוסה* 🚨`,
     category_id: 3,
     subcategory_id: 10,
+    author: "אלעד דויטש",
+    reading_time: "7 דקות קריאה",
     featured_image: "https://images.pexels.com/photos/1366630/pexels-photo-1366630.jpeg?auto=compress&cs=tinysrgb&w=1200",
     images: [
       "https://images.pexels.com/photos/1366630/pexels-photo-1366630.jpeg?auto=compress&cs=tinysrgb&w=1200",
@@ -534,9 +604,15 @@ export const POSTS: Post[] = [
 - תאילנד: חינם
 סה"כ: 145 דולר
 
-זה לא הרבה, אבל צריך לתכנן מראש!`,
+זה לא הרבה, אבל צריך לתכנן מראש!
+
+---
+
+*נכתב על ידי אלעד דויטש - אוסף חותמות בדרכון* 🛂`,
     category_id: 3,
     subcategory_id: 11,
+    author: "אלעד דויטש",
+    reading_time: "5 דקות קריאה",
     featured_image: "https://images.pexels.com/photos/2422278/pexels-photo-2422278.jpeg?auto=compress&cs=tinysrgb&w=1200",
     images: [
       "https://images.pexels.com/photos/2422278/pexels-photo-2422278.jpeg?auto=compress&cs=tinysrgb&w=1200",
@@ -591,9 +667,15 @@ export const POSTS: Post[] = [
 10. גאדו גאדו - אינדונזיה
 סלט ירקות עם ביצה קשה ורוטב בוטנים. צמחוני וטעים.
 
-הכלל שלי: אם יש תור של מקומיים - זה המקום הנכון!`,
+הכלל שלי: אם יש תור של מקומיים - זה המקום הנכון!
+
+---
+
+*נכתב על ידי אלעד דויטש - מכור לאוכל רחוב* 🍜`,
     category_id: 4,
     subcategory_id: 12,
+    author: "אלעד דויטש",
+    reading_time: "6 דקות קריאה",
     featured_image: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1200",
     images: [
       "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1200",
@@ -649,9 +731,15 @@ export const POSTS: Post[] = [
 המחיר בחוץ לארץ: 15-20 שקל למנה
 בירושלים: 30-35 שקל למנה גדולה
 
-שווה לעשות בבית!`,
+שווה לעשות בבית!
+
+---
+
+*נכתב על ידי אלעד דויטש - מכור לחומוס ירושלמי* 🥙`,
     category_id: 4,
     subcategory_id: 13,
+    author: "אלעד דויטש",
+    reading_time: "5 דקות קריאה",
     featured_image: "https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?auto=compress&cs=tinysrgb&w=1200",
     images: [
       "https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?auto=compress&cs=tinysrgb&w=1200",
@@ -722,9 +810,15 @@ export const POSTS: Post[] = [
 תקציב יומי:
 - זול: 100,000 רופיה (25 שקל)
 - בינוני: 300,000 רופיה (75 שקל)
-- מפנק: 600,000+ רופיה (150+ שקל)`,
+- מפנק: 600,000+ רופיה (150+ שקל)
+
+---
+
+*נכתב על ידי אלעד דויטש - מומחה לאוכל באלי* 🌴`,
     category_id: 4,
     subcategory_id: 14,
+    author: "אלעד דויטש",
+    reading_time: "7 דקות קריאה",
     featured_image: "https://images.pexels.com/photos/1199960/pexels-photo-1199960.jpeg?auto=compress&cs=tinysrgb&w=1200",
     images: [
       "https://images.pexels.com/photos/1199960/pexels-photo-1199960.jpeg?auto=compress&cs=tinysrgb&w=1200",
@@ -757,7 +851,7 @@ export const POSTS: Post[] = [
 היכן: איסטנבול
 
 4. וייטנאם - קפה עם חלב מרוכז
-קפה פין: קפה חזק מטפטף על קרח ו חלב מרוכז מתוק.
+קפה פין: קפה חזק מטפטף על קרח וחלב מרוכז מתוק.
 זול: 20,000 דונג (3 שקל)
 ממכר!
 היכן: הא נוי, הו צ'י מין
@@ -795,9 +889,15 @@ export const POSTS: Post[] = [
 הקפה הכי טוב שלי?
 וייטנאם. קר, מתוק, חזק, זול. מנצח.
 
-אבל לכל מקום יש את הקסם שלו. קפה זה לא רק טעם - זו החוויה.`,
+אבל לכל מקום יש את הקסם שלו. קפה זה לא רק טעם - זו החוויה.
+
+---
+
+*נכתב על ידי אלעד דויטש - צייד קפה עולמי* ☕`,
     category_id: 4,
     subcategory_id: 14,
+    author: "אלעד דויטש",
+    reading_time: "8 דקות קריאה",
     featured_image: "https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=1200",
     images: [
       "https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=1200",
