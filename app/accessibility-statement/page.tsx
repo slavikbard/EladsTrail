@@ -80,8 +80,8 @@ export default function AccessibilityStatement() {
               אם נתקלתם בבעיית נגישות באתר או אם אתם זקוקים לסיוע, אנא צרו עמנו קשר:
             </p>
             <ul className="list-disc pr-6 space-y-2">
-              <li>דוא"ל: accessibility@eladstrail.com</li>
-              <li>טלפון: 03-1234567</li>
+              <li>דוא"ל: slavik.bard@gmail.com</li>
+              <li>0547921821</li>
             </ul>
             <p className="mt-4">
               נשתדל לטפל בכל פנייה בהקדם האפשרי ולתת מענה ראוי לצרכי הנגישות שלכם.
@@ -91,9 +91,9 @@ export default function AccessibilityStatement() {
           <section>
             <h2 className="text-2xl font-bold text-[#1B263B] mt-8 mb-4">רכז נגישות</h2>
             <p>
-              רכז הנגישות של האתר: אלעד<br />
-              דוא"ל: elad@eladstrail.com<br />
-              טלפון: 03-1234567
+              רכז הנגישות של האתר: סלביק<br />
+              דוא"ל: slavik.bard@gmail.com<br />
+              טלפון: 0547921821
             </p>
           </section>
 
