@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { MapPin, Utensils, Camera, Heart } from 'lucide-react';
+import { MapPin, Utensils, Camera, Heart, Users, Mountain } from 'lucide-react';
 
 export default function About() {
   return (
@@ -29,7 +29,7 @@ export default function About() {
         >
           <Image
             src="https://images.pexels.com/photos/1365425/pexels-photo-1365425.jpeg"
-            alt="אלעד במסלול"
+            alt="אלעד דוויץ' במסלול"
             fill
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 900px"
@@ -43,31 +43,73 @@ export default function About() {
           className="prose prose-lg max-w-none"
         >
           <div className="bg-white border-r-4 border-[#D4A574] p-8 md:p-12 mb-12">
-            <p className="text-2xl text-[#5D4E37] leading-relaxed font-light italic">
-              אני אלעד, מטייל קשוח מישראל. נשוי לבחורה מקומית מבאלי. עשינו טרקים, וולקנים, אוכל רחוב. פורסמתי ב-Ynet, BBC. הצטרפו להרפתקאות!
+            <p className="text-2xl text-[#5D4E37] leading-relaxed font-light italic mb-4">
+              שלום, אני <strong>אלעד דוויץ׳</strong>, מטייל אתגרי מהקריות שאוהב לקחת את עצמו למקומות שלא לכל אחד יש אומץ להגיע אליהם.
+            </p>
+            <p className="text-lg text-[#8B7E6A] leading-relaxed font-light">
+              רווק, ג'ינג'י, ובן שנים שלא יכול לשבת בבית כשיש עוד מסלול קשוח לא צעוד או מסעדה מקומית שלא טעמתי את האוכל שלה.
             </p>
           </div>
 
           <div className="space-y-8 text-[#5D4E37] text-lg leading-loose font-light">
-            <p>
-              הכל התחיל בגיל 19, כשיצאתי לטרק הראשון שלי באנאפורנה, נפאל. 10 ימים של הליכה, 4130 מטר גובה, ואין חזרה אחורה. מהרגע הראשון הבנתי - זה מה שאני רוצה לעשות עם החיים שלי.
+            <h2 className="text-3xl font-light text-[#5D4E37] mb-6" style={{fontFamily: 'serif'}}>
+              את מה אני אוהב
+            </h2>
+
+            <div className="bg-[#F4EDE3] p-6 border-l-4 border-[#D4A574]">
+              <h3 className="text-xl font-medium text-[#5D4E37] mb-3">טיולים מאתגרים</h3>
+              <p>
+                לא מסתפק בטיול סטנדרטי. אתה תמצא אותי בקצוות הר געש, בלוע של הר עם טמפרטורה של מינוס 10 מעלות, או בטרק של 5 ימים דרך יערות במבוק בהימלאיה. <strong>אם זה לא קשה, זה לא מעניין.</strong>
+              </p>
+            </div>
+
+            <div className="bg-[#F4EDE3] p-6 border-l-4 border-[#D4A574]">
+              <h3 className="text-xl font-medium text-[#5D4E37] mb-3">אוכל אמיתי</h3>
+              <p>
+                רחוב, תחנות אוכל מקומיות, לא מסעדות תיירותיות. חיפשתי את הפאד תאי הטוב ביותר בבנגקוק, אכלתי חומוס בירושלים כמו הישראלים, ושתיתי קפה וייטנאמי על קרח בהא נוי. <strong>האוכל זה התרבות, והתרבות זו הסיפור.</strong>
+              </p>
+            </div>
+
+            <div className="bg-[#F4EDE3] p-6 border-l-4 border-[#D4A574]">
+              <h3 className="text-xl font-medium text-[#5D4E37] mb-3">חברים לטיול</h3>
+              <p>
+                לא לבד, אלא עם כל אחד שרוצה להצטרף. הטיול הוא טוב פי 200% כשאתה חולק את זה עם מישהו שמרגיש את אותה רוח הרפתקה. <strong>יחד אנחנו קורעים את המדינה ואת העולם.</strong>
+              </p>
+            </div>
+
+            <h2 className="text-3xl font-light text-[#5D4E37] mb-6 mt-12" style={{fontFamily: 'serif'}}>
+              המטרה
+            </h2>
+
+            <p className="text-xl font-medium text-[#D4A574] italic">
+              "לקרוע את המדינה ואת העולם"
             </p>
 
             <p>
-              ב-2019 הגעתי לבאלי למסע טיולים. שם פגשתי את אשתי, ווידה - מקומית שגדלה בין שדות האורז של אובוד. היא הכירה לי את האינדונזיה האמיתית - לא את זו של התיירים, אלא את זו של האנשים שחיים כאן. הטרקים לוולקנים, אוכל הרחוב בשווקים הקטנים, הכפרים המסורתיים הרחוקים מהכבישים המרכזיים.
+              זה לא רק סלוגן, זה דרך חיים. כל שבוע יש מסלול חדש ישראלי שלא בדקתי, כל שנה יש מדינה חדשה שלא ביקרתי בה.
             </p>
 
-            <p>
-              מאז, עברנו ביחד מסלולים ברחבי העולם. טיפסנו להר געש רינג'אני בלומבוק, צעדנו במעגל מון בלאן באלפים, התמודדנו עם הרוחות הפראיות של פטגוניה, וטרקנו בהימלאיה הנפאלית. כל טרק הוא סיפור, כל פסגה היא אתגר, וכל ארוחה מקומית היא חלון לתרבות חדשה.
-            </p>
+            <p>הנפש שלי רוצה:</p>
+            <ul className="list-disc list-inside space-y-2 text-[#8B7E6A] mr-4">
+              <li>להשלים טרק קשוח שהיה מאתגר מאוד</li>
+              <li>לאכול את המנה המוזרה בשוק מקומי (ולא להבין בדיוק מה זה)</li>
+              <li>להגיע לפסגה בזריחה עם נוף שעוצר נשימה</li>
+              <li>לחזור הביתה עם סיפורים שאף אחד לא מאמין</li>
+            </ul>
+
+            <h2 className="text-3xl font-light text-[#5D4E37] mb-6 mt-12" style={{fontFamily: 'serif'}}>
+              למה בלוג?
+            </h2>
 
             <p>
-              הסיפורים שלי פורסמו ב-Ynet, BBC, וכמה כתבי עת טיולים בינלאומיים. אבל הבלוג הזה הוא הבית האמיתי שלי - המקום שבו אני משתף את החוויות האמיתיות, בלי עריכה, בלי יופי מלאכותי. רק אני, התרמיל, המסלול, והאוכל שבדרך.
+              כי כל אלה שרוצים ללכת לאיזה מקום אתגרי, אני רוצה שתדעו:
             </p>
-
-            <p>
-              אני לא מאמין בטיולים מאורגנים מפוצצים. אני מאמין בתכנון עצמאי, בתקציב נמוך, ובחוויות אותנטיות. רוב המסלולים שלי אני עושה בעצמי או עם ווידה, עם ציוד מינימלי ותרמיל שלא שוקל יותר מ-12 קילו.
-            </p>
+            <ul className="list-disc list-inside space-y-2 text-[#8B7E6A] mr-4">
+              <li><strong>איפה זה באמת קשוח</strong> ולמה</li>
+              <li><strong>מה אוכלים שם</strong> ואיפה</li>
+              <li><strong>כמה זה עולה</strong> (בלי הפתעות)</li>
+              <li><strong>איזה טעויות לא לעשות</strong> (למדתי הדרך הקשה)</li>
+            </ul>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 mt-16">
@@ -78,10 +120,10 @@ export default function About() {
               viewport={{ once: true }}
               className="bg-white p-8 border-t-2 border-[#D4A574]"
             >
-              <MapPin className="w-10 h-10 text-[#D4A574] mb-4" />
+              <Mountain className="w-10 h-10 text-[#D4A574] mb-4" />
               <h3 className="text-2xl font-light text-[#5D4E37] mb-4" style={{fontFamily: 'serif'}}>המסלולים שלי</h3>
               <p className="text-[#8B7E6A] leading-relaxed font-light">
-                מתמחה במסלולי טיולים קשוחים ומאתגרים. שביל ישראל, שבילי הרי אירופה, ומסלולים מדבריים. אם זה קל מדי, זה לא בשבילי.
+                מתמחה במסלולי טיולים קשוחים ומאתגרים. הר חרמון בחורף, וולקנים באינדונזיה, פטגוניה, הימלאיה. אם זה לא מאתגר, זה לא בשבילי.
               </p>
             </motion.div>
 
@@ -95,7 +137,7 @@ export default function About() {
               <Utensils className="w-10 h-10 text-[#D4A574] mb-4" />
               <h3 className="text-2xl font-light text-[#5D4E37] mb-4" style={{fontFamily: 'serif'}}>האוכל שלי</h3>
               <p className="text-[#8B7E6A] leading-relaxed font-light">
-                מחפש אוכל אמיתי, מקומי, ביתי. לא מעניין אותי מסעדות מהודרות - אני רוצה לטעום את המקום דרך האוכל של האנשים שחיים בו.
+                מחפש אוכל אמיתי, מקומי, ביתי. אוכל רחוב, שווקים, warung אינדונזי, חומוס ירושלמי. לא מעניין אותי מסעדות מהודרות - אני רוצה לטעום את המקום דרך האוכל של האנשים שחיים בו.
               </p>
             </motion.div>
 
@@ -106,10 +148,10 @@ export default function About() {
               viewport={{ once: true }}
               className="bg-white p-8 border-t-2 border-[#D4A574]"
             >
-              <Camera className="w-10 h-10 text-[#D4A574] mb-4" />
-              <h3 className="text-2xl font-light text-[#5D4E37] mb-4" style={{fontFamily: 'serif'}}>הצילום שלי</h3>
+              <Users className="w-10 h-10 text-[#D4A574] mb-4" />
+              <h3 className="text-2xl font-light text-[#5D4E37] mb-4" style={{fontFamily: 'serif'}}>החברים שלי</h3>
               <p className="text-[#8B7E6A] leading-relaxed font-light">
-                כל התמונות בבלוג צולמו על ידי במהלך הטיולים. אני מאמין בתיעוד אמיתי של החוויה - הטוב, הרע, והמיוזע.
+                הטיול הכי טוב הוא עם חברים שחושבים כמוך. אוהב לצאת עם כנופיה שמוכנה לקחת סיכונים, לצעוד 8 שעות ביום, ולאכול דברים מוזרים בשווקים.
               </p>
             </motion.div>
 
@@ -123,7 +165,7 @@ export default function About() {
               <Heart className="w-10 h-10 text-[#D4A574] mb-4" />
               <h3 className="text-2xl font-light text-[#5D4E37] mb-4" style={{fontFamily: 'serif'}}>הפילוסופיה שלי</h3>
               <p className="text-[#8B7E6A] leading-relaxed font-light">
-                לטייל זה לא לברוח מהחיים - זה לחיות אותם במלואם. כל מסלול מלמד משהו חדש, כל ארוחה מחברת לתרבות חדשה.
+                לטייל זה לא לברוח מהחיים - זה לחיות אותם במלואם. כל מסלול מלמד משהו חדש, כל ארוחה מחברת לתרבות חדשה. העולם גדול מדי כדי לשבת בבית.
               </p>
             </motion.div>
           </div>
@@ -137,13 +179,16 @@ export default function About() {
           >
             <div className="bg-[#F4EDE3] p-12 border border-[#D4A574]">
               <h3 className="text-4xl font-extralight text-[#5D4E37] mb-6 tracking-tight" style={{fontFamily: 'serif'}}>
-                <span className="italic">בואו לטייל איתי</span>
+                <span className="italic">בואו נטייל ביחד</span>
               </h3>
               <p className="text-xl mb-8 leading-relaxed max-w-2xl mx-auto text-[#8B7E6A] font-light">
-                אם גם אתם אוהבים מסלולים קשוחים, אוכל אמיתי, וחוויות שלא שוכחים - הגעתם למקום הנכון. בואו נטייל ביחד.
+                אם גם אתם אוהבים מסלולים קשוחים, אוכל אמיתי, וחוויות שלא שוכחים - הגעתם למקום הנכון. העולם מחכה.
               </p>
-              <p className="text-2xl font-light text-[#D4A574] italic">
+              <p className="text-3xl font-light text-[#D4A574] italic mb-4">
                 לטייל. לאכול. לחזור על זה.
+              </p>
+              <p className="text-sm text-[#8B7E6A] font-light">
+                אלעד דוויץ׳ | מטייל אתגרי | אוהב אוכל | הקריות | אתה זה יחד איתי? 🏔️
               </p>
             </div>
           </motion.div>
