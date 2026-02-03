@@ -7,6 +7,7 @@ export interface Post {
   category_id: number;
   subcategory_id?: number;
   featured_image: string;
+  images: string[]; // חדש: גלריית תמונות
   date: string;
 }
 
@@ -106,6 +107,12 @@ export const POSTS: Post[] = [
     category_id: 1,
     subcategory_id: 1,
     featured_image: "https://images.pexels.com/photos/773594/pexels-photo-773594.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    images: [
+      "https://images.pexels.com/photos/773594/pexels-photo-773594.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/459301/pexels-photo-459301.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/357573/pexels-photo-357573.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/1166245/pexels-photo-1166245.jpeg?auto=compress&cs=tinysrgb&w=1200"
+    ],
     date: "2024-01-15"
   },
   {
@@ -130,6 +137,11 @@ export const POSTS: Post[] = [
     category_id: 1,
     subcategory_id: 2,
     featured_image: "https://images.pexels.com/photos/2166559/pexels-photo-2166559.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    images: [
+      "https://images.pexels.com/photos/2166559/pexels-photo-2166559.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/2356059/pexels-photo-2356059.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/2481593/pexels-photo-2481593.jpeg?auto=compress&cs=tinysrgb&w=1200"
+    ],
     date: "2024-01-10"
   },
   {
@@ -157,6 +169,11 @@ export const POSTS: Post[] = [
     category_id: 1,
     subcategory_id: 3,
     featured_image: "https://images.pexels.com/photos/2259917/pexels-photo-2259917.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    images: [
+      "https://images.pexels.com/photos/2259917/pexels-photo-2259917.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/572897/pexels-photo-572897.jpeg?auto=compress&cs=tinysrgb&w=1200"
+    ],
     date: "2024-01-05"
   },
   {
@@ -186,6 +203,11 @@ export const POSTS: Post[] = [
     category_id: 1,
     subcategory_id: 4,
     featured_image: "https://images.pexels.com/photos/3568039/pexels-photo-3568039.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    images: [
+      "https://images.pexels.com/photos/3568039/pexels-photo-3568039.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/3732594/pexels-photo-3732594.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/414171/pexels-photo-414171.jpeg?auto=compress&cs=tinysrgb&w=1200"
+    ],
     date: "2023-12-28"
   },
   {
@@ -215,6 +237,11 @@ export const POSTS: Post[] = [
     category_id: 2,
     subcategory_id: 5,
     featured_image: "https://images.pexels.com/photos/869258/pexels-photo-869258.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    images: [
+      "https://images.pexels.com/photos/869258/pexels-photo-869258.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/237272/pexels-photo-237272.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/672358/pexels-photo-672358.jpeg?auto=compress&cs=tinysrgb&w=1200"
+    ],
     date: "2023-12-20"
   },
   {
@@ -240,6 +267,11 @@ export const POSTS: Post[] = [
     category_id: 2,
     subcategory_id: 6,
     featured_image: "https://images.pexels.com/photos/417192/pexels-photo-417192.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    images: [
+      "https://images.pexels.com/photos/417192/pexels-photo-417192.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/53389/volcano-lava-eruption-volcanic-53389.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/672358/pexels-photo-672358.jpeg?auto=compress&cs=tinysrgb&w=1200"
+    ],
     date: "2023-12-15"
   },
   {
@@ -270,6 +302,11 @@ export const POSTS: Post[] = [
     category_id: 2,
     subcategory_id: 7,
     featured_image: "https://images.pexels.com/photos/631292/pexels-photo-631292.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    images: [
+      "https://images.pexels.com/photos/631292/pexels-photo-631292.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/667205/pexels-photo-667205.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/158179/lion-big-cat-predator-savanna-158179.jpeg?auto=compress&cs=tinysrgb&w=1200"
+    ],
     date: "2023-12-10"
   },
   {
@@ -335,6 +372,11 @@ export const POSTS: Post[] = [
     category_id: 3,
     subcategory_id: 8,
     featured_image: "https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    images: [
+      "https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/2403401/pexels-photo-2403401.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/2128036/pexels-photo-2128036.jpeg?auto=compress&cs=tinysrgb&w=1200"
+    ],
     date: "2023-12-05"
   },
   {
@@ -384,6 +426,10 @@ export const POSTS: Post[] = [
     category_id: 3,
     subcategory_id: 9,
     featured_image: "https://images.pexels.com/photos/164504/pexels-photo-164504.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    images: [
+      "https://images.pexels.com/photos/164504/pexels-photo-164504.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/915972/pexels-photo-915972.jpeg?auto=compress&cs=tinysrgb&w=1200"
+    ],
     date: "2023-12-01"
   },
   {
@@ -442,6 +488,10 @@ export const POSTS: Post[] = [
     category_id: 3,
     subcategory_id: 10,
     featured_image: "https://images.pexels.com/photos/1366630/pexels-photo-1366630.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    images: [
+      "https://images.pexels.com/photos/1366630/pexels-photo-1366630.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/2402777/pexels-photo-2402777.jpeg?auto=compress&cs=tinysrgb&w=1200"
+    ],
     date: "2023-11-25"
   },
   {
@@ -488,6 +538,10 @@ export const POSTS: Post[] = [
     category_id: 3,
     subcategory_id: 11,
     featured_image: "https://images.pexels.com/photos/2422278/pexels-photo-2422278.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    images: [
+      "https://images.pexels.com/photos/2422278/pexels-photo-2422278.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/799091/pexels-photo-799091.jpeg?auto=compress&cs=tinysrgb&w=1200"
+    ],
     date: "2023-11-20"
   },
   {
@@ -541,6 +595,10 @@ export const POSTS: Post[] = [
     category_id: 4,
     subcategory_id: 12,
     featured_image: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    images: [
+      "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg?auto=compress&cs=tinysrgb&w=1200"
+    ],
     date: "2023-11-15"
   },
   {
@@ -595,6 +653,10 @@ export const POSTS: Post[] = [
     category_id: 4,
     subcategory_id: 13,
     featured_image: "https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    images: [
+      "https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/4106481/pexels-photo-4106481.jpeg?auto=compress&cs=tinysrgb&w=1200"
+    ],
     date: "2023-11-10"
   },
   {
@@ -664,6 +726,10 @@ export const POSTS: Post[] = [
     category_id: 4,
     subcategory_id: 14,
     featured_image: "https://images.pexels.com/photos/1199960/pexels-photo-1199960.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    images: [
+      "https://images.pexels.com/photos/1199960/pexels-photo-1199960.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=1200"
+    ],
     date: "2023-11-05"
   },
   {
@@ -733,6 +799,10 @@ export const POSTS: Post[] = [
     category_id: 4,
     subcategory_id: 14,
     featured_image: "https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    images: [
+      "https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/374885/pexels-photo-374885.jpeg?auto=compress&cs=tinysrgb&w=1200"
+    ],
     date: "2023-11-01"
   }
 ];
