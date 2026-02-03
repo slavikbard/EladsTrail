@@ -44,7 +44,7 @@ export default function About() {
         >
           <div className="bg-white border-r-4 border-[#D4A574] p-8 md:p-12 mb-12">
             <p className="text-2xl text-[#5D4E37] leading-relaxed font-light italic mb-4">
-              שלום, אני <strong>אלעד דויטש׳</strong>, מטייל אתגרי מהקריות שאוהב לקחת את עצמו למקומות שלא לכל אחד יש אומץ להגיע אליהם.
+              שלום, אני <strong>אלעד דויטש</strong>, מטייל אתגרי מהקריות שאוהב לקחת את עצמו למקומות שלא לכל אחד יש אומץ להגיע אליהם.
             </p>
             <p className="text-lg text-[#8B7E6A] leading-relaxed font-light">
               רווק, ג'ינג'י, ובן שנים שלא יכול לשבת בבית כשיש עוד מסלול קשוח לא צעוד או מסעדה מקומית שלא טעמתי את האוכל שלה.
