@@ -19,6 +19,7 @@ export default function Header() {
     { href: '/about', label: 'אודות אלעד', icon: <Info className="w-5 h-5" /> },
   ];
 
+  // אנימציות כניסה מדורגות לפריטים בתפריט
   const containerVars = {
     initial: { transition: { staggerChildren: 0.05, staggerDirection: -1 } },
     animate: { transition: { staggerChildren: 0.07, delayChildren: 0.2 } }
@@ -34,12 +35,12 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-24 md:h-20">
           
-          {/* לוגו מוגדל עם כיתוב מעודכן */}
+          {/* לוגו מוגדל - מותאם למובייל ודסקטופ */}
           <Link href="/" className="flex items-center gap-3 active:scale-95 transition-transform">
             <div className="relative h-16 w-16 md:h-14 md:w-14">
               <Image
                 src="/logo.svg"
-                alt="SLAVX"
+                alt="ELAD'S TRAIL"
                 fill
                 className="object-contain"
                 priority
@@ -55,7 +56,7 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* ניווט דסקטופ */}
+          {/* ניווט דסקטופ (מוסתר במובייל) */}
           <nav className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
               <Link
@@ -104,7 +105,7 @@ export default function Header() {
             </div>
           </nav>
 
-          {/* כפתור המבורגר למובייל */}
+          {/* כפתור המבורגר למובייל - מעוצב בכתום */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="md:hidden p-2.5 bg-orange-50 text-[#E85D04] rounded-2xl transition-all active:scale-90"
@@ -114,20 +115,20 @@ export default function Header() {
         </div>
       </div>
 
-      {/* תפריט מובייל */}
+      {/* תפריט מובייל - גרסה מתוקנת ללא שגיאות */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: '100vh' }}
+            animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden fixed inset-x-0 top-24 bg-white z-40 overflow-hidden"
+            className="md:hidden fixed inset-x-0 top-[96px] bg-white z-[60] shadow-2xl overflow-y-auto max-h-[calc(100vh-96px)]"
           >
             <motion.nav 
               variants={containerVars}
               initial="initial"
               animate="animate"
-              className="px-6 py-8 space-y-4"
+              className="px-6 py-8 space-y-4 pb-24"
             >
               {navItems.map((item) => (
                 <motion.div key={item.href} variants={itemVars}>
