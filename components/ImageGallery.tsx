@@ -16,14 +16,14 @@ export default function ImageGallery({ images, captions }: ImageGalleryProps) {
     setCurrentIndex(index);
     setIsOpen(true);
     if (typeof document !== 'undefined') {
-      document.body.style.overflow = 'hidden'; // נועל גלילה כשהגלריה פתוחה
+      document.body.style.overflow = 'hidden';
     }
   };
 
   const closeLightbox = () => {
     setIsOpen(false);
     if (typeof document !== 'undefined') {
-      document.body.style.overflow = 'unset'; // מחזיר גלילה
+      document.body.style.overflow = 'unset';
     }
   };
 
@@ -35,12 +35,11 @@ export default function ImageGallery({ images, captions }: ImageGalleryProps) {
     setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
   }, [images.length]);
 
-  // טיפול במקלדת - מונע כפילויות ובעיות זיכרון
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!isOpen) return;
-      if (e.key === 'ArrowRight') goToPrev(); // RTL - חץ ימין = הקודם
-      if (e.key === 'ArrowLeft') goToNext(); // RTL - חץ שמאל = הבא
+      if (e.key === 'ArrowRight') goToPrev();
+      if (e.key === 'ArrowLeft') goToNext();
       if (e.key === 'Escape') closeLightbox();
     };
 
@@ -58,13 +57,12 @@ export default function ImageGallery({ images, captions }: ImageGalleryProps) {
               className="gallery-item"
               onClick={() => openLightbox(index)}
             >
-              <div className="image-container">
-                 <Image
+              <div className="image-wrapper">
+                {/* שימוש ב-img רגיל כדי למנוע מתיחות של Next/Image */}
+                <img
                   src={image}
                   alt={captions?.[index] || `תמונה ${index + 1}`}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="gallery-image"
+                  className="forced-image"
                 />
               </div>
               {captions && captions[index] && (
@@ -90,15 +88,13 @@ export default function ImageGallery({ images, captions }: ImageGalleryProps) {
           </button>
 
           <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-            <div className="lightbox-image-wrapper">
-                <Image
-                  src={images[currentIndex]}
-                  alt={captions?.[currentIndex] || `תמונה ${currentIndex + 1}`}
-                  fill
-                  className="lightbox-image"
-                  priority
-                />
-            </div>
+            {/* גם כאן img רגיל עם contain כדי שלא יימתח */}
+            <img
+              src={images[currentIndex]}
+              alt={captions?.[currentIndex] || `תמונה full view`}
+              className="lightbox-forced-image"
+            />
+            
             {captions && captions[currentIndex] && (
               <div className="lightbox-caption">{captions[currentIndex]}</div>
             )}
@@ -124,55 +120,51 @@ export default function ImageGallery({ images, captions }: ImageGalleryProps) {
           width: 100%;
           max-width: 1200px;
           margin: 40px auto;
-          padding: 0 20px;
+          padding: 0 10px; /* הקטנתי שוליים למובייל */
           direction: rtl;
         }
         .gallery-grid {
           display: grid;
+          /* במובייל זה יהיה טור אחד רחב, ובמסכים גדולים יותר טורים */
           grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
           gap: 20px;
-          align-items: start; /* חשוב: מונע מתיחה אנכית של האלמנטים */
+          align-items: start;
         }
         .gallery-item {
-          position: relative;
           cursor: pointer;
-          overflow: hidden;
           border-radius: 12px;
-          background: #1e293b;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-          display: flex;
-          flex-direction: column;
+          background: #f8fafc;
+          overflow: hidden;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+          transition: all 0.3s ease;
+          border: 1px solid #e2e8f0;
         }
         .gallery-item:hover {
           transform: translateY(-5px);
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         }
-        /* מיכל לתמונה כדי לשמור על גובה אחיד */
-        .image-container {
-            position: relative;
-            width: 100%;
-            height: 250px; /* הגובה הקבוע של הריבועים בגלריה */
-            background: #0f172a; /* רקע כהה לשטחים המתים */
+        .image-wrapper {
+          width: 100%;
+          line-height: 0;
+          background: #fff;
         }
-        .gallery-image {
-          /* השינוי הקריטי: contain במקום cover */
-          object-fit: contain !important;
-          transition: transform 0.3s ease;
-        }
-        .gallery-item:hover .gallery-image {
-          transform: scale(1.05);
+        .forced-image {
+          width: 100% !important;
+          height: auto !important;
+          display: block;
+          object-fit: contain !important; /* קריטי - מונע מתיחה */
         }
         .gallery-caption {
-          /* שינוי: הכיתוב מופיע מתחת לתמונה ולא עליה */
-          background: #1e293b;
-          color: white;
-          padding: 15px;
-          font-size: 14px;
-          font-weight: 500;
+          padding: 12px;
+          background: white;
+          color: #1e293b;
+          font-weight: 600;
           text-align: center;
-          border-top: 1px solid #334155;
+          border-top: 1px solid #f1f5f9;
+          font-size: 14px;
         }
+
+        /* Lightbox Styles */
         .lightbox {
           position: fixed;
           top: 0;
@@ -186,99 +178,107 @@ export default function ImageGallery({ images, captions }: ImageGalleryProps) {
           align-items: center;
           animation: fadeIn 0.3s ease;
         }
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
         .lightbox-content {
           position: relative;
-          /* מגביל את גודל התוכן במסך מלא */
-          width: 90vw;
-          height: 85vh;
+          width: 100%;
+          height: 100%;
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
+          padding: 20px 0; /* מקום לכותרות */
         }
-        .lightbox-image-wrapper {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            flex-grow: 1; /* לוקח את רוב המקום */
+
+        .lightbox-forced-image {
+          max-width: 90vw;
+          max-height: 80vh; /* משאיר מקום לכיתוב למטה */
+          width: auto;
+          height: auto;
+          object-fit: contain !important; /* קריטי - שומר על פרופורציות במצב מלא! */
+          border-radius: 4px;
         }
-        .lightbox-image {
-          object-fit: contain !important; /* שומר על פרופורציות גם במסך מלא */
-        }
+
         .lightbox-caption {
-          background: rgba(0, 0, 0, 0.8);
+          background: rgba(0, 0, 0, 0.7);
           color: white;
-          padding: 15px 30px;
+          padding: 10px 20px;
           margin-top: 15px;
-          border-radius: 8px;
-          font-size: 18px;
+          border-radius: 20px;
+          font-size: 16px;
           text-align: center;
-          flex-shrink: 0; /* שלא יתכווץ */
+          max-width: 90%;
         }
         .lightbox-counter {
-          background: rgba(56, 189, 248, 0.9);
-          color: white;
-          padding: 8px 16px;
+          color: rgba(255,255,255,0.7);
           margin-top: 10px;
-          border-radius: 20px;
           font-size: 14px;
-          font-weight: 600;
-          flex-shrink: 0;
         }
-        .lightbox-close {
-          position: absolute;
-          top: 20px;
-          left: 20px;
-          background: rgba(255, 255, 255, 0.2);
-          color: white;
-          border: none;
-          font-size: 36px;
-          width: 50px;
-          height: 50px;
-          border-radius: 50%;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          z-index: 10000;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-        .lightbox-close:hover {
-          background: rgba(255, 255, 255, 0.3);
-          transform: rotate(90deg);
-        }
+
+        /* כפתורים - עיצוב בסיס */
         .lightbox-btn {
           position: absolute;
           top: 50%;
           transform: translateY(-50%);
-          background: rgba(56, 189, 248, 0.8);
+          background: rgba(255, 255, 255, 0.15);
           color: white;
           border: none;
-          font-size: 36px;
-          padding: 20px 25px;
+          font-size: 40px;
+          padding: 15px;
           cursor: pointer;
-          border-radius: 8px;
+          border-radius: 50%;
           transition: all 0.3s ease;
           z-index: 10000;
+          display: flex; align-items: center; justify-content: center;
+          width: 60px; height: 60px;
         }
-        .lightbox-btn:hover {
-          background: rgba(56, 189, 248, 1);
-          transform: translateY(-50%) scale(1.1);
+        .lightbox-btn:hover { background: rgba(255, 255, 255, 0.3); }
+        .lightbox-prev { right: 30px; }
+        .lightbox-next { left: 30px; }
+
+        .lightbox-close {
+          position: absolute;
+          top: 20px;
+          left: 20px;
+          background: rgba(255,255,255,0.15);
+          color: white;
+          border: none;
+          font-size: 30px;
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          cursor: pointer;
+          z-index: 10001;
+          display: flex; align-items: center; justify-content: center;
         }
-        .lightbox-prev { right: 20px; }
-        .lightbox-next { left: 20px; }
+
+        /* --- התאמות למובייל --- */
         @media (max-width: 768px) {
           .gallery-grid {
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
+            gap: 15px; /* פחות רווח בין תמונות */
           }
-          /* בגריד - אין צורך לשנות גובה כי הוא מוגדר ב-image-container */
-          .lightbox-btn { font-size: 28px; padding: 15px 20px; }
-          .lightbox-close { font-size: 28px; width: 40px; height: 40px; }
+          /* כפתורים קטנים יותר במובייל כדי לא להסתיר את התמונה */
+          .lightbox-btn {
+            font-size: 24px;
+            width: 45px; height: 45px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.5); /* רקע כהה יותר לניגודיות */
+          }
+          .lightbox-prev { right: 10px; }
+          .lightbox-next { left: 10px; }
+          
+          .lightbox-close {
+            top: 15px; left: 15px;
+            width: 40px; height: 40px;
+            font-size: 24px;
+            background: rgba(0, 0, 0, 0.5);
+          }
+          
+          .lightbox-caption {
+            font-size: 14px;
+            padding: 8px 15px;
+          }
         }
       `}</style>
     </>
