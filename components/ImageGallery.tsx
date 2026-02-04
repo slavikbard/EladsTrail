@@ -58,14 +58,15 @@ export default function ImageGallery({ images, captions }: ImageGalleryProps) {
               className="gallery-item"
               onClick={() => openLightbox(index)}
             >
-              <Image
-                src={image}
-                alt={captions?.[index] || `תמונה ${index + 1}`}
-                width={400}
-                height={300}
-                className="gallery-image"
-                style={{ objectFit: 'cover' }} // תיקון למתיחה!
-              />
+              <div className="image-container">
+                 <Image
+                  src={image}
+                  alt={captions?.[index] || `תמונה ${index + 1}`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="gallery-image"
+                />
+              </div>
               {captions && captions[index] && (
                 <div className="gallery-caption">{captions[index]}</div>
               )}
@@ -89,15 +90,15 @@ export default function ImageGallery({ images, captions }: ImageGalleryProps) {
           </button>
 
           <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-            <Image
-              src={images[currentIndex]}
-              alt={captions?.[currentIndex] || `תמונה ${currentIndex + 1}`}
-              width={1200}
-              height={800}
-              className="lightbox-image"
-              style={{ objectFit: 'contain' }}
-              priority
-            />
+            <div className="lightbox-image-wrapper">
+                <Image
+                  src={images[currentIndex]}
+                  alt={captions?.[currentIndex] || `תמונה ${currentIndex + 1}`}
+                  fill
+                  className="lightbox-image"
+                  priority
+                />
+            </div>
             {captions && captions[currentIndex] && (
               <div className="lightbox-caption">{captions[currentIndex]}</div>
             )}
@@ -130,6 +131,7 @@ export default function ImageGallery({ images, captions }: ImageGalleryProps) {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
           gap: 20px;
+          align-items: start; /* חשוב: מונע מתיחה אנכית של האלמנטים */
         }
         .gallery-item {
           position: relative;
@@ -139,31 +141,37 @@ export default function ImageGallery({ images, captions }: ImageGalleryProps) {
           background: #1e293b;
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
           transition: transform 0.3s ease, box-shadow 0.3s ease;
+          display: flex;
+          flex-direction: column;
         }
         .gallery-item:hover {
           transform: translateY(-5px);
           box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
         }
+        /* מיכל לתמונה כדי לשמור על גובה אחיד */
+        .image-container {
+            position: relative;
+            width: 100%;
+            height: 250px; /* הגובה הקבוע של הריבועים בגלריה */
+            background: #0f172a; /* רקע כהה לשטחים המתים */
+        }
         .gallery-image {
-          width: 100%;
-          height: 250px;
+          /* השינוי הקריטי: contain במקום cover */
+          object-fit: contain !important;
           transition: transform 0.3s ease;
-          object-fit: cover !important; /* קריטי לתיקון המתיחה */
         }
         .gallery-item:hover .gallery-image {
           transform: scale(1.05);
         }
         .gallery-caption {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+          /* שינוי: הכיתוב מופיע מתחת לתמונה ולא עליה */
+          background: #1e293b;
           color: white;
           padding: 15px;
           font-size: 14px;
           font-weight: 500;
           text-align: center;
+          border-top: 1px solid #334155;
         }
         .lightbox {
           position: fixed;
@@ -184,19 +192,95 @@ export default function ImageGallery({ images, captions }: ImageGalleryProps) {
         }
         .lightbox-content {
           position: relative;
-          max-width: 90%;
-          max-height: 90%;
+          /* מגביל את גודל התוכן במסך מלא */
+          width: 90vw;
+          height: 85vh;
           display: flex;
           flex-direction: column;
           align-items: center;
+          justify-content: center;
+        }
+        .lightbox-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            flex-grow: 1; /* לוקח את רוב המקום */
         }
         .lightbox-image {
-          max-width: 100%;
-          max-height: 80vh;
-          width: auto;
-          height: auto;
-          border-radius: 8px;
-          object-fit: contain !important;
+          object-fit: contain !important; /* שומר על פרופורציות גם במסך מלא */
         }
         .lightbox-caption {
           background: rgba(0, 0, 0, 0.8);
+          color: white;
+          padding: 15px 30px;
+          margin-top: 15px;
+          border-radius: 8px;
+          font-size: 18px;
+          text-align: center;
+          flex-shrink: 0; /* שלא יתכווץ */
+        }
+        .lightbox-counter {
+          background: rgba(56, 189, 248, 0.9);
+          color: white;
+          padding: 8px 16px;
+          margin-top: 10px;
+          border-radius: 20px;
+          font-size: 14px;
+          font-weight: 600;
+          flex-shrink: 0;
+        }
+        .lightbox-close {
+          position: absolute;
+          top: 20px;
+          left: 20px;
+          background: rgba(255, 255, 255, 0.2);
+          color: white;
+          border: none;
+          font-size: 36px;
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          z-index: 10000;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .lightbox-close:hover {
+          background: rgba(255, 255, 255, 0.3);
+          transform: rotate(90deg);
+        }
+        .lightbox-btn {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          background: rgba(56, 189, 248, 0.8);
+          color: white;
+          border: none;
+          font-size: 36px;
+          padding: 20px 25px;
+          cursor: pointer;
+          border-radius: 8px;
+          transition: all 0.3s ease;
+          z-index: 10000;
+        }
+        .lightbox-btn:hover {
+          background: rgba(56, 189, 248, 1);
+          transform: translateY(-50%) scale(1.1);
+        }
+        .lightbox-prev { right: 20px; }
+        .lightbox-next { left: 20px; }
+        @media (max-width: 768px) {
+          .gallery-grid {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+          }
+          /* בגריד - אין צורך לשנות גובה כי הוא מוגדר ב-image-container */
+          .lightbox-btn { font-size: 28px; padding: 15px 20px; }
+          .lightbox-close { font-size: 28px; width: 40px; height: 40px; }
+        }
+      `}</style>
+    </>
+  );
+}
