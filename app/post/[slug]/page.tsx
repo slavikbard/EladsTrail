@@ -7,6 +7,7 @@ import { getPostBySlug, getCategoryById, getPostsByCategory, AUTHOR } from '@/sr
 import { notFound, useParams } from 'next/navigation';
 import { Clock, MapPin, User } from 'lucide-react';
 import ImageSlider from '@/components/ImageSlider';
+import ImageGallery from '@/components/ImageGallery'; // הוספנו את הייבוא של הגלריה המתוקנת
 
 export default function PostPage() {
   const params = useParams();
@@ -72,7 +73,7 @@ export default function PostPage() {
 
         <div className="w-24 h-px bg-[#D4A574] mx-auto mb-12" />
 
-        {/* סליידר תמונות חדש! */}
+        {/* סליידר תמונות עליון */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -84,14 +85,14 @@ export default function PostPage() {
           />
         </motion.div>
 
-        {/* תקציר - ברוחב התמונה */}
+        {/* תקציר */}
         <div className="w-full text-center mb-16 bg-white p-8 border-r-4 border-[#D4A574]">
           <p className="text-xl md:text-2xl text-[#5D4E37] leading-relaxed font-light italic">
             {post.excerpt_he}
           </p>
         </div>
 
-        {/* תוכן הפוסט - ברוחב התמונה */}
+        {/* תוכן הפוסט */}
         <div className="w-full bg-white p-8 md:p-12 mb-12">
           <div 
             className="text-[#5D4E37] text-lg font-light leading-relaxed"
@@ -106,36 +107,21 @@ export default function PostPage() {
           </div>
         </div>
 
-        {/* גלריית תמונות - ברוחב התמונה */}
+        {/* גלריית תמונות תחתונה - משתמשת ברכיב המתוקן */}
         {post.images && post.images.length > 1 && (
           <div className="w-full mb-16">
             <h3 className="text-2xl font-light text-[#5D4E37] mb-6 text-center" style={{fontFamily: 'serif'}}>
               <span className="italic">גלריית תמונות</span>
             </h3>
-            <div className="grid grid-cols-2 gap-4">
-              {post.images.slice(1).map((image, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="relative aspect-[4/3] overflow-hidden rounded-lg"
-                >
-                  <Image
-                    src={image}
-                    alt={`${post.title_he} - תמונה ${index + 2}`}
-                    fill
-                    className="object-cover hover:scale-105 transition-transform duration-500"
-                    sizes="(max-width: 768px) 50vw, 400px"
-                  />
-                </motion.div>
-              ))}
-            </div>
+            {/* קריאה לרכיב שמתקן את המתיחה והחיתוך */}
+            <ImageGallery 
+              images={post.images.slice(1)} 
+              captions={post.captions?.slice(1)} 
+            />
           </div>
         )}
 
-        {/* כרטיס מחבר - אלעד דויטש */}
+        {/* כרטיס מחבר */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -143,7 +129,6 @@ export default function PostPage() {
           className="w-full bg-gradient-to-l from-[#F4EDE3] to-[#FAF8F5] p-8 md:p-12 border-2 border-[#D4A574] rounded-lg shadow-lg mb-16"
         >
           <div className="flex flex-col md:flex-row items-start gap-8">
-            {/* תמונת פרופיל עגולה */}
             <div className="relative w-40 h-40 md:w-48 md:h-48 flex-shrink-0 mx-auto md:mx-0">
               <Image
                 src={AUTHOR.image}
@@ -153,7 +138,6 @@ export default function PostPage() {
               />
             </div>
 
-            {/* תוכן */}
             <div className="flex-1 text-center md:text-right space-y-4">
               <div className="border-b-2 border-[#D4A574] pb-4">
                 <h3 className="text-4xl md:text-5xl font-light text-[#5D4E37] mb-2" style={{fontFamily: 'serif'}}>
@@ -164,11 +148,9 @@ export default function PostPage() {
                   <span>{AUTHOR.location}</span>
                 </div>
               </div>
-
               <p className="text-xl md:text-2xl text-[#5D4E37] font-light leading-relaxed">
                 {AUTHOR.bio}
               </p>
-
               <p className="text-2xl md:text-3xl text-[#D4A574] font-light italic pt-2">
                 {AUTHOR.tagline}
               </p>
@@ -178,6 +160,7 @@ export default function PostPage() {
 
       </article>
 
+      {/* פוסטים קשורים */}
       {relatedPosts.length > 0 && (
         <section className="bg-white py-20">
           <div className="max-w-7xl mx-auto px-4">
