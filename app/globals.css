@@ -58,28 +58,30 @@ html {
     font: -apple-system-body;
   }
 }
-/* פתרון לסמן הנגישות הצף */
+/* פתרון אגרסיבי לשקיפות כל כפתור הנגישות כולל הרקע הכתום */
 
-/* הערה: אני משתמש כאן בסלקטורים כלליים שמתאימים לרוב התוספים. 
-   אם זה לא תופס, נצטרך למצוא את ה-ID הספציפי של התוסף שלך.
-*/
-
-[id*="accessibility"], [class*="accessibility"], .enable-accessibility-widget, #accessibility-enabler {
-  opacity: 0.4; /* שקיפות של 40% כברירת מחדל */
-  transition: opacity 0.3s ease, transform 0.3s ease !important;
-  filter: grayscale(50%); /* בונוס: עושה אותו קצת פחות צעקני */
+/* אנחנו פונים לכל האלמנטים של הנגישות בבת אחת */
+div[class*="accessibility"], 
+div[id*="accessibility"],
+.accessibility-component,
+[aria-label*="נגישות"] {
+  opacity: 0.3 !important; /* שקיפות משמעותית לכל הכפתור */
+  transition: all 0.4s ease-in-out !important;
+  filter: saturate(0.5) !important; /* מחליש את עוצמת הכתום */
 }
 
-[id*="accessibility"]:hover, [class*="accessibility"]:hover, .enable-accessibility-widget:hover {
-  opacity: 1; /* כשמעבירים עכבר הוא הופך לברור לגמרי */
-  filter: grayscale(0%);
-  transform: scale(1.05); /* גדל מעט כדי לסמן שהוא פעיל */
+/* כשהמשתמש באמת צריך אותו ומרחף מעליו */
+div[class*="accessibility"]:hover, 
+div[id*="accessibility"]:hover,
+[aria-label*="נגישות"]:hover {
+  opacity: 1 !important;
+  filter: saturate(1) !important;
+  transform: scale(1.1);
 }
 
-/* התאמה למובייל - לפעמים עדיף להקטין אותו שם */
-@media (max-width: 768px) {
-  [id*="accessibility"], [class*="accessibility"] {
-    transform: scale(0.8); /* מקטין את הכפתור ב-20% בטלפון */
-    opacity: 0.3; /* שקוף עוד יותר בטלפון כדי שלא יפריע לאגודל */
-  }
+/* בונוס: הזזה לצד שמאל כדי שלא יסתיר את תחילת השורות בעברית */
+div[id*="accessibility"], 
+div[class*="accessibility"] {
+  right: auto !important;
+  left: 20px !important;
 }
