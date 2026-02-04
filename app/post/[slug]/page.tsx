@@ -114,9 +114,8 @@ export default function PostPage() {
               <span className="italic">גלריית תמונות</span>
             </h3>
             {/* קריאה לרכיב שמתקן את המתיחה והחיתוך */}
-            <ImageGallery 
-              images={post.images.slice(1)} 
-              captions={post.captions?.slice(1)} 
+            <ImageGallery
+              images={post.images.slice(1)}
             />
           </div>
         )}
