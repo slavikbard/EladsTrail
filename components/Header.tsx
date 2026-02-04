@@ -22,20 +22,30 @@ export default function Header() {
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50" dir="rtl">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
-          <Link href="/" className="flex items-center gap-3">
-            <Image
-              src="/logo.svg"
-              alt="SLAVX"
-              width={50}
-              height={50}
-              className="h-12 w-12"
-            />
-            <span className="text-xl font-light text-[#1B263B] tracking-wide hidden sm:block">
-              ELAD'S TRAIL
-            </span>
+        <div className="flex items-center justify-between h-24 md:h-20"> {/* הגבהתי מעט את הבר למובייל */}
+          
+          {/* אזור הלוגו */}
+          <Link href="/" className="flex items-center gap-2 md:gap-3">
+            <div className="relative h-16 w-16 md:h-14 md:w-14"> {/* הגדלנו את המיכל של הלוגו */}
+              <Image
+                src="/logo.svg"
+                alt="SLAVX"
+                fill
+                className="object-contain" // שומר על פרופורציות הלוגו
+                priority
+              />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-lg md:text-xl font-light text-[#1B263B] tracking-wide leading-tight">
+                ELAD'S TRAIL
+              </span>
+              <span className="text-[10px] text-[#E85D04] font-medium tracking-[0.2em] uppercase hidden sm:block">
+                Adventure awaits
+              </span>
+            </div>
           </Link>
 
+          {/* ניווט דסקטופ */}
           <nav className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
               <Link
@@ -102,35 +112,37 @@ export default function Header() {
             </div>
           </nav>
 
+          {/* כפתור המבורגר למובייל */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="md:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
             aria-label="תפריט ניווט"
           >
             {mobileMenuOpen ? (
-              <X className="w-6 h-6" />
+              <X className="w-8 h-8 text-[#1B263B]" />
             ) : (
-              <Menu className="w-6 h-6" />
+              <Menu className="w-8 h-8 text-[#1B263B]" />
             )}
           </button>
         </div>
       </div>
 
+      {/* תפריט מובייל נפתח */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-t bg-white"
+            className="md:hidden border-t bg-white overflow-hidden"
           >
-            <nav className="px-4 py-4 space-y-2">
+            <nav className="px-4 py-6 space-y-2">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`block px-4 py-2 rounded-lg font-medium transition-colors ${
+                  className={`block px-4 py-3 rounded-lg font-medium text-lg transition-colors ${
                     pathname === item.href
                       ? 'bg-[#E85D04] text-white'
                       : 'text-[#1B263B] hover:bg-gray-100'
@@ -140,27 +152,27 @@ export default function Header() {
                 </Link>
               ))}
 
-              <div className="pt-2 border-t mt-2">
-                <p className="px-4 py-2 text-sm font-semibold text-gray-500">יעדים</p>
+              <div className="pt-4 border-t mt-4">
+                <p className="px-4 py-2 text-sm font-bold text-[#E85D04] uppercase tracking-widest">יעדים</p>
                 {CATEGORIES.map((category) => {
                   const subcategories = getSubcategoriesByCategory(category.id);
                   return (
-                    <div key={category.id} className="mb-3">
+                    <div key={category.id} className="mb-2">
                       <Link
                         href={`/category/${category.slug}`}
                         onClick={() => setMobileMenuOpen(false)}
-                        className="block px-4 py-2 text-[#1B263B] font-medium hover:bg-gray-100 rounded-lg transition-colors"
+                        className="block px-4 py-2 text-[#1B263B] font-medium text-base hover:bg-gray-100 rounded-lg transition-colors"
                       >
                         {category.name_he}
                       </Link>
                       {subcategories.length > 0 && (
-                        <div className="pr-4 mt-1">
+                        <div className="pr-6 mt-1 flex flex-wrap gap-2">
                           {subcategories.map((subcategory) => (
                             <Link
                               key={subcategory.id}
                               href={`/category/${category.slug}#${subcategory.slug}`}
                               onClick={() => setMobileMenuOpen(false)}
-                              className="block px-4 py-1.5 text-sm text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+                              className="inline-block px-3 py-1 text-xs bg-gray-50 text-gray-600 rounded-full border border-gray-100"
                             >
                               {subcategory.name_he}
                             </Link>
