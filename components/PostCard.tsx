@@ -1,10 +1,12 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Clock, Mountain, Users } from 'lucide-react';
-import { Post, getCategoryById } from '@/src/data/siteData';
+import { Clock, Eye } from 'lucide-react';
+import type { Post, Category } from '@/lib/posts';
+import { supabase } from '@/lib/supabase';
 
 interface PostCardProps {
   post: Post;
@@ -12,15 +14,22 @@ interface PostCardProps {
   variant?: 'default' | 'compact' | 'featured';
 }
 
-const difficultyConfig: Record<string, { color: string; bg: string }> = {
-  'קל': { color: 'text-emerald-700', bg: 'bg-emerald-50' },
-  'בינוני': { color: 'text-amber-700', bg: 'bg-amber-50' },
-  'קשה': { color: 'text-orange-700', bg: 'bg-orange-50' },
-  'אתגרי': { color: 'text-red-700', bg: 'bg-red-50' },
-};
-
 export default function PostCard({ post, index = 0, variant = 'default' }: PostCardProps) {
-  const category = getCategoryById(post.category_id);
+  const [category, setCategory] = useState<Category | null>(null);
+
+  useEffect(() => {
+    async function loadCategory() {
+      if (post.category_id) {
+        const { data } = await supabase
+          .from('categories')
+          .select('*')
+          .eq('id', post.category_id)
+          .maybeSingle();
+        setCategory(data);
+      }
+    }
+    loadCategory();
+  }, [post.category_id]);
 
   if (variant === 'featured') {
     return (
@@ -48,11 +57,6 @@ export default function PostCard({ post, index = 0, variant = 'default' }: PostC
                   {category.name_he}
                 </span>
               )}
-              {post.difficulty && (
-                <span className={`px-3 py-1 text-[11px] font-semibold rounded-full ${difficultyConfig[post.difficulty]?.bg || 'bg-gray-50'} ${difficultyConfig[post.difficulty]?.color || 'text-gray-700'}`}>
-                  {post.difficulty}
-                </span>
-              )}
             </div>
 
             <div className="absolute bottom-0 right-0 left-0 p-6">
@@ -60,16 +64,10 @@ export default function PostCard({ post, index = 0, variant = 'default' }: PostC
                 {post.title_he}
               </h3>
               <div className="flex items-center gap-4 text-white/80 text-xs">
-                {post.reading_time && (
+                {post.view_count > 0 && (
                   <span className="flex items-center gap-1">
-                    <Clock className="w-3.5 h-3.5" />
-                    {post.reading_time.replace('⏱️ ', '')}
-                  </span>
-                )}
-                {post.is_family_friendly && (
-                  <span className="flex items-center gap-1">
-                    <Users className="w-3.5 h-3.5" />
-                    מתאים למשפחות
+                    <Eye className="w-3.5 h-3.5" />
+                    {post.view_count} צפיות
                   </span>
                 )}
               </div>
@@ -108,9 +106,12 @@ export default function PostCard({ post, index = 0, variant = 'default' }: PostC
             <h3 className="text-sm font-medium text-[#1B263B] leading-snug line-clamp-2 group-hover:text-[#E85D04] transition-colors">
               {post.title_he}
             </h3>
-            <span className="text-[11px] text-gray-400 mt-1 block">
-              {post.reading_time?.replace('⏱️ ', '')}
-            </span>
+            {post.view_count > 0 && (
+              <span className="text-[11px] text-gray-400 mt-1 flex items-center gap-1">
+                <Eye className="w-3 h-3" />
+                {post.view_count} צפיות
+              </span>
+            )}
           </div>
         </motion.article>
       </Link>
@@ -134,14 +135,6 @@ export default function PostCard({ post, index = 0, variant = 'default' }: PostC
             className="object-cover transition-transform duration-700 group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
-          {post.difficulty && (
-            <div className="absolute top-3 right-3">
-              <span className={`px-2.5 py-1 text-[10px] font-bold rounded-full ${difficultyConfig[post.difficulty]?.bg || 'bg-gray-50'} ${difficultyConfig[post.difficulty]?.color || 'text-gray-700'}`}>
-                <Mountain className="w-3 h-3 inline-block ml-1" />
-                {post.difficulty}
-              </span>
-            </div>
-          )}
         </div>
         <div className="p-5">
           <div className="flex items-center justify-between mb-2">
@@ -150,10 +143,10 @@ export default function PostCard({ post, index = 0, variant = 'default' }: PostC
                 {category.name_he}
               </span>
             )}
-            {post.reading_time && (
+            {post.view_count > 0 && (
               <span className="flex items-center gap-1 text-[11px] text-gray-400">
-                <Clock className="w-3 h-3" />
-                {post.reading_time.replace('⏱️ ', '')}
+                <Eye className="w-3 h-3" />
+                {post.view_count}
               </span>
             )}
           </div>
@@ -163,12 +156,6 @@ export default function PostCard({ post, index = 0, variant = 'default' }: PostC
           <p className="text-gray-500 text-sm leading-relaxed line-clamp-2">
             {post.excerpt_he}
           </p>
-          {post.is_family_friendly && (
-            <div className="mt-3 flex items-center gap-1.5 text-[11px] text-emerald-600">
-              <Users className="w-3.5 h-3.5" />
-              מתאים למשפחות
-            </div>
-          )}
         </div>
       </motion.article>
     </Link>

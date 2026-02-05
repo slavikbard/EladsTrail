@@ -1,13 +1,20 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { getRecentPosts, CATEGORIES, getAllPosts } from '@/src/data/siteData';
+import { getRecentPosts, getPublishedPosts, getAllCategories, type Post, type Category } from '@/lib/posts';
 import Image from 'next/image';
 import Link from 'next/link';
 import PostCard from '@/components/PostCard';
 import { ArrowLeft, Mountain, MapPin, UtensilsCrossed, Lightbulb } from 'lucide-react';
 
-// מיפוי אייקונים לקטגוריות
+const categoryImages: Record<string, string> = {
+  'destinations': 'https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg',
+  'bucket-list-hikes': 'https://images.pexels.com/photos/618848/pexels-photo-618848.jpeg',
+  'travel-tips': 'https://images.pexels.com/photos/346798/pexels-photo-346798.jpeg',
+  'food-drinks': 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg',
+};
+
 const categoryIcons: Record<string, React.ReactNode> = {
   'destinations': <MapPin className="w-6 h-6" />,
   'bucket-list-hikes': <Mountain className="w-6 h-6" />,
@@ -16,8 +23,31 @@ const categoryIcons: Record<string, React.ReactNode> = {
 };
 
 export default function Home() {
-  const recentPosts = getRecentPosts(6);
-  const allPosts = getAllPosts();
+  const [recentPosts, setRecentPosts] = useState<Post[]>([]);
+  const [allPosts, setAllPosts] = useState<Post[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadData() {
+      try {
+        const [recent, all, cats] = await Promise.all([
+          getRecentPosts(6),
+          getPublishedPosts(),
+          getAllCategories()
+        ]);
+        setRecentPosts(recent);
+        setAllPosts(all);
+        setCategories(cats);
+      } catch (error) {
+        console.error('Error loading data:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadData();
+  }, []);
+
   const featuredPost = recentPosts[0];
   const sidePosts = recentPosts.slice(1, 4);
   const morePosts = recentPosts.slice(4);
@@ -204,7 +234,7 @@ export default function Home() {
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {CATEGORIES.map((cat, i) => {
+            {categories.map((cat, i) => {
               const postCount = allPosts.filter(p => p.category_id === cat.id).length;
               return (
                 <Link key={cat.id} href={`/category/${cat.slug}`}>
@@ -216,7 +246,7 @@ export default function Home() {
                     className="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer"
                   >
                     <Image
-                      src={cat.image}
+                      src={categoryImages[cat.slug] || 'https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg'}
                       alt={cat.name_he}
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-110"

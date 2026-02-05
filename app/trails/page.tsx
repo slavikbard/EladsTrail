@@ -1,15 +1,35 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mountain, Search } from 'lucide-react';
-import { getAllPosts, CATEGORIES } from '@/src/data/siteData';
+import { getPublishedPosts, getAllCategories, type Post, type Category } from '@/lib/posts';
 import PostCard from '@/components/PostCard';
 
 export default function Trails() {
-  const allPosts = getAllPosts();
-  const [activeCategory, setActiveCategory] = useState<number | null>(null);
+  const [allPosts, setAllPosts] = useState<Post[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadData() {
+      try {
+        const [posts, cats] = await Promise.all([
+          getPublishedPosts(),
+          getAllCategories()
+        ]);
+        setAllPosts(posts);
+        setCategories(cats);
+      } catch (error) {
+        console.error('Error loading data:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadData();
+  }, []);
 
   const filteredPosts = allPosts.filter(post => {
     const matchesCategory = activeCategory === null || post.category_id === activeCategory;
@@ -52,7 +72,7 @@ export default function Trails() {
               >
                 הכל ({allPosts.length})
               </button>
-              {CATEGORIES.map(cat => {
+              {categories.map(cat => {
                 const count = allPosts.filter(p => p.category_id === cat.id).length;
                 return (
                   <button
