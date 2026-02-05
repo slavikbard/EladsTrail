@@ -1,9 +1,21 @@
-For all designs I ask you to make, have them be beautiful, not cookie cutter. Make webpages that are fully featured and worthy for production.
+Design Philosophy: > Create bespoke, high-end web experiences. Avoid "generic bootstrap" or cookie-cutter layouts. Prioritize "Quiet Luxury" aesthetics: ample whitespace, sophisticated typography (Inter/Geist), and subtle micro-interactions using Framer Motion. Every page must be production-ready, accessible (A11y), and fully responsive.
 
-When using client-side hooks (useState and useEffect) in a component that's being treated as a Server Component by Next.js, always add the "use client" directive at the top of the file.
+Next.js & React Best Practices:
 
-Do not write code that will trigger this error: "Warning: Extra attributes from the server: %s%s""class,style"
+Strict Client/Server Separation: Always prepend "use client"; to files using hooks (useState, useEffect, useContext).
 
-By default, this template supports JSX syntax with Tailwind CSS classes, the shadcn/ui library, React hooks, and Lucide React for icons. Do not install other packages for UI themes, icons, etc unless absolutely necessary or I request them.
+Hydration Error Prevention: Strictly avoid using browser-only globals (like window, localStorage, or dynamic dates/random numbers) directly in the initial render to prevent "Extra attributes from the server" or hydration mismatch errors. Use useEffect for client-only logic.
 
-Use icons from lucide-react for logos.
+Performance: Use Next.js Image component for all assets with proper priority for LCP elements.
+
+Tech Stack & Constraints:
+
+UI: Build exclusively with Tailwind CSS and shadcn/ui. Ensure consistent spacing and a unified color palette.
+
+Icons: Use Lucide React for all iconography and brand logos unless a specific SVG is provided.
+
+Animations: Use Framer Motion for smooth page transitions and hover states.
+
+Dependencies: Do not introduce external libraries for themes or icons unless explicitly requested.
+
+RTL Support (Crucial): When the project is in Hebrew, ensure full RTL (Right-to-Left) compatibility using Tailwind's rtl: prefix or logical properties (e.g., pr- instead of pl- for padding where applicable).
