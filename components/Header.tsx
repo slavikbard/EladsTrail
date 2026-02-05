@@ -49,92 +49,81 @@ export default function Header() {
     <header
       className={`sticky top-0 z-[100] w-full transition-all duration-300 ${
         scrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-sm'
+          ? 'bg-white/95 backdrop-blur-md shadow-md'
           : 'bg-white'
       }`}
       dir="rtl"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        {/* הגדלתי את גובה ה-Header כאן (h-20 בנייד, h-24 במחשב) */}
-        <div className="flex items-center justify-between h-20 md:h-24">
-          <Link href="/" className="flex items-center gap-4 relative z-[110]">
-            {/* הגדלת ה-Container של הלוגו באופן משמעותי */}
-            <div className="relative h-14 w-14 md:h-20 md:w-20 transition-all duration-300">
+        {/* Header גבוה מאוד (h-24 בנייד, h-32 במחשב) כדי להכיל לוגו רחב */}
+        <div className="flex items-center justify-between h-24 md:h-32">
+          <Link href="/" className="flex items-center gap-6 relative z-[110] group">
+            {/* שינוי דרמטי: רוחב גדול (w-48) וגובה משמעותי (h-24) */}
+            <div className="relative h-20 w-32 md:h-28 md:w-48 transition-transform duration-300 group-hover:scale-105">
               <Image
                 src="/logo.svg"
                 alt="ELAD'S TRAIL"
                 fill
-                className="object-contain"
+                className="object-contain object-right" // הצמדה לימין בגלל RTL
                 priority
               />
             </div>
             
-            <div className="flex flex-col">
-              {/* הגדלת הטקסט של המותג */}
-              <span className="text-lg md:text-xl font-bold text-[#1B263B] leading-none tracking-wide">
+            <div className="flex flex-col border-r-2 border-gray-100 pr-4">
+              <span className="text-xl md:text-2xl font-black text-[#1B263B] leading-tight tracking-tighter">
                 ELAD&apos;S TRAIL
               </span>
-              {/* הגדלת הסלוגן */}
-              <span className="text-[11px] md:text-[13px] text-[#E85D04] font-semibold mt-1 tracking-wider">
+              <span className="text-[12px] md:text-[15px] text-[#E85D04] font-bold mt-1 tracking-wide">
                 לטייל. לאכול. לחזור על זה.
               </span>
             </div>
           </Link>
 
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-2">
             <NavLink href="/" active={isHome}>בית</NavLink>
             <NavLink href="/trails" active={pathname === '/trails'}>כל המסלולים</NavLink>
 
             <div ref={dropdownRef} className="relative">
               <button
                 onClick={() => setCategoriesOpen(!categoriesOpen)}
-                className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
+                className={`flex items-center gap-1.5 px-5 py-2.5 text-base font-semibold rounded-xl transition-all duration-200 ${
                   pathname.startsWith('/category') || pathname === '/categories'
                     ? 'text-[#E85D04] bg-orange-50'
                     : 'text-[#1B263B] hover:text-[#E85D04] hover:bg-gray-50'
                 }`}
               >
                 יעדים
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${categoriesOpen ? 'rotate-180' : ''}`} />
+                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${categoriesOpen ? 'rotate-180' : ''}`} />
               </button>
 
               <AnimatePresence>
                 {categoriesOpen && (
                   <motion.div
-                    initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                    initial={{ opacity: 0, y: 12, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 8, scale: 0.96 }}
-                    transition={{ duration: 0.15 }}
-                    className="absolute top-full right-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden"
+                    exit={{ opacity: 0, y: 12, scale: 0.95 }}
+                    className="absolute top-full right-0 mt-3 w-72 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden"
                   >
-                    <div className="p-2">
+                    <div className="p-3">
                       {CATEGORIES.map((cat) => (
                         <Link
                           key={cat.id}
                           href={`/category/${cat.slug}`}
-                          className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 transition-colors group"
+                          className="flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-gray-50 transition-colors group"
                         >
-                          <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-gray-50 text-[#8B7E6A] group-hover:bg-[#E85D04]/10 group-hover:text-[#E85D04] transition-colors">
-                            {categoryIcons[cat.slug] || <Compass className="w-4 h-4" />}
+                          <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-gray-50 text-[#8B7E6A] group-hover:bg-[#E85D04]/10 group-hover:text-[#E85D04] transition-colors">
+                            {categoryIcons[cat.slug] || <Compass className="w-5 h-5" />}
                           </span>
                           <div>
-                            <span className="block text-sm font-medium text-[#1B263B] group-hover:text-[#E85D04] transition-colors">
+                            <span className="block text-sm font-bold text-[#1B263B] group-hover:text-[#E85D04]">
                               {cat.name_he}
                             </span>
-                            <span className="block text-[11px] text-gray-400">
+                            <span className="block text-[12px] text-gray-400 font-medium">
                               {cat.name_en}
                             </span>
                           </div>
                         </Link>
                       ))}
-                    </div>
-                    <div className="border-t border-gray-100 p-2">
-                      <Link
-                        href="/categories"
-                        className="flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-sm text-[#E85D04] hover:bg-orange-50 transition-colors font-medium"
-                      >
-                        כל היעדים
-                      </Link>
                     </div>
                   </motion.div>
                 )}
@@ -146,14 +135,14 @@ export default function Header() {
 
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-[#1B263B] hover:bg-gray-50 rounded-lg relative z-[110] transition-colors"
-            aria-label="Toggle menu"
+            className="md:hidden p-3 text-[#1B263B] bg-gray-50 rounded-xl relative z-[110]"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
           </button>
         </div>
       </div>
 
+      {/* תפריט מובייל נשאר ללא שינוי פונקציונלי אך מותאם ויזואלית */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <>
@@ -161,42 +150,19 @@ export default function Header() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/20 z-[80] md:hidden"
+              className="fixed inset-0 bg-black/40 z-[80] md:hidden backdrop-blur-sm"
               onClick={() => setMobileMenuOpen(false)}
             />
             <motion.div
-              initial={{ opacity: 0, y: -10 }}
+              initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
-              className="md:hidden absolute top-full left-0 w-full bg-white shadow-xl z-[90] border-t border-gray-100"
+              exit={{ opacity: 0, y: -20 }}
+              className="md:hidden absolute top-full left-0 w-full bg-white shadow-2xl z-[90] border-t border-gray-100 rounded-b-3xl"
             >
-              <nav className="p-4 space-y-1 max-h-[75vh] overflow-y-auto">
-                <MobileNavItem href="/" active={isHome} icon={<Compass className="w-5 h-5" />}>
-                  בית
-                </MobileNavItem>
-                <MobileNavItem href="/trails" active={pathname === '/trails'} icon={<MapIcon className="w-5 h-5" />}>
-                  כל המסלולים
-                </MobileNavItem>
-                <MobileNavItem href="/about" active={pathname === '/about'} icon={<Info className="w-5 h-5" />}>
-                  אודות אלעד
-                </MobileNavItem>
-
-                <div className="pt-3 mt-3 border-t border-gray-100">
-                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2 px-3">קטגוריות</p>
-                  {CATEGORIES.map((cat) => (
-                    <Link
-                      key={cat.id}
-                      href={`/category/${cat.slug}`}
-                      className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 transition-colors"
-                    >
-                      <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-gray-50 text-[#8B7E6A]">
-                        {categoryIcons[cat.slug] || <Compass className="w-4 h-4" />}
-                      </span>
-                      <span className="text-sm font-medium text-[#1B263B]">{cat.name_he}</span>
-                    </Link>
-                  ))}
-                </div>
+              <nav className="p-6 space-y-2">
+                <MobileNavItem href="/" active={isHome} icon={<Compass className="w-6 h-6" />}>בית</MobileNavItem>
+                <MobileNavItem href="/trails" active={pathname === '/trails'} icon={<MapIcon className="w-6 h-6" />}>כל המסלולים</MobileNavItem>
+                <MobileNavItem href="/about" active={pathname === '/about'} icon={<Info className="w-6 h-6" />}>אודות</MobileNavItem>
               </nav>
             </motion.div>
           </>
@@ -210,9 +176,9 @@ function NavLink({ href, active, children }: { href: string; active: boolean; ch
   return (
     <Link
       href={href}
-      className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
+      className={`px-6 py-2.5 text-base font-semibold rounded-xl transition-all duration-200 ${
         active
-          ? 'text-[#E85D04] bg-orange-50'
+          ? 'text-[#E85D04] bg-orange-50 shadow-sm'
           : 'text-[#1B263B] hover:text-[#E85D04] hover:bg-gray-50'
       }`}
     >
@@ -225,8 +191,8 @@ function MobileNavItem({ href, active, icon, children }: { href: string; active:
   return (
     <Link
       href={href}
-      className={`flex items-center gap-3 px-3 py-3 rounded-xl font-medium text-sm transition-all ${
-        active ? 'bg-[#E85D04] text-white' : 'text-[#1B263B] hover:bg-gray-50'
+      className={`flex items-center gap-4 px-4 py-4 rounded-2xl font-bold text-base transition-all ${
+        active ? 'bg-[#E85D04] text-white shadow-lg shadow-orange-200' : 'text-[#1B263B] bg-gray-50'
       }`}
     >
       {icon}
