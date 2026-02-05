@@ -1089,8 +1089,9 @@ export const POSTS: Post[] = [
     subcategory_id: 3,
     author: "אלעד דויטש",
     reading_time: "⏱️ 9 דקות קריאה",
-    featured_image: "https://pplx-res.cloudinary.com/image/upload/v1763479838/search_images/30edd0042fda947b561038ff10eaba24c3be35fc.jpg",
+    featured_image: "https://res.cloudinary.com/dwi0ey5cv/image/upload/v1770049225/MatzegetAlbania_vo28lk.png",
     images: [
+      "https://res.cloudinary.com/dwi0ey5cv/image/upload/v1770049225/MatzegetAlbania_vo28lk.png",
      "https://res.cloudinary.com/dwi0ey5cv/image/upload/v1770151751/Albania_The_Wild_Pearl_of_the_Balkans_14_wnc55n.jpg",
     "https://res.cloudinary.com/dwi0ey5cv/image/upload/v1770151750/Albania_The_Wild_Pearl_of_the_Balkans_13_k2roni.jpg",
     "https://res.cloudinary.com/dwi0ey5cv/image/upload/v1770151745/Albania_The_Wild_Pearl_of_the_Balkans_10_v8fz0m.jpg",
@@ -1105,12 +1106,8 @@ export const POSTS: Post[] = [
   "https://res.cloudinary.com/dwi0ey5cv/image/upload/v1770151744/Albania_The_Wild_Pearl_of_the_Balkans_3_wsnmls.jpg",
   "https://res.cloudinary.com/dwi0ey5cv/image/upload/v1770151744/Albania_The_Wild_Pearl_of_the_Balkans_2_vub96q.jpg",
   "https://res.cloudinary.com/dwi0ey5cv/image/upload/v1770151744/Albania_The_Wild_Pearl_of_the_Balkans_1_rfacfx.jpg",
-
-  "https://res.cloudinary.com/dwi0ey5cv/image/upload/v1770049225/MatzegetAlbania_vo28lk.png",
-      "https://pplx-res.cloudinary.com/image/upload/v1763479838/search_images/30edd0042fda947b561038ff10eaba24c3be35fc.jpg",
-      "https://pplx-res.cloudinary.com/image/upload/v1769604705/search_images/01c37efd4fcb9f17cce70704c599ef14ce672143.jpg",
-      "https://pplx-res.cloudinary.com/image/upload/v1764074241/search_images/d112e46f979b967d71a33fe1cf5b20026c9bda6f.jpg",
-      "https://pplx-res.cloudinary.com/image/upload/v1766590490/search_images/d11e99797095df90c020b55ce40f5e7a800e612c.jpg",
+   "https://pplx-res.cloudinary.com/image/upload/v1763479838/search_images/30edd0042fda947b561038ff10eaba24c3be35fc.jpg",
+      
     ],
     date: "2024-02-03"
   }
