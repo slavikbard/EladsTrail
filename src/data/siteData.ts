@@ -1109,7 +1109,7 @@ export const POSTS: Post[] = [
     "https://res.cloudinary.com/dwi0ey5cv/image/upload/v1770151744/Albania_The_Wild_Pearl_of_the_Balk_3_wsnmls.jpg",
     "https://res.cloudinary.com/dwi0ey5cv/image/upload/v1770151744/Albania_The_Wild_Pearl_of_the_Balk_2_vub96q.jpg",
     "https://res.cloudinary.com/dwi0ey5cv/image/upload/v1770151744/Albania_The_Wild_Pearl_of_the_Balk_1_rfacfx.jpg",
-    "https://pplx-res.cloudinary.com/image/upload/v1763479838/search_images/30edd0042fda947b561038ff10eaba24c3be35fc.jpg"
+    "https://pplx-res.cloudinary.com/image/upload/v1763479838/search_images/30edd0042fda947b561038ff10eaba24c3be35fc.jpg",
   ],
   date: "2017-02-03"
 }
