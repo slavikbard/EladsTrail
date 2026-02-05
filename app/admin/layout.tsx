@@ -1,7 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Shield } from 'lucide-react';
+import { Shield, LayoutDashboard, FileText, Upload } from 'lucide-react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const ADMIN_PASSWORD = 'elad2024';
 
@@ -61,5 +63,55 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     );
   }
 
-  return <>{children}</>;
+  const pathname = usePathname();
+
+  const isActive = (path: string) => pathname === path;
+
+  return (
+    <>
+      <nav className="bg-white border-b border-gray-200 sticky top-0 z-40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+          <div className="flex items-center gap-8">
+            <h1 className="text-lg font-bold text-[#1B263B]">ADMIN</h1>
+            <div className="flex items-center gap-4">
+              <Link
+                href="/admin"
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg transition ${
+                  isActive('/admin')
+                    ? 'bg-blue-500 text-white'
+                    : 'text-gray-700 hover:bg-gray-100'
+                }`}
+              >
+                <LayoutDashboard className="w-4 h-4" />
+                <span className="text-sm font-medium">דשבורד</span>
+              </Link>
+              <Link
+                href="/admin/editor"
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg transition ${
+                  isActive('/admin/editor')
+                    ? 'bg-blue-500 text-white'
+                    : 'text-gray-700 hover:bg-gray-100'
+                }`}
+              >
+                <FileText className="w-4 h-4" />
+                <span className="text-sm font-medium">עורך פוסטים</span>
+              </Link>
+              <Link
+                href="/admin/upload"
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg transition ${
+                  isActive('/admin/upload')
+                    ? 'bg-blue-500 text-white'
+                    : 'text-gray-700 hover:bg-gray-100'
+                }`}
+              >
+                <Upload className="w-4 h-4" />
+                <span className="text-sm font-medium">העלאת תמונות</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </nav>
+      {children}
+    </>
+  );
 }
