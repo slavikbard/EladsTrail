@@ -7,6 +7,7 @@ import Link from 'next/link';
 import PostCard from '@/components/PostCard';
 import { ArrowLeft, Mountain, MapPin, UtensilsCrossed, Lightbulb } from 'lucide-react';
 
+// מיפוי אייקונים לקטגוריות הקיימות ב-siteData
 const categoryIcons: Record<string, React.ReactNode> = {
   'destinations': <MapPin className="w-6 h-6" />,
   'bucket-list-hikes': <Mountain className="w-6 h-6" />,
@@ -15,6 +16,7 @@ const categoryIcons: Record<string, React.ReactNode> = {
 };
 
 export default function Home() {
+  // שליפת נתונים מתוך siteData.ts
   const recentPosts = getRecentPosts(6);
   const allPosts = getAllPosts();
   const featuredPost = recentPosts[0];
@@ -23,6 +25,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#FAFAF8]" dir="rtl">
+      {/* Hero Section */}
       <section className="relative h-[85vh] md:h-[90vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
@@ -32,7 +35,8 @@ export default function Home() {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/60" />
+          {/* שכבת החשכה משופרת לקריאות מקסימלית */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70" />
         </div>
 
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
@@ -49,7 +53,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.15 }}
-            className="text-5xl md:text-7xl font-bold text-white mb-4 tracking-tight"
+            className="text-5xl md:text-7xl font-bold text-white mb-4 tracking-tight drop-shadow-md"
           >
             המסלול של אלעד
           </motion.h1>
@@ -58,7 +62,8 @@ export default function Home() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="text-xl md:text-2xl text-white/85 font-light mb-10 tracking-wide"
+            /* תיקון צבע: כתום מותג עם צל בולט להפרדה מהרקע */
+            className="text-xl md:text-2xl text-[#E85D04] font-semibold mb-10 tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]"
           >
             לטייל &bull; לאכול &bull; לחזור על זה
           </motion.p>
@@ -85,6 +90,7 @@ export default function Home() {
           </motion.div>
         </div>
 
+        {/* Scroll Indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -101,6 +107,7 @@ export default function Home() {
         </motion.div>
       </section>
 
+      {/* Recent Posts Section */}
       <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex items-end justify-between mb-10">
@@ -149,19 +156,10 @@ export default function Home() {
               ))}
             </div>
           )}
-
-          <div className="text-center mt-10 md:hidden">
-            <Link
-              href="/trails"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-[#E85D04] hover:text-[#d04f00] transition-colors"
-            >
-              כל הפוסטים
-              <ArrowLeft className="w-4 h-4" />
-            </Link>
-          </div>
         </div>
       </section>
 
+      {/* Categories Section */}
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
@@ -220,6 +218,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Contact CTA Section */}
       <section className="py-16 md:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <motion.div
