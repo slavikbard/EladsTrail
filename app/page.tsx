@@ -1,174 +1,251 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { getRecentPosts, CATEGORIES } from '@/src/data/siteData';
+import { getRecentPosts, CATEGORIES, getAllPosts } from '@/src/data/siteData';
 import Image from 'next/image';
 import Link from 'next/link';
+import PostCard from '@/components/PostCard';
+import { ArrowLeft, Mountain, MapPin, UtensilsCrossed, Lightbulb } from 'lucide-react';
+
+const categoryIcons: Record<string, React.ReactNode> = {
+  'destinations': <MapPin className="w-6 h-6" />,
+  'bucket-list-hikes': <Mountain className="w-6 h-6" />,
+  'travel-tips': <Lightbulb className="w-6 h-6" />,
+  'food-drinks': <UtensilsCrossed className="w-6 h-6" />,
+};
 
 export default function Home() {
-  const recentPosts = getRecentPosts(4);
+  const recentPosts = getRecentPosts(6);
+  const allPosts = getAllPosts();
+  const featuredPost = recentPosts[0];
+  const sidePosts = recentPosts.slice(1, 4);
+  const morePosts = recentPosts.slice(4);
 
   return (
-    <div className="min-h-screen bg-white" dir="rtl">
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+    <div className="min-h-screen bg-[#FAFAF8]" dir="rtl">
+      <section className="relative h-[85vh] md:h-[90vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
             src="/background.jpg"
             alt="Hero Background"
             fill
-            className="object-cover brightness-75"
+            className="object-cover"
             priority
           />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/60" />
         </div>
 
-        <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
+        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="mb-8"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            className="mb-6"
           >
-            <Image src="/logo.svg" alt="המסלול של אלעד" width={120} height={120} className="mx-auto mb-6" />
+            <Image src="/logo.svg" alt="Logo" width={80} height={80} className="mx-auto" />
           </motion.div>
 
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-light text-white mb-6 tracking-wide"
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="text-5xl md:text-7xl font-bold text-white mb-4 tracking-tight"
           >
             המסלול של אלעד
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-2xl md:text-3xl text-white/90 font-light mb-12 tracking-wider"
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="text-xl md:text-2xl text-white/85 font-light mb-10 tracking-wide"
           >
-            לטייל • לאכול • לחזור על זה
+            לטייל &bull; לאכול &bull; לחזור על זה
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ duration: 0.7, delay: 0.45 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <Link
               href="/trails"
-              className="inline-block bg-[#E85D04] text-white px-10 py-4 text-lg font-medium hover:bg-[#1B263B] transition-colors duration-300"
+              className="inline-flex items-center gap-2 bg-[#E85D04] text-white px-8 py-3.5 rounded-full text-base font-semibold hover:bg-[#d04f00] transition-all duration-300 shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40"
             >
               גלו את המסלולים
+              <ArrowLeft className="w-4 h-4" />
+            </Link>
+            <Link
+              href="/about"
+              className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm text-white px-8 py-3.5 rounded-full text-base font-medium hover:bg-white/25 transition-all duration-300 border border-white/20"
+            >
+              הכירו את אלעד
             </Link>
           </motion.div>
         </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1, duration: 1 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+        >
+          <div className="w-6 h-10 rounded-full border-2 border-white/40 flex items-start justify-center p-1.5">
+            <motion.div
+              animate={{ y: [0, 12, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              className="w-1.5 h-1.5 rounded-full bg-white/70"
+            />
+          </div>
+        </motion.div>
       </section>
 
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-light text-[#1B263B] mb-4 tracking-wide">
-              פוסטים אחרונים
-            </h2>
-            <p className="text-gray-600 text-lg">
-              הרפתקאות, טרקים, ואוכל מהעולם
-            </p>
+      <section className="py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                className="text-sm font-semibold text-[#E85D04] tracking-wider uppercase mb-2"
+              >
+                חדש באתר
+              </motion.p>
+              <motion.h2
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-3xl md:text-4xl font-bold text-[#1B263B]"
+              >
+                פוסטים אחרונים
+              </motion.h2>
+            </div>
+            <Link
+              href="/trails"
+              className="hidden md:flex items-center gap-2 text-sm font-medium text-[#E85D04] hover:text-[#d04f00] transition-colors"
+            >
+              כל הפוסטים
+              <ArrowLeft className="w-4 h-4" />
+            </Link>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {recentPosts.map((post, index) => {
-              const category = CATEGORIES.find(c => c.id === post.category_id);
+          {featuredPost && (
+            <div className="grid lg:grid-cols-2 gap-6 mb-6">
+              <PostCard post={featuredPost} variant="featured" index={0} />
+              <div className="grid gap-6">
+                {sidePosts.map((post, i) => (
+                  <PostCard key={post.id} post={post} variant="compact" index={i + 1} />
+                ))}
+              </div>
+            </div>
+          )}
+
+          {morePosts.length > 0 && (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+              {morePosts.map((post, i) => (
+                <PostCard key={post.id} post={post} index={i + 4} />
+              ))}
+            </div>
+          )}
+
+          <div className="text-center mt-10 md:hidden">
+            <Link
+              href="/trails"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-[#E85D04] hover:text-[#d04f00] transition-colors"
+            >
+              כל הפוסטים
+              <ArrowLeft className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12">
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="text-sm font-semibold text-[#E85D04] tracking-wider uppercase mb-2"
+            >
+              קטגוריות
+            </motion.p>
+            <motion.h2
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-3xl md:text-4xl font-bold text-[#1B263B]"
+            >
+              חקרו לפי נושא
+            </motion.h2>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {CATEGORIES.map((cat, i) => {
+              const postCount = allPosts.filter(p => p.category_id === cat.id).length;
               return (
-                <Link key={post.id} href={`/post/${post.slug}`}>
-                  <motion.article
-                    initial={{ opacity: 0, y: 30 }}
+                <Link key={cat.id} href={`/category/${cat.slug}`}>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    transition={{ duration: 0.4, delay: i * 0.08 }}
                     viewport={{ once: true }}
-                    className="bg-white hover:shadow-xl transition-shadow duration-300 overflow-hidden group"
+                    className="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer"
                   >
-                    <div className="relative aspect-[4/5] overflow-hidden">
-                      <Image
-                        src={post.featured_image}
-                        alt={post.title_he}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
-                    </div>
-                    <div className="p-6">
-                      {category && (
-                        <span className="text-xs text-[#E85D04] font-medium tracking-wider mb-3 block uppercase">
-                          {category.name_he}
-                        </span>
-                      )}
-                      <h3 className="text-xl font-light text-[#1B263B] mb-3 leading-tight line-clamp-2 group-hover:text-[#E85D04] transition-colors">
-                        {post.title_he}
+                    <Image
+                      src={cat.image}
+                      alt={cat.name_he}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent group-hover:from-black/80 transition-all duration-500" />
+                    <div className="absolute bottom-0 right-0 left-0 p-5">
+                      <div className="flex items-center gap-2 text-white/70 mb-2">
+                        {categoryIcons[cat.slug]}
+                      </div>
+                      <h3 className="text-xl font-bold text-white mb-1">
+                        {cat.name_he}
                       </h3>
-                      <p className="text-gray-600 text-sm leading-relaxed line-clamp-3">
-                        {post.excerpt_he}
-                      </p>
+                      <p className="text-white/60 text-sm">{postCount} פוסטים</p>
                     </div>
-                  </motion.article>
+                  </motion.div>
                 </Link>
               );
             })}
           </div>
-
-          <div className="text-center mt-12">
-            <Link
-              href="/trails"
-              className="inline-block text-[#E85D04] hover:text-[#1B263B] font-medium text-lg transition-colors border-b-2 border-[#E85D04] hover:border-[#1B263B] pb-1"
-            >
-              צפו בכל הפוסטים ←
-            </Link>
-          </div>
         </div>
       </section>
 
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-light text-[#1B263B] mb-4 tracking-wide">
-              חקרו את היעדים
-            </h2>
-            <p className="text-gray-600 text-lg">
-              ממסלולים קשוחים ועד אוכל רחוב - הכל כאן
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {CATEGORIES.map((category, index) => (
-              <Link key={category.id} href={`/category/${category.slug}`}>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="group cursor-pointer bg-white overflow-hidden hover:shadow-xl transition-shadow duration-300"
-                >
-                  <div className="relative aspect-[4/3] overflow-hidden">
-                    <Image
-                      src={category.image}
-                      alt={category.name_he}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-6">
-                      <h3 className="text-white text-2xl font-light mb-2">
-                        {category.name_he}
-                      </h3>
-                      {category.description_he && (
-                        <p className="text-white/80 text-sm">
-                          {category.description_he}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                </motion.div>
+      <section className="py-16 md:py-24">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="relative overflow-hidden rounded-3xl bg-[#1B263B] p-8 md:p-14 text-center"
+          >
+            <div className="absolute top-0 left-0 w-40 h-40 bg-[#E85D04]/10 rounded-full blur-3xl" />
+            <div className="absolute bottom-0 right-0 w-56 h-56 bg-[#E85D04]/5 rounded-full blur-3xl" />
+            <div className="relative z-10">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                בואו נטייל ביחד
+              </h2>
+              <p className="text-lg text-gray-300 mb-8 max-w-xl mx-auto leading-relaxed">
+                מסלולים קשוחים, אוכל אמיתי, וחוויות שלא שוכחים. הצטרפו למסע.
+              </p>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 bg-[#E85D04] text-white px-8 py-3.5 rounded-full text-base font-semibold hover:bg-[#d04f00] transition-all duration-300 shadow-lg shadow-orange-500/25"
+              >
+                צרו קשר
+                <ArrowLeft className="w-4 h-4" />
               </Link>
-            ))}
-          </div>
+            </div>
+          </motion.div>
         </div>
       </section>
     </div>

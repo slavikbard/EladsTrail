@@ -4,7 +4,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useParams, notFound } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { CATEGORIES, getPostsByCategory } from '@/src/data/siteData';
+import { CATEGORIES, getPostsByCategory, getSubcategoriesByCategory } from '@/src/data/siteData';
+import PostCard from '@/components/PostCard';
+import { ArrowRight } from 'lucide-react';
 
 export default function CategoryPage() {
   const params = useParams();
@@ -17,89 +19,74 @@ export default function CategoryPage() {
   }
 
   const posts = getPostsByCategory(category.id);
+  const subcategories = getSubcategoriesByCategory(category.id);
 
   return (
-    <div className="min-h-screen bg-[#FAF8F5]" dir="rtl">
-      <section className="relative h-[50vh] flex items-center justify-center overflow-hidden">
+    <div className="min-h-screen bg-[#FAFAF8]" dir="rtl">
+      <section className="relative h-[45vh] md:h-[50vh] flex items-end overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
             src={category.image}
             alt={category.name_he}
             fill
-            className="object-cover brightness-50"
+            className="object-cover"
             priority
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
         </div>
 
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pb-10 w-full">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-6xl md:text-7xl font-extralight text-white mb-6 tracking-tight" style={{fontFamily: 'serif'}}
           >
-            <span className="italic">{category.name_he}</span>
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-lg text-white/90 font-light tracking-wider"
-          >
-            {posts.length} פוסטים
-          </motion.p>
+            <Link
+              href="/categories"
+              className="inline-flex items-center gap-1.5 text-white/70 text-sm mb-4 hover:text-white transition-colors"
+            >
+              <ArrowRight className="w-4 h-4" />
+              כל הקטגוריות
+            </Link>
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-3">
+              {category.name_he}
+            </h1>
+            {category.description_he && (
+              <p className="text-white/80 text-lg max-w-xl">
+                {category.description_he}
+              </p>
+            )}
+            <p className="text-white/60 text-sm mt-3">{posts.length} פוסטים</p>
+          </motion.div>
         </div>
       </section>
 
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          {posts.length > 0 ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {posts.map((post, index) => (
-                <Link key={post.id} href={`/post/${post.slug}`}>
-                  <motion.article
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    className="group"
-                  >
-                    <div className="relative aspect-[4/5] overflow-hidden mb-6">
-                      <Image
-                        src={post.featured_image}
-                        alt={post.title_he}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                    </div>
-                    <span className="text-xs text-[#D4A574] font-medium tracking-widest mb-3 block uppercase">
-                      {category.name_he}
-                    </span>
-                    <h3 className="text-2xl font-light text-[#5D4E37] mb-3 leading-tight group-hover:text-[#D4A574] transition-colors" style={{fontFamily: 'serif'}}>
-                      {post.title_he}
-                    </h3>
-                    <p className="text-[#8B7E6A] leading-relaxed line-clamp-3 text-sm">
-                      {post.excerpt_he}
-                    </p>
-                  </motion.article>
-                </Link>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-20">
-              <p className="text-xl text-[#8B7E6A]">בקרוב יגיעו פוסטים חדשים...</p>
-            </div>
-          )}
+      {subcategories.length > 0 && (
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-hide">
+            {subcategories.map(sub => (
+              <span
+                key={sub.id}
+                className="px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap bg-white text-gray-600 border border-gray-200"
+              >
+                {sub.name_he}
+              </span>
+            ))}
+          </div>
         </div>
-      </section>
+      )}
 
-      <div className="text-center py-16 bg-[#F4EDE3]">
-        <Link
-          href="/"
-          className="inline-block text-[#D4A574] hover:text-[#5D4E37] font-light text-lg transition-colors tracking-wider"
-        >
-          ← חזרה לדף הבית
-        </Link>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-12">
+        {posts.length > 0 ? (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {posts.map((post, index) => (
+              <PostCard key={post.id} post={post} index={index} />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-20">
+            <p className="text-xl text-gray-400">בקרוב יגיעו פוסטים חדשים...</p>
+          </div>
+        )}
       </div>
     </div>
   );

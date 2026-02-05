@@ -32,7 +32,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-white text-gray-900;
+    @apply bg-white text-gray-900 antialiased;
   }
 }
 
@@ -53,34 +53,32 @@ html {
   scroll-behavior: smooth;
 }
 
-@supports (font: -apple-system-body) {
-  html {
-    font: -apple-system-body;
-  }
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
-/* פתרון אגרסיבי לשקיפות כל כפתור הנגישות כולל הרקע הכתום */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
 
-/* אנחנו פונים לכל האלמנטים של הנגישות בבת אחת */
-div[class*="accessibility"], 
+div[class*="accessibility"],
 div[id*="accessibility"],
 .accessibility-component,
 [aria-label*="נגישות"] {
-  opacity: 0.3 !important; /* שקיפות משמעותית לכל הכפתור */
+  opacity: 0.3 !important;
   transition: all 0.4s ease-in-out !important;
-  filter: saturate(0.5) !important; /* מחליש את עוצמת הכתום */
+  filter: saturate(0.5) !important;
 }
 
-/* כשהמשתמש באמת צריך אותו ומרחף מעליו */
-div[class*="accessibility"]:hover, 
+div[class*="accessibility"]:hover,
 div[id*="accessibility"]:hover,
 [aria-label*="נגישות"]:hover {
   opacity: 1 !important;
   filter: saturate(1) !important;
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
-/* בונוס: הזזה לצד שמאל כדי שלא יסתיר את תחילת השורות בעברית */
-div[id*="accessibility"], 
+div[id*="accessibility"],
 div[class*="accessibility"] {
   right: auto !important;
   left: 20px !important;
