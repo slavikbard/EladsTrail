@@ -7,6 +7,7 @@ import Link from 'next/link';
 import PostCard from '@/components/PostCard';
 import { ArrowLeft, Mountain, MapPin, UtensilsCrossed, Lightbulb } from 'lucide-react';
 
+// מיפוי אייקונים לקטגוריות
 const categoryIcons: Record<string, React.ReactNode> = {
   'destinations': <MapPin className="w-6 h-6" />,
   'bucket-list-hikes': <Mountain className="w-6 h-6" />,
@@ -23,80 +24,95 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#FAFAF8]" dir="rtl">
-      <section className="relative h-[85vh] md:h-[90vh] flex items-center justify-center overflow-hidden">
+      {/* Hero Section - מוגדל ומרשים */}
+      <section className="relative h-[85vh] md:h-[95vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
             src="/background.jpg"
             alt="Hero Background"
             fill
-            className="object-cover"
+            className="object-cover scale-105" 
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/70" />
+          {/* שכבת החשכה מדורגת לקריאות מקסימלית */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/80" />
         </div>
 
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          {/* בלוק הלוגו המשופר */}
+        <div className="relative z-10 text-center px-4 w-full max-w-6xl mx-auto">
+          {/* לוגו מרשימי עם פריסה רחבה */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="mb-8 relative inline-block"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="flex flex-col items-center mb-10"
           >
-            {/* אפקט הילה מאחורי הלוגו */}
-            <div className="absolute inset-0 bg-white/20 blur-3xl rounded-full scale-150 z-0" />
+            <div className="relative mb-6">
+               {/* הילה יוקרתית מאחורי הלוגו להדגשה */}
+              <div className="absolute inset-0 bg-[#E85D04]/20 blur-[100px] rounded-full scale-150" />
+              <Image 
+                src="/logo.svg" 
+                alt="Logo" 
+                width={180} // גודל מקסימלי ללוגו
+                height={180} 
+                className="relative z-10 drop-shadow-[0_0_25px_rgba(232,93,4,0.3)]" 
+                priority 
+              />
+            </div>
             
-            <Image 
-              src="/logo.svg" 
-              alt="Logo" 
-              width={160}  /* הגדלה משמעותית */
-              height={160} 
-              className="relative z-10 mx-auto drop-shadow-[0_10px_15px_rgba(0,0,0,0.3)]" 
-              priority 
-            />
+            {/* כותרת משנית באנגלית למראה יוקרתי ורחב */}
+            <motion.span 
+              initial={{ opacity: 0, letterSpacing: "0.1em" }}
+              animate={{ opacity: 1, letterSpacing: "0.4em" }}
+              transition={{ duration: 1, delay: 0.5 }}
+              className="text-white/60 text-sm md:text-base uppercase font-medium mb-4 tracking-[0.4em]"
+            >
+              ELAD'S TRAIL
+            </motion.span>
           </motion.div>
 
+          {/* כותרת ראשית ענקית */}
           <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.15 }}
-            className="text-5xl md:text-7xl font-bold text-white mb-4 tracking-tight drop-shadow-md"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="text-6xl md:text-9xl font-black text-white mb-6 tracking-tighter drop-shadow-2xl"
           >
             המסלול של אלעד
           </motion.h1>
 
+          {/* סלוגן צבעוני ורחב */}
           <motion.p
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            /* צבע כתום מותג מובלט */
-            className="text-xl md:text-2xl text-[#E85D04] font-semibold mb-10 tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]"
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="text-2xl md:text-4xl text-[#E85D04] font-bold mb-12 tracking-wide drop-shadow-lg flex items-center justify-center gap-4"
           >
-            לטייל &bull; לאכול &bull; לחזור על זה
+            <span>לטייל</span>
+            <span className="text-white/30">•</span>
+            <span>לאכול</span>
+            <span className="text-white/30">•</span>
+            <span>לחזור על זה</span>
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.45 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            transition={{ duration: 0.7, delay: 0.6 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-6"
           >
             <Link
               href="/trails"
-              className="inline-flex items-center gap-2 bg-[#E85D04] text-white px-8 py-3.5 rounded-full text-base font-semibold hover:bg-[#d04f00] transition-all duration-300 shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40"
+              className="group relative overflow-hidden bg-[#E85D04] text-white px-12 py-4 rounded-full text-lg font-bold transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(232,93,4,0.4)]"
             >
-              גלו את המסלולים
-              <ArrowLeft className="w-4 h-4" />
-            </Link>
-            <Link
-              href="/about"
-              className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm text-white px-8 py-3.5 rounded-full text-base font-medium hover:bg-white/25 transition-all duration-300 border border-white/20"
-            >
-              הכירו את אלעד
+              <span className="relative z-10 flex items-center gap-2">
+                גלו את המסלולים
+                <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+              </span>
             </Link>
           </motion.div>
         </div>
 
+        {/* Scroll Indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -113,7 +129,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* המשך שאר הדף ללא שינוי נתונים */}
+      {/* פוסטים אחרונים */}
       <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex items-end justify-between mb-10">
@@ -165,6 +181,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* קטגוריות */}
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
@@ -223,6 +240,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* CTA לסיום */}
       <section className="py-16 md:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <motion.div
