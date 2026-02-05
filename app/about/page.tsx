@@ -180,7 +180,7 @@ export default function About() {
               <p className="text-xl mb-8 leading-relaxed max-w-2xl mx-auto text-[#8B7E6A] font-light">
                 אם גם אתם אוהבים מסלולים קשוחים, אוכל אמיתי, וחוויות שלא שוכחים - הגעתם למקום הנכון. העולם מחכה.
               </p>
-              <p className="text-3xl font-light text-[#5D4E37] italic mb-4">
+              <p className="text-3xl font-light text-[#ffffff] italic mb-4">
                 לטייל. לאכול. לחזור על זה.
               </p>
               <p className="text-sm text-[#8B7E6A] font-light">
