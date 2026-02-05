@@ -7,7 +7,6 @@ import Link from 'next/link';
 import PostCard from '@/components/PostCard';
 import { ArrowLeft, Mountain, MapPin, UtensilsCrossed, Lightbulb } from 'lucide-react';
 
-// מיפוי אייקונים לקטגוריות הקיימות ב-siteData
 const categoryIcons: Record<string, React.ReactNode> = {
   'destinations': <MapPin className="w-6 h-6" />,
   'bucket-list-hikes': <Mountain className="w-6 h-6" />,
@@ -16,7 +15,6 @@ const categoryIcons: Record<string, React.ReactNode> = {
 };
 
 export default function Home() {
-  // שליפת נתונים מתוך siteData.ts
   const recentPosts = getRecentPosts(6);
   const allPosts = getAllPosts();
   const featuredPost = recentPosts[0];
@@ -25,7 +23,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#FAFAF8]" dir="rtl">
-      {/* Hero Section */}
       <section className="relative h-[85vh] md:h-[90vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
@@ -35,18 +32,28 @@ export default function Home() {
             className="object-cover"
             priority
           />
-          {/* שכבת החשכה משופרת לקריאות מקסימלית */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/70" />
         </div>
 
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+          {/* בלוק הלוגו המשופר */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6 }}
-            className="mb-6"
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="mb-8 relative inline-block"
           >
-            <Image src="/logo.svg" alt="Logo" width={80} height={80} className="mx-auto" />
+            {/* אפקט הילה מאחורי הלוגו */}
+            <div className="absolute inset-0 bg-white/20 blur-3xl rounded-full scale-150 z-0" />
+            
+            <Image 
+              src="/logo.svg" 
+              alt="Logo" 
+              width={160}  /* הגדלה משמעותית */
+              height={160} 
+              className="relative z-10 mx-auto drop-shadow-[0_10px_15px_rgba(0,0,0,0.3)]" 
+              priority 
+            />
           </motion.div>
 
           <motion.h1
@@ -62,7 +69,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            /* תיקון צבע: כתום מותג עם צל בולט להפרדה מהרקע */
+            /* צבע כתום מותג מובלט */
             className="text-xl md:text-2xl text-[#E85D04] font-semibold mb-10 tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]"
           >
             לטייל &bull; לאכול &bull; לחזור על זה
@@ -90,7 +97,6 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* Scroll Indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -107,7 +113,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Recent Posts Section */}
+      {/* המשך שאר הדף ללא שינוי נתונים */}
       <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex items-end justify-between mb-10">
@@ -159,7 +165,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Categories Section */}
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
@@ -218,7 +223,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact CTA Section */}
       <section className="py-16 md:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <motion.div
