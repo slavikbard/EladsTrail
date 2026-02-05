@@ -55,9 +55,11 @@ export default function Header() {
       dir="rtl"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          <Link href="/" className="flex items-center gap-2.5 relative z-[110]">
-            <div className="relative h-10 w-10 md:h-12 md:w-12">
+        {/* הגדלתי את גובה ה-Header כאן (h-20 בנייד, h-24 במחשב) */}
+        <div className="flex items-center justify-between h-20 md:h-24">
+          <Link href="/" className="flex items-center gap-4 relative z-[110]">
+            {/* הגדלת ה-Container של הלוגו באופן משמעותי */}
+            <div className="relative h-14 w-14 md:h-20 md:w-20 transition-all duration-300">
               <Image
                 src="/logo.svg"
                 alt="ELAD'S TRAIL"
@@ -66,11 +68,14 @@ export default function Header() {
                 priority
               />
             </div>
+            
             <div className="flex flex-col">
-              <span className="text-base md:text-lg font-bold text-[#1B263B] leading-none tracking-wide">
+              {/* הגדלת הטקסט של המותג */}
+              <span className="text-lg md:text-xl font-bold text-[#1B263B] leading-none tracking-wide">
                 ELAD&apos;S TRAIL
               </span>
-              <span className="text-[10px] md:text-[11px] text-[#E85D04] font-semibold mt-0.5 tracking-wider">
+              {/* הגדלת הסלוגן */}
+              <span className="text-[11px] md:text-[13px] text-[#E85D04] font-semibold mt-1 tracking-wider">
                 לטייל. לאכול. לחזור על זה.
               </span>
             </div>
