@@ -11,6 +11,10 @@ export interface Post {
   author: string;
   reading_time: string;
   date: string;
+  // שדות חדשים שהוספנו - שים לב לסימן השאלה (?)
+  // הוא קריטי! הוא אומר שזה אופציונלי, כך שהפוסטים הישנים שלך לא יגרמו לשגיאה.
+  difficulty?: 'קל' | 'בינוני' | 'קשה' | 'אתגרי';
+  is_family_friendly?: boolean;
 }
 
 export interface Subcategory {
