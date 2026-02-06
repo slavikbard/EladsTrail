@@ -6,14 +6,23 @@ import { Menu, X, ChevronDown, Compass, Info, Map as MapIcon, Mountain, Utensils
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import { CATEGORIES } from '@/src/data/siteData';
+import { getAllCategories, type Category } from '@/lib/posts';
 
 export default function Header() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [categoriesOpen, setCategoriesOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [categories, setCategories] = useState<Category[]>([]);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    async function loadCategories() {
+      const cats = await getAllCategories();
+      setCategories(cats);
+    }
+    loadCategories();
+  }, []);
 
   useEffect(() => {
     setMobileMenuOpen(false);
@@ -37,10 +46,9 @@ export default function Header() {
   }, []);
 
   const categoryIcons: Record<string, React.ReactNode> = {
-    'destinations': <MapPin className="w-4 h-4" />,
-    'bucket-list-hikes': <Mountain className="w-4 h-4" />,
-    'travel-tips': <Lightbulb className="w-4 h-4" />,
-    'food-drinks': <UtensilsCrossed className="w-4 h-4" />,
+    'israel': <MapPin className="w-4 h-4" />,
+    'global': <Mountain className="w-4 h-4" />,
+    'culinary': <UtensilsCrossed className="w-4 h-4" />,
   };
 
   const isHome = pathname === '/';
@@ -105,7 +113,7 @@ export default function Header() {
                     className="absolute top-full right-0 mt-3 w-72 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden"
                   >
                     <div className="p-3">
-                      {CATEGORIES.map((cat) => (
+                      {categories.map((cat) => (
                         <Link
                           key={cat.id}
                           href={`/category/${cat.slug}`}

@@ -10,10 +10,9 @@ import PostCard from '@/components/PostCard';
 import { ArrowRight } from 'lucide-react';
 
 const categoryImages: Record<string, string> = {
-  'destinations': 'https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg',
-  'bucket-list-hikes': 'https://images.pexels.com/photos/618848/pexels-photo-618848.jpeg',
-  'travel-tips': 'https://images.pexels.com/photos/346798/pexels-photo-346798.jpeg',
-  'food-drinks': 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg',
+  'israel': 'https://images.pexels.com/photos/3566187/pexels-photo-3566187.jpeg',
+  'global': 'https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg',
+  'culinary': 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg',
 };
 
 export default function CategoryPage() {

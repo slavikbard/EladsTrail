@@ -9,17 +9,15 @@ import PostCard from '@/components/PostCard';
 import { ArrowLeft, Mountain, MapPin, UtensilsCrossed, Lightbulb } from 'lucide-react';
 
 const categoryImages: Record<string, string> = {
-  'destinations': 'https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg',
-  'bucket-list-hikes': 'https://images.pexels.com/photos/618848/pexels-photo-618848.jpeg',
-  'travel-tips': 'https://images.pexels.com/photos/346798/pexels-photo-346798.jpeg',
-  'food-drinks': 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg',
+  'israel': 'https://images.pexels.com/photos/3566187/pexels-photo-3566187.jpeg',
+  'global': 'https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg',
+  'culinary': 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg',
 };
 
 const categoryIcons: Record<string, React.ReactNode> = {
-  'destinations': <MapPin className="w-6 h-6" />,
-  'bucket-list-hikes': <Mountain className="w-6 h-6" />,
-  'travel-tips': <Lightbulb className="w-6 h-6" />,
-  'food-drinks': <UtensilsCrossed className="w-6 h-6" />,
+  'israel': <MapPin className="w-6 h-6" />,
+  'global': <Mountain className="w-6 h-6" />,
+  'culinary': <UtensilsCrossed className="w-6 h-6" />,
 };
 
 export default function Home() {

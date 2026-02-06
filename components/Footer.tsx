@@ -3,12 +3,21 @@
 import Link from 'next/link';
 import { Instagram, Facebook, Mail } from 'lucide-react';
 import Image from 'next/image';
-import { useState } from 'react';
-import { CATEGORIES } from '@/src/data/siteData';
+import { useState, useEffect } from 'react';
+import { getAllCategories, type Category } from '@/lib/posts';
 
 export default function Footer() {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    async function loadCategories() {
+      const cats = await getAllCategories();
+      setCategories(cats);
+    }
+    loadCategories();
+  }, []);
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,7 +68,7 @@ export default function Footer() {
           <div className="md:col-span-2">
             <h4 className="text-sm font-semibold mb-4 text-white/90">קטגוריות</h4>
             <ul className="space-y-2.5">
-              {CATEGORIES.map((cat) => (
+              {categories.map((cat) => (
                 <FooterLink key={cat.id} href={`/category/${cat.slug}`}>{cat.name_he}</FooterLink>
               ))}
             </ul>

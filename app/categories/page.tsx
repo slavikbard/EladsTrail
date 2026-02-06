@@ -1,13 +1,51 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { CATEGORIES, getAllPosts, getSubcategoriesByCategory } from '@/src/data/siteData';
+import { getAllCategories, getPublishedPosts, type Category, type Post } from '@/lib/posts';
 import { ArrowLeft } from 'lucide-react';
 
+const categoryImages: Record<string, string> = {
+  'israel': 'https://images.pexels.com/photos/3566187/pexels-photo-3566187.jpeg',
+  'global': 'https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg',
+  'culinary': 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg',
+};
+
 export default function CategoriesPage() {
-  const allPosts = getAllPosts();
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [allPosts, setAllPosts] = useState<Post[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadData() {
+      try {
+        const [cats, posts] = await Promise.all([
+          getAllCategories(),
+          getPublishedPosts()
+        ]);
+        setCategories(cats);
+        setAllPosts(posts);
+      } catch (error) {
+        console.error('Error loading data:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#FAFAF8] flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#E85D04] mx-auto"></div>
+          <p className="mt-4 text-gray-500">טוען...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#FAFAF8]" dir="rtl">
@@ -30,9 +68,8 @@ export default function CategoriesPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 md:py-16">
         <div className="grid md:grid-cols-2 gap-6">
-          {CATEGORIES.map((cat, i) => {
+          {categories.map((cat, i) => {
             const postCount = allPosts.filter(p => p.category_id === cat.id).length;
-            const subcategories = getSubcategoriesByCategory(cat.id);
 
             return (
               <motion.div
@@ -47,7 +84,7 @@ export default function CategoriesPage() {
                 >
                   <div className="relative h-52 overflow-hidden">
                     <Image
-                      src={cat.image}
+                      src={categoryImages[cat.slug] || 'https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg'}
                       alt={cat.name_he}
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -60,21 +97,6 @@ export default function CategoriesPage() {
                     </div>
                   </div>
                   <div className="p-5">
-                    {cat.description_he && (
-                      <p className="text-gray-600 text-sm mb-4">{cat.description_he}</p>
-                    )}
-                    {subcategories.length > 0 && (
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {subcategories.map(sub => (
-                          <span
-                            key={sub.id}
-                            className="px-3 py-1 text-[11px] font-medium bg-gray-50 text-gray-600 rounded-full"
-                          >
-                            {sub.name_he}
-                          </span>
-                        ))}
-                      </div>
-                    )}
                     <div className="flex items-center justify-between pt-3 border-t border-gray-100">
                       <span className="text-sm text-gray-400">{postCount} פוסטים</span>
                       <span className="flex items-center gap-1.5 text-sm font-medium text-[#E85D04] group-hover:gap-2.5 transition-all">

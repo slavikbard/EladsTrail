@@ -1,34 +1,53 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import {
   LayoutDashboard, FileText, Search, Filter, ChevronDown,
   Copy, Check, ArrowUpDown, Mountain, Clock, Users, Tag
 } from 'lucide-react';
-import { getAllPosts, CATEGORIES, getCategoryById, getSubcategoryById, Post } from '@/src/data/siteData';
+import { getPublishedPosts, getAllCategories, type Post, type Category } from '@/lib/posts';
+import { supabase } from '@/lib/supabase';
 import Image from 'next/image';
 
-type SortField = 'id' | 'title' | 'category' | 'date' | 'difficulty';
+type SortField = 'id' | 'title' | 'category' | 'date';
 type SortDir = 'asc' | 'desc';
 
 export default function AdminDashboard() {
-  const allPosts = getAllPosts();
+  const [allPosts, setAllPosts] = useState<Post[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [categoryFilter, setCategoryFilter] = useState<number | null>(null);
+  const [categoryFilter, setCategoryFilter] = useState<string | null>(null);
   const [sortField, setSortField] = useState<SortField>('id');
   const [sortDir, setSortDir] = useState<SortDir>('asc');
-  const [copiedId, setCopiedId] = useState<number | null>(null);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadData() {
+      try {
+        const [posts, cats] = await Promise.all([
+          getPublishedPosts(),
+          getAllCategories()
+        ]);
+        setAllPosts(posts);
+        setCategories(cats);
+      } catch (error) {
+        console.error('Error loading data:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadData();
+  }, []);
 
   const stats = useMemo(() => ({
     total: allPosts.length,
-    byCategory: CATEGORIES.map(c => ({
+    byCategory: categories.map(c => ({
       ...c,
       count: allPosts.filter(p => p.category_id === c.id).length,
     })),
-    withDifficulty: allPosts.filter(p => p.difficulty).length,
-    familyFriendly: allPosts.filter(p => p.is_family_friendly).length,
-  }), [allPosts]);
+  }), [allPosts, categories]);
 
   const filteredPosts = useMemo(() => {
     let posts = [...allPosts];
@@ -37,8 +56,7 @@ export default function AdminDashboard() {
       const q = searchQuery.toLowerCase();
       posts = posts.filter(p =>
         p.title_he.toLowerCase().includes(q) ||
-        p.slug.toLowerCase().includes(q) ||
-        p.author.toLowerCase().includes(q)
+        p.slug.toLowerCase().includes(q)
       );
     }
 
@@ -49,11 +67,10 @@ export default function AdminDashboard() {
     posts.sort((a, b) => {
       let cmp = 0;
       switch (sortField) {
-        case 'id': cmp = a.id - b.id; break;
+        case 'id': cmp = a.id.localeCompare(b.id); break;
         case 'title': cmp = a.title_he.localeCompare(b.title_he); break;
-        case 'category': cmp = a.category_id - b.category_id; break;
-        case 'date': cmp = new Date(a.date).getTime() - new Date(b.date).getTime(); break;
-        case 'difficulty': cmp = (a.difficulty || '').localeCompare(b.difficulty || ''); break;
+        case 'category': cmp = a.category_id.localeCompare(b.category_id); break;
+        case 'date': cmp = new Date(a.created_at).getTime() - new Date(b.created_at).getTime(); break;
       }
       return sortDir === 'asc' ? cmp : -cmp;
     });
@@ -94,9 +111,7 @@ export default function AdminDashboard() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <StatCard label="סה&quot;כ פוסטים" value={stats.total} icon={<FileText className="w-5 h-5" />} color="bg-blue-50 text-blue-600" />
-          <StatCard label="עם רמת קושי" value={stats.withDifficulty} icon={<Mountain className="w-5 h-5" />} color="bg-orange-50 text-orange-600" />
-          <StatCard label="מתאים למשפחות" value={stats.familyFriendly} icon={<Users className="w-5 h-5" />} color="bg-emerald-50 text-emerald-600" />
-          <StatCard label="קטגוריות" value={CATEGORIES.length} icon={<Tag className="w-5 h-5" />} color="bg-amber-50 text-amber-600" />
+          <StatCard label="קטגוריות" value={categories.length} icon={<Tag className="w-5 h-5" />} color="bg-amber-50 text-amber-600" />
         </div>
 
         <div className="grid md:grid-cols-4 gap-4 mb-6">
@@ -141,26 +156,23 @@ export default function AdminDashboard() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-gray-50 text-gray-500">
-                  <SortableHeader label="#" field="id" current={sortField} dir={sortDir} onClick={handleSort} />
                   <th className="text-right py-3 px-4 font-medium">תמונה</th>
                   <SortableHeader label="כותרת" field="title" current={sortField} dir={sortDir} onClick={handleSort} />
                   <SortableHeader label="קטגוריה" field="category" current={sortField} dir={sortDir} onClick={handleSort} />
                   <SortableHeader label="תאריך" field="date" current={sortField} dir={sortDir} onClick={handleSort} />
-                  <SortableHeader label="קושי" field="difficulty" current={sortField} dir={sortDir} onClick={handleSort} />
-                  <th className="text-right py-3 px-4 font-medium">זמן קריאה</th>
+                  <th className="text-right py-3 px-4 font-medium">צפיות</th>
                   <th className="text-right py-3 px-4 font-medium">פעולות</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
                 {filteredPosts.map(post => {
-                  const cat = getCategoryById(post.category_id);
+                  const cat = categories.find(c => c.id === post.category_id);
                   return (
                     <tr
                       key={post.id}
                       className="hover:bg-gray-50/50 transition-colors cursor-pointer"
                       onClick={() => setSelectedPost(selectedPost?.id === post.id ? null : post)}
                     >
-                      <td className="py-3 px-4 text-gray-400 font-mono text-xs">{post.id}</td>
                       <td className="py-3 px-4">
                         <div className="relative w-12 h-12 rounded-lg overflow-hidden bg-gray-100">
                           <Image
@@ -184,17 +196,10 @@ export default function AdminDashboard() {
                         )}
                       </td>
                       <td className="py-3 px-4 text-gray-500 whitespace-nowrap">
-                        {new Date(post.date).toLocaleDateString('he-IL')}
-                      </td>
-                      <td className="py-3 px-4">
-                        {post.difficulty ? (
-                          <DifficultyBadge level={post.difficulty} />
-                        ) : (
-                          <span className="text-gray-300 text-xs">--</span>
-                        )}
+                        {new Date(post.created_at).toLocaleDateString('he-IL')}
                       </td>
                       <td className="py-3 px-4 text-gray-500 whitespace-nowrap">
-                        {post.reading_time?.replace('⏱️ ', '') || '--'}
+                        {post.view_count || 0}
                       </td>
                       <td className="py-3 px-4">
                         <button
